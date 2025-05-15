@@ -10,13 +10,15 @@ Our client SDK maintains 1:1 parity with the open-source version,
 enabling existing users to migrate seamlessly—zero refactoring required.
 
 LanceDB supports table creation using multiple data formats, including:
-* Pandas DataFrames (example below)
-* [Polars](https://pola.rs/) DataFrames
-* Apache Arrow Tables
+
+- Pandas DataFrames (example below)
+- [Polars](https://pola.rs/) DataFrames 
+- Apache Arrow Tables
 
 For the Python SDK, you can also define tables flexibly using:
-* PyArrow schemas (for explicit schema control)
-* `LanceModel` (a **Pydantic**-based model for structured data validation and serialization)
+
+- PyArrow schemas (for explicit schema control)
+- `LanceModel` (a **Pydantic**-based model for structured data validation and serialization)
 
 This ensures compatibility with modern data workflows while maintaining performance and type safety.
 
@@ -107,7 +109,7 @@ This ensures compatibility with modern data workflows while maintaining performa
     await table.add(data);
     ```
 
-!!! info
+!!! info "Vector Column Type"
     The vector column needs to be a pyarrow.FixedSizeList type.
 
 ### Using Pydantic Models
@@ -138,6 +140,7 @@ table = db.create_table(table_name, schema=Content, mode="overwrite")
 
 You can use nested Pydantic models to represent complex data structures. 
 For example, you may want to store the document string and the document source name as a nested Document object:
+
 ```python
 from pydantic import BaseModel
 
@@ -145,7 +148,9 @@ class Document(BaseModel):
     content: str
     source: str
 ```
+
 This can be used as the type of a LanceDB table column:
+
 ```python
 class NestedSchema(LanceModel):
     id: str
@@ -156,7 +161,9 @@ class NestedSchema(LanceModel):
 table_name = "nested_model_example"
 table = db.create_table(table_name, schema=NestedSchema, mode="overwrite")
 ```
+
 This creates a struct column called `document` that has two subfields called `content` and `source`:
+
 ```
 In [28]: table.schema
 Out[28]:
@@ -247,4 +254,4 @@ your table in one go. Data will be automatically compacted for the best query pe
 
 Explore full documentation in our SDK guides: [Python](https://lancedb.github.io/lancedb/python/python/) and [Typescript](https://lancedb.github.io/lancedb/js/globals/).
 
-[^1]:We suggest the best batch size to be 500k
+[^1]: We suggest the best batch size to be 500k

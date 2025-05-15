@@ -11,7 +11,7 @@ LanceDB Enterprise has the following key components
 - Plan execution fleet
 - Indexer fleet
 
-![architecture](../assets/enterprise/enterprise-architecture.png)
+![architecture](../assets/architecture.png)
 
 ### Query Execution
 

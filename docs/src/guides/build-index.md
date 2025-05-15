@@ -1,9 +1,9 @@
 ---
-title: "Building Indexes in LanceDB Enterprise | Index Creation Guide"
-description: "Learn how to build and optimize indexes in LanceDB Enterprise. Includes vector indexes, scalar indexes, and best practices for index management."
+title: "Building Indexes in LanceDB | Index Creation Guide"
+description: "Learn how to build and optimize indexes in LanceDB. Includes vector indexes, scalar indexes, and best practices for index management."
 ---
 
-# Building an Index with LanceDB Enterprise
+# Building an Index with LanceDB
 
 LanceDB provides a comprehensive suite of indexing strategies to optimize query performance across diverse workloads:
 
@@ -86,14 +86,14 @@ You can create multiple vector indices within a table.
     });
     ```
 
-<Tip>
-  - If your vector column is named `vector` and contains more than 256 vectors, an IVF_PQ index with L2 distance is automatically created
-  - You can create a new index with different parameters using `create_index` - this replaces any existing index
-  - When using cosine similarity, distances range from 0 (identical vectors) to 2 (maximally dissimilar)
-  - Available index types:
-    - `IVF_PQ`: Default index type, optimized for high-dimensional vectors
-    - `IVF_HNSW_SQ`: Combines IVF clustering with HNSW graph for improved search quality
-</Tip>
+
+- If your vector column is named `vector` and contains more than 256 vectors, an IVF_PQ index with L2 distance is automatically created
+- You can create a new index with different parameters using `create_index` - this replaces any existing index
+- When using cosine similarity, distances range from 0 (identical vectors) to 2 (maximally dissimilar)
+- Available index types:
+- `IVF_PQ`: Default index type, optimized for high-dimensional vectors
+- `IVF_HNSW_SQ`: Combines IVF clustering with HNSW graph for improved search quality
+
 
 ### Check Index Status
 
@@ -696,8 +696,6 @@ While indices are being updated, queries use brute force methods for unindexed r
 
 ## GPU-based Indexing
 
-<Warning>
-  This feature is currently only available in LanceDB Enterprise. Please [contact us](mailto:contact@lancedb.com) to enable GPU indexing for your deployment.
-</Warning>
+> This feature is currently only available in LanceDB Enterprise. Please [contact us](mailto:contact@lancedb.com) to enable GPU indexing for your deployment.
 
 With GPU-powered indexing, LanceDB can create vector indices with billions of rows in a few hours.

@@ -8,7 +8,7 @@ description: "Learn how to deploy LanceDB Enterprise in production environments.
 There are two deployment models you can choose from for LanceDB Enterprise: *_Managed_* and *_BYOC_*.
 In each case AWS, GCP and Azure clouds are supported.
 
-### Managed Deployment
+## Managed Deployment
 
 **Managed deployment** is a private deployment of LanceDB Enterprise.
 All applications will run cloud accounts managed by LanceDB in the same location as your client applications.
@@ -17,7 +17,7 @@ This hands-off approach is recommended for users who do not wish to manage the i
 
 To access your deployment, LanceDB can provision a public or private load balancer. 
 
-### Bring Your Own Cloud (BYOC)
+## Bring Your Own Cloud (BYOC)
 
 With this deployment model LanceDB Enterprise is installed into your own cloud account.
 

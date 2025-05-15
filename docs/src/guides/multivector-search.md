@@ -19,17 +19,16 @@ Key features:
 - Supporint query being a single vector or multiple vectors
 - Optimized search performance with [XTR](https://arxiv.org/abs/2501.17788) with improved recall.
 
-<Info>
-Currently, only the `cosine` metric is supported for multivector search. 
-The vector value type can be `float16`, `float32`, or `float64`.
-</Info>
+!!! info "Multivector Search Limitations"
+    Currently, only the `cosine` metric is supported for multivector search. 
+    The vector value type can be `float16`, `float32`, or `float64`.
 
 ## Using Multivector in Python
 
 Currently, multivector search is only support in our Python SDK. 
 Below is an example of using multivector search in LanceDB:
 
-```Python Python
+```python
 import lancedb
 import numpy as np
 import pyarrow as pa
@@ -72,4 +71,3 @@ results_single = tbl.search(query).limit(5).to_pandas()
 # Query with multiple vectors
 query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
-```

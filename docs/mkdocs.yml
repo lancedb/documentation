@@ -118,24 +118,36 @@ nav:
               - Storage: concepts/storage.md
               - Data Management: concepts/data_management.md
       - Core Usage:
-          - Working with Tables: guides/tables.md
+          - Working with Tables: 
+              - Table Operations: guides/tables.md
+              - Ingesting Data: guides/ingestion.md
+              - Updating Data: guides/update.md
+              - Schema Evolution: guides/schema-evolution.md
           - Building an Index:
               - Building a Vector Index: ann_indexes.md
               - Building a Scalar Index: guides/scalar_index.md
+              - Building Indexes: guides/build-index.md
           - Structuring Search Queries:
               - Vector Search: search.md
+              - How to Build a Search Query: guides/vector-search.md
               - Full-Text Search (native): fts.md
               - Full-Text Search (tantivy-based): fts_tantivy.md
-              - SQL Filtering: sql.md
+              - Full-Text Search: guides/full-text-search.md
+              - Metadata Filtering: guides/filtering.md
+              - Filtering & SQL: sql.md
+              - Building SQL Queries: guides/sql-query.md
+              - Query Performance: guides/understanding-query-performance.md
           - Configuring Storage: guides/storage.md
       - Advanced Usage:
           - Complex Queries:
               - Hybrid Search:
                   - Overview: hybrid_search/hybrid_search.md
+                  - Building Hybrid Searches: guides/hybrid-search.md
                   - Comparing Rerankers: hybrid_search/eval.md
                   - Airbnb financial data example: notebooks/hybrid_search.ipynb
               - Multivector Search:
                   - Overview: guides/multi-vector.md
+                  - Building Multivector Queries: guides/multivector-search.md
                   - Example: notebooks/Multivector_on_LanceDB.ipynb
               - Reranking:
                   - Quickstart: reranking/index.md
@@ -175,6 +187,7 @@ nav:
               - User-Defined Embedding Functions: embeddings/custom_embedding_function.md
               - Variables and Secrets: embeddings/variables_and_secrets.md
           - Versioning & Reproducibility:
+              - Versioning Guide: guides/versioning.md
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
       - LanceDB Enterprise:
@@ -184,20 +197,6 @@ nav:
               - Deployment: enterprise/deployment.md
               - Benchmark: enterprise/benchmark.md
               - Security: enterprise/security.md
-          - Core Usage: 
-            - Ingest Data: enterprise/guides/ingestion.md
-            - Update Data: enterprise/guides/update.md
-            - Build an Index: enterprise/guides/build-index.md
-            - Vector Search: enterprise/guides/vector-search.md
-            - Multivector Search: enterprise/guides/multivector-search.md
-            - Full Text Search: enterprise/guides/full-text-search.md
-            - Hybrid Search: enterprise/guides/hybrid-search.md
-            - Metadata Filtering: enterprise/guides/filtering.md
-            - Schema Evolution: enterprise/guides/schema-evolution.md
-            - Versioning & Reproducibility: enterprise/guides/versioning.md
-            - Query Data with SQL: enterprise/guides/sql-query.md
-          - Advanced Usage: 
-            - Query Performance Turning: enterprise/guides/understand-query-perf.md
       - Support:
           - Migration Guide: migration.md
           - FAQs: faq.md

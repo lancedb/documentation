@@ -37,28 +37,28 @@ Let's examine a vector search query that:
 - Returns the top 100 matches
 - Projects specific columns: `chunk_index`, `title`, and `identifier`
 
-<CodeGroup>
-```Python Python
-# explain_plan
-query_explain_plan = (
-    table.search(query_embed)
-    .where("identifier > 0 AND identifier < 1000000")
-    .select(["chunk_index", "title", "identifier"])
-    .limit(100)
-    .explain_plan(True)
-)
-```
+=== "Python"
+    ```python
+    # explain_plan
+    query_explain_plan = (
+        table.search(query_embed)
+        .where("identifier > 0 AND identifier < 1000000")
+        .select(["chunk_index", "title", "identifier"])
+        .limit(100)
+        .explain_plan(True)
+    )
+    ```
 
-```typescript TypeScript
-// explain_plan
-const explainPlan = await table
-    .search(queryEmbed)
-    .where("identifier > 0 AND identifier < 1000000")
-    .select(["chunk_index", "title", "identifier"])
-    .limit(100)
-    .explainPlan(true);
-```
-</CodeGroup>
+=== "TypeScript"
+    ```typescript
+    // explain_plan
+    const explainPlan = await table
+        .search(queryEmbed)
+        .where("identifier > 0 AND identifier < 1000000")
+        .select(["chunk_index", "title", "identifier"])
+        .limit(100)
+        .explainPlan(true);
+    ```
 
 The execution plan reveals the sequence of operations performed to execute your query. 
 Let's examine each component of the plan:
@@ -133,27 +133,30 @@ scan and filter before vector search.
 
 Let's use `analyze_plan` to run the query and analyze the query performance, 
 which will help us identify potential bottlenecks:
-<CodeGroup>
-```Python Python
-# analyze_plan
-query_analyze_plan = (
-    table.search(query_embed)
-    .where("identifier > 0 AND identifier < 1000000")
-    .select([ "chunk_index", "title", "identifier"])
-    .limit(100)
-    .analyze_plan()
-)
-```
-```TypeScript TypeScript
-// analyze_plan
-const analyzePlan = await table
-    .search(queryEmbed)
-    .where("identifier > 0 AND identifier < 1000000")
-    .select([ "chunk_index", "title", "identifier"])
-    .limit(100)
-    .analyzePlan();
-```
-</CodeGroup>
+
+=== "Python"
+    ```python
+    # analyze_plan
+    query_analyze_plan = (
+        table.search(query_embed)
+        .where("identifier > 0 AND identifier < 1000000")
+        .select([ "chunk_index", "title", "identifier"])
+        .limit(100)
+        .analyze_plan()
+    )
+    ```
+
+=== "TypeScript"
+    ```typescript
+    // analyze_plan
+    const analyzePlan = await table
+        .search(queryEmbed)
+        .where("identifier > 0 AND identifier < 1000000")
+        .select([ "chunk_index", "title", "identifier"])
+        .limit(100)
+        .analyzePlan();
+    ```
+
 ```python
 ProjectionExec: expr=[chunk_index@4 as chunk_index, title@5 as title, identifier@1 as identifier, _distance@3 as _distance], metrics=[output_rows=100, elapsed_compute=1.424µs]
     RemoteTake: columns="vector, identifier, _rowid, _distance, chunk_index, title", metrics=[output_rows=100, elapsed_compute=175.53097ms, output_batches=1, remote_takes=100]
@@ -333,10 +336,10 @@ Index Type Selection
 | `List` | Label_list | Multi-label classification and filtering |
 
 More details on indexing can be found [here](../guides/build-index.md#vector-index). 
-<Info>
+
+!!! info "Index Coverage Monitoring"
     Use `table.index_stats()` to monitor index coverage. 
     A well-optimized table should have `num_unindexed_rows ~ 0`.
-</Info>
 
 2. **Query Plan Optimization**
 
@@ -350,10 +353,9 @@ Common Patterns and Fixes:
 | Multiple sequential filters | Reorder filter conditions |
 
 
-<Note>
-Regularly analyze your query plans to identify and address performance bottlenecks. 
-The `analyze_plan` output provides detailed metrics to guide optimization efforts.
-</Note>
+!!! note "Regular Performance Analysis"
+    Regularly analyze your query plans to identify and address performance bottlenecks. 
+    The `analyze_plan` output provides detailed metrics to guide optimization efforts.
 
 ## First Step: Use the Right Indices
 

@@ -38,6 +38,7 @@ theme:
     - navigation.footer
     - navigation.tracking
     - navigation.instant
+    - navigation.indexes
     - content.footnote.tooltips
   icon:
     repo: fontawesome/brands/github
@@ -120,7 +121,7 @@ nav:
           - Building an Index:
               - Building a Vector Index: ann_indexes.md
               - Building a Scalar Index: guides/scalar_index.md
-          - Building Queries:
+          - Structuring Search Queries:
               - Vector Search: search.md
               - Full-Text Search (native): fts.md
               - Full-Text Search (tantivy-based): fts_tantivy.md
@@ -148,73 +149,60 @@ nav:
                   - Voyage AI Rerankers: reranking/voyageai.md
                   - Building Custom Rerankers: reranking/custom_reranker.md
                   - Example: notebooks/lancedb_reranking.ipynb
-          - RAG:
-              - Vanilla RAG: rag/vanilla_rag.md
-              - Multi-Head RAG: rag/multi_head_rag.md
-              - Corrective RAG: rag/corrective_rag.md
-              - Agentic RAG: rag/agentic_rag.md
-              - Graph RAG: rag/graph_rag.md
-              - Self RAG: rag/self_rag.md
-              - Adaptive RAG: rag/adaptive_rag.md
-              - SFR RAG: rag/sfr_rag.md
-              - Advanced Techniques:
-                  - HyDE: rag/advanced_techniques/hyde.md
-                  - FLARE: rag/advanced_techniques/flare.md
+          - Working with Embeddings:
+              - Understand Embeddings: embeddings/understanding_embeddings.md
+              - Get Started: embeddings/index.md
+              - Embedding Functions: embeddings/embedding_functions.md
+              - Available Models:
+                  - Overview: embeddings/default_embedding_functions.md
+                  - Text Embedding Functions:
+                      - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
+                      - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
+                      - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
+                      - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
+                      - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
+                      - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
+                      - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
+                      - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
+                      - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
+                      - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
+                      - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
+                  - Multimodal Embedding Functions:
+                      - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
+                      - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
+                      - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
+              - User-Defined Embedding Functions: embeddings/custom_embedding_function.md
+              - Variables and Secrets: embeddings/variables_and_secrets.md
           - Versioning & Reproducibility:
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
-          - Tuning Retrieval Performance:
-              - Choosing Right Query Type: guides/tuning_retrievers/1_query_types.md
-              - Reranking: guides/tuning_retrievers/2_reranking.md
-              - Embedding Fine-Tuning: guides/tuning_retrievers/3_embed_tuning.md
-      - Managing Embeddings:
-          - Understand Embeddings: embeddings/understanding_embeddings.md
-          - Get Started: embeddings/index.md
-          - Embedding Functions: embeddings/embedding_functions.md
-          - Available Models:
-              - Overview: embeddings/default_embedding_functions.md
-              - Text Embedding Functions:
-                  - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
-                  - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
-                  - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
-                  - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
-                  - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
-                  - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
-                  - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
-                  - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
-                  - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
-                  - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
-                  - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
-              - Multimodal Embedding Functions:
-                  - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
-                  - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
-                  - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
-          - User-Defined Embedding Functions: embeddings/custom_embedding_function.md
-          - Variables and Secrets: embeddings/variables_and_secrets.md
-      - Migration Guide: migration.md
-      - FAQs: faq.md
-      - Troubleshooting: troubleshooting.md
+      - Support:
+          - Migration Guide: migration.md
+          - FAQs: faq.md
+          - Troubleshooting: troubleshooting.md
 
   - Tutorials & Integrations:
       - Integrations:
           - Overview: integrations/index.md
-          - Pandas and PyArrow: python/pandas_and_pyarrow.md
-          - Polars: python/polars_arrow.md
-          - DuckDB: python/duckdb.md
-          - LangChain:
-              - LangChain 🔗: integrations/langchain.md
-              - LangChain demo: notebooks/langchain_demo.ipynb
-              - LangChain JS/TS 🔗: https://js.langchain.com/docs/integrations/vectorstores/lancedb
-          - LlamaIndex 🦙:
-              - LlamaIndex docs: integrations/llamaIndex.md
-              - LlamaIndex demo: notebooks/llamaIndex_demo.ipynb
-          - Pydantic: python/pydantic.md
-          - Voxel51: integrations/voxel51.md
-          - PromptTools: integrations/prompttools.md
-          - dlt: integrations/dlt.md
-          - phidata: integrations/phidata.md
-          - Genkit: integrations/genkit.md
-      - Examples:
+          - Platforms & Data Tools:
+              - Pandas and PyArrow: python/pandas_and_pyarrow.md
+              - Polars: python/polars_arrow.md
+              - DuckDB: python/duckdb.md
+              - Voxel51: integrations/voxel51.md
+              - dlt: integrations/dlt.md
+              - phidata: integrations/phidata.md
+          - Frameworks:
+              - LangChain:
+                  - LangChain 🔗: integrations/langchain.md
+                  - LangChain demo: notebooks/langchain_demo.ipynb
+                  - LangChain JS/TS 🔗: https://js.langchain.com/docs/integrations/vectorstores/lancedb
+              - LlamaIndex 🦙:
+                  - LlamaIndex docs: integrations/llamaIndex.md
+                  - LlamaIndex demo: notebooks/llamaIndex_demo.ipynb
+              - Pydantic: python/pydantic.md
+              - PromptTools: integrations/prompttools.md
+              - Genkit: integrations/genkit.md
+      - Tutorials:
           - Overview: examples/index.md
           - Python:
               - Overview: examples/examples_python.md
@@ -236,6 +224,18 @@ nav:
               - TransformersJS Embedding Search: examples/transformerjs_embedding_search_nodejs.md
           - Rust:
               - Overview: examples/examples_rust.md
+          - RAG:
+              - Vanilla RAG: rag/vanilla_rag.md
+              - Multi-Head RAG: rag/multi_head_rag.md
+              - Corrective RAG: rag/corrective_rag.md
+              - Agentic RAG: rag/agentic_rag.md
+              - Graph RAG: rag/graph_rag.md
+              - Self RAG: rag/self_rag.md
+              - Adaptive RAG: rag/adaptive_rag.md
+              - SFR RAG: rag/sfr_rag.md
+              - Advanced Techniques:
+                  - HyDE: rag/advanced_techniques/hyde.md
+                  - FLARE: rag/advanced_techniques/flare.md
 
   - API & SDK Reference:
       - Overview: api_reference.md

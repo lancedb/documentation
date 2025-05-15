@@ -1,4 +1,9 @@
-# VoyageAI Embeddings
+---
+title: VoyageAI Embedding Function | Text Embedding Guide
+description: Learn how to use VoyageAI's embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with VoyageAI's models.
+---
+
+# VoyageAI Embedding Models
 
 Voyage AI provides cutting-edge embedding and rerankers.
 

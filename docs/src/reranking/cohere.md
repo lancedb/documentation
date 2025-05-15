@@ -1,4 +1,9 @@
-# Cohere Reranker
+---
+title: Cohere Reranker in LanceDB | AI-Powered Search Optimization
+description: Integrate Cohere's powerful reranking API with LanceDB for enhanced search results. Supports English and multilingual models with configurable scoring options for vector, FTS, and hybrid search.
+---
+
+# Cohere Reranker in LanceDB
 
 This reranker uses the [Cohere](https://cohere.ai/) API to rerank the search results. You can use this reranker by passing `CohereReranker()` to the `rerank()` method. Note that you'll either need to set the `COHERE_API_KEY` environment variable or pass the `api_key` argument to use this reranker.
 

@@ -1,4 +1,9 @@
-# AWS Bedrock Text Embedding Functions
+---
+title: AWS Bedrock Text Embedding Function | Amazon AI Integration Guide
+description: Learn how to use AWS Bedrock embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with Amazon's AI services.
+---
+
+# AWS Bedrock Text Embedding Models
 
 AWS Bedrock supports multiple base models for generating text embeddings. You need to setup the AWS credentials to use this embedding function.
 You can do so by using `awscli` and also add your session_token:

@@ -1,3 +1,8 @@
+---
+title: LanceDB Integrations | AI & Data Ecosystem
+description: Explore LanceDB's integrations with popular AI frameworks and tools including LangChain, LlamaIndex, and more. Learn how to connect LanceDB with your existing AI stack.
+---
+
 # Integrations
 
 LanceDB supports ingesting from and exporting to your favorite data formats across the Python and JavaScript ecosystems.

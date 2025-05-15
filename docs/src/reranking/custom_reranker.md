@@ -1,4 +1,10 @@
-## Building Custom Rerankers
+---
+title: Custom Rerankers in LanceDB | Extending Search Capabilities
+description: Learn how to create custom rerankers in LanceDB by extending the base Reranker class. Includes implementation examples, score handling, and best practices for hybrid search optimization.
+---
+
+# Building Custom Rerankers in LanceDB
+
 You can build your own custom reranker by subclassing the `Reranker` class and implementing the `rerank_hybrid()` method. Optionally, you can also implement the `rerank_vector()` and `rerank_fts()` methods if you want to support reranking for vector and FTS search separately.
 
 The `Reranker` base interface comes with a `merge_results()` method that can be used to combine the results of semantic and full-text search. This is a vanilla merging algorithm that simply concatenates the results and removes the duplicates without taking the scores into consideration. It only keeps the first copy of the row encountered. This works well in cases that don't require the scores of semantic and full-text search to combine the results. If you want to use the scores or want to support `return_score="all"`, you'll need to implement your own merging algorithm.

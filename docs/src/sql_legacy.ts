@@ -1,5 +1,8 @@
 import * as vectordb from "vectordb";
 
+// LanceDB Legacy SQL/Filtering Example | JavaScript/TypeScript
+// Example code for SQL-style filtering and search using the legacy vectordb package in LanceDB. Demonstrates prefiltering, where clauses, and result limiting.
+
 (async () => {
   console.log("sql_legacy.ts: start");
   const db = await vectordb.connect("data/sample-lancedb");

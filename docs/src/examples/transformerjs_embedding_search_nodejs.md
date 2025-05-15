@@ -1,3 +1,8 @@
+---
+title: TransformerJS Embedding Search with Node.js | JavaScript Implementation Guide
+description: Learn how to use TransformerJS with LanceDB for embedding search in Node.js applications. Includes setup, configuration, and best practices for JavaScript vector search.
+---
+
 # Vector embedding search using TransformersJS
 
 ## Embed and query data from LanceDB using TransformersJS

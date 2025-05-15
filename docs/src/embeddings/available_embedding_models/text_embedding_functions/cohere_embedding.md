@@ -1,4 +1,9 @@
-# Cohere Embeddings
+---
+title: Cohere Embedding Function | Text Embedding Guide
+description: Learn how to use Cohere's embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with Cohere's AI models.
+---
+
+# Cohere Embedding Models
 
 Using cohere API requires cohere package, which can be installed using `pip install cohere`. Cohere embeddings are used to generate embeddings for text data. The embeddings can be used for various tasks like semantic search, clustering, and classification.
 You also need to set the `COHERE_API_KEY` environment variable to use the Cohere API.

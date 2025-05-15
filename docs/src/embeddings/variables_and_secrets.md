@@ -1,4 +1,9 @@
-# Variable and Secrets
+---
+title: Variables and Secrets in LanceDB | Configuration Guide
+description: Learn how to manage variables and secrets in LanceDB. Includes best practices for API key management, runtime configuration, and secure embedding function setup.
+---
+
+# Variables and Secrets in LanceDB
 
 Most embedding configuration options are saved in the table's metadata. However,
 this isn't always appropriate. For example, API keys should never be stored in the

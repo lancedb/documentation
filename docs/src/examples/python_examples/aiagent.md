@@ -1,3 +1,8 @@
+---
+title: AI Agent Implementation with LanceDB | Python Guide
+description: Learn how to build AI agents using LanceDB in Python. Includes examples for agent memory, task planning, and best practices for autonomous AI systems.
+---
+
 # AI Agents: Intelligent Collaboration🤖
 
 Think of a platform where AI Agents can seamlessly exchange information, coordinate over tasks, and achieve shared targets with great efficiency💻📈.

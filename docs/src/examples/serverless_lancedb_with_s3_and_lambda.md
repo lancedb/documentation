@@ -1,3 +1,8 @@
+---
+title: Serverless LanceDB with AWS S3 & Lambda | Cloud Deployment Guide
+description: Learn how to deploy LanceDB in a serverless architecture using AWS S3 and Lambda. Includes setup, configuration, and best practices for cloud deployment.
+---
+
 # Serverless LanceDB
 
 ## Store your data on S3 and use Lambda to compute embeddings and retrieve queries in production easily.

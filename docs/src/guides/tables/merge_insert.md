@@ -1,3 +1,8 @@
+---
+title: Merge Insert in LanceDB | Upsert, Insert-if-Not-Exists & Replace Range
+description: Learn how to use the merge insert command in LanceDB for upserts, insert-if-not-exists, and range replacements. Covers performance tips, embedding functions, and API usage in Python and TypeScript.
+---
+
 The merge insert command is a flexible API that can be used to perform:
 
 1. Upsert

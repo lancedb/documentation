@@ -1,4 +1,9 @@
-# Vector search
+---
+title: Understanding Vector Search in LanceDB | Embeddings & ANN Search
+description: Learn about vector search, embeddings, and approximate nearest neighbor (ANN) search in LanceDB. Understand how vector databases work and how to perform efficient similarity searches.
+---
+
+# Vector Search in LanceDB
 
 Vector search is a technique used to search for similar items based on their vector representations, called embeddings. It is also known as similarity search, nearest neighbor search, or approximate nearest neighbor search.
 

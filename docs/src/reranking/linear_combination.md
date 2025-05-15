@@ -1,4 +1,9 @@
-# Linear Combination Reranker
+---
+title: Linear Combination Reranker in LanceDB | Score-Based Search Optimization
+description: Learn about LanceDB's deprecated Linear Combination Reranker for combining semantic and full-text search scores. Note: RRFReranker is recommended for score-based reranking.
+---
+
+# Linear Combination Reranker in LanceDB
 
 !!! note
     This is deprecated. It is recommended to use the `RRFReranker` instead, if you want to use a score-based reranker.

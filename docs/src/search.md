@@ -1,3 +1,8 @@
+---
+title: Search in LanceDB | Vector, FTS, and Hybrid Search
+description: Learn about LanceDB's powerful search capabilities including vector similarity search, full-text search, and hybrid search. Features comprehensive query options, filtering, and result customization.
+---
+
 # Vector Search
 
 A vector search finds the approximate or exact nearest neighbors to a given query vector.

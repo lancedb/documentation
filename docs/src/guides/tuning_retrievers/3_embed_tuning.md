@@ -1,3 +1,8 @@
+---
+title: Embedding Tuning in LanceDB | Model Optimization Guide
+description: Learn how to optimize embedding models in LanceDB for better search results. Includes fine-tuning techniques, model selection, and performance optimization strategies.
+---
+
 ## Finetuning the Embedding Model
 Try it yourself: <a href="https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/embedding_tuner.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a><br/>
 

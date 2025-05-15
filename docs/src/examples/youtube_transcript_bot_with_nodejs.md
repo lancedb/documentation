@@ -1,3 +1,8 @@
+---
+title: YouTube Transcript Bot with Node.js & LanceDB | JavaScript Implementation Guide
+description: Learn how to build a YouTube transcript analysis bot using Node.js and LanceDB. Includes setup, configuration, and best practices for JavaScript video content processing.
+---
+
 # YouTube transcript QA bot with NodeJS
 
 ## use LanceDB's Javascript API and OpenAI to build a QA bot for YouTube transcripts

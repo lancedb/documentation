@@ -1,4 +1,10 @@
-# Sentence transformers
+---
+title: Sentence Transformers | Open Source Embedding Guide
+description: Learn how to use Sentence Transformers in LanceDB. Includes setup, configuration, and best practices for text embedding generation with state-of-the-art open source models.
+---
+
+# Sentence Transformers Embedding Model
+
 Allows you to set parameters when registering a `sentence-transformers` object.
 
 !!! info

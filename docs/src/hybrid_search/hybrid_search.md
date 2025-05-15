@@ -1,3 +1,8 @@
+---
+title: Hybrid Search in LanceDB | Vector & Keyword Search Guide
+description: Learn how to implement hybrid search in LanceDB by combining vector and keyword-based search. Includes examples for reranking, score normalization, and best practices for search optimization.
+---
+
 # Hybrid Search
 
 LanceDB supports both semantic and keyword-based search (also termed full-text search, or FTS). In real world applications, it is often useful to combine these two approaches to get the best best results. For example, you may want to search for a document that is semantically similar to a query document, but also contains a specific keyword. This is an example of *hybrid search*, a search algorithm that combines multiple search techniques.

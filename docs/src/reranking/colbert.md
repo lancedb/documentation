@@ -1,4 +1,9 @@
-# ColBERT Reranker
+---
+title: ColBERT Reranker in LanceDB | Contextual Search Optimization
+description: Enhance search results with ColBERT's contextual reranking in LanceDB. Features efficient model deployment, device optimization, and flexible scoring options for vector, FTS, and hybrid search.
+---
+
+# ColBERT Reranker in LanceDB
 
 This reranker uses ColBERT model to rerank the search results. You can use this reranker by passing `ColbertReranker()` to the `rerank()` method. 
 !!! note

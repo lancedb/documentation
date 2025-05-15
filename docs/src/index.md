@@ -1,4 +1,9 @@
-# LanceDB
+---
+title: LanceDB Documentation | Vector Database Guide
+description: Comprehensive documentation for LanceDB, a vector database for AI applications. Includes guides, tutorials, API references, and best practices for vector search and data management.
+---
+
+# LanceDB Documentation
 
 LanceDB is an open-source vector database for AI that's designed to store, manage, query and retrieve embeddings on large-scale multi-modal data. The core of LanceDB is written in Rust 🦀 and is built on top of [Lance](https://github.com/lancedb/lance), an open-source columnar data format designed for performant ML workloads and fast random access.
 

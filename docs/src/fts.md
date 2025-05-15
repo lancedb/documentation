@@ -1,3 +1,8 @@
+---
+title: Full-Text Search in LanceDB | Text Search Guide
+description: Learn how to implement full-text search in LanceDB. Includes text indexing, search capabilities, and best practices for efficient text search operations.
+---
+
 # Full-text search (Native FTS)
 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.

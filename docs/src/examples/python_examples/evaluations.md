@@ -1,3 +1,8 @@
+---
+title: Vector Search Evaluation with LanceDB | Python Guide
+description: Learn how to evaluate vector search performance using LanceDB in Python. Includes examples for metrics calculation, benchmarking, and best practices for search evaluation.
+---
+
 **Evaluation: Assessing Text Performance with Precision 📊💡**
 ====================================================================
 

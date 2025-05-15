@@ -1,3 +1,7 @@
+---
+title: PromptTools Integration with LanceDB | Evaluation Framework Guide
+description: Learn how to use PromptTools with LanceDB for testing and evaluating LLM prompts, configurations, and vector search performance. Includes setup and best practices for prompt engineering.
+---
 
 [PromptTools](https://github.com/hegelai/prompttools) offers a set of free, open-source tools for testing and experimenting with models, prompts, and configurations. The core idea is to enable developers to evaluate prompts using familiar interfaces like code and notebooks. You can use it to experiment with different configurations of LanceDB, and test how LanceDB integrates with the LLM of your choice.
 <!-- 

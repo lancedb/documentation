@@ -1,4 +1,10 @@
-# Gemini Embeddings
+---
+title: Gemini Embedding Function | Google AI Integration Guide
+description: Learn how to use Google's Gemini embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with Google's AI models.
+---
+
+# Gemini Embedding Models
+
 With Google's Gemini, you can represent text (words, sentences, and blocks of text) in a vectorized form, making it easier to compare and contrast embeddings. For example, two texts that share a similar subject matter or sentiment should have similar embeddings, which can be identified through mathematical comparison techniques such as cosine similarity. For more on how and why you should use embeddings, refer to the Embeddings guide.
 The Gemini Embedding Model API supports various task types:
 

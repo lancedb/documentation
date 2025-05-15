@@ -1,3 +1,8 @@
+---
+title: LanceDB Examples | Code Samples & Tutorials
+description: Explore practical examples and tutorials for using LanceDB. Includes Python, JavaScript, and Rust implementations, serverless deployments, and integration guides.
+---
+
 # Example projects and recipes
 
 ## Recipes and example code

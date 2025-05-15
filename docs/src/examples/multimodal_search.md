@@ -1,3 +1,8 @@
+---
+title: Multimodal Search with LanceDB | Text & Image Search Guide
+description: Learn how to implement multimodal search using LanceDB. Includes text and image search capabilities, embedding generation, and best practices for multimodal applications.
+---
+
 # Image multimodal search
 
 ## Search through an image dataset using natural language, full text and SQL

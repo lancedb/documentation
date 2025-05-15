@@ -1,3 +1,10 @@
+---
+title: Reranking in LanceDB | Search Result Reordering
+description: Learn about LanceDB's reranking capabilities for improving search result quality. Includes built-in rerankers like Cohere, CrossEncoder, ColBERT, and custom reranker implementation.
+---
+
+# Reranking in LanceDB
+
 Reranking is the process of reordering a list of items based on some criteria. In the context of search, reranking is used to reorder the search results returned by a search engine based on some criteria. This can be useful when the initial ranking of the search results is not satisfactory or when the user has provided additional information that can be used to improve the ranking of the search results.
 
 LanceDB comes with some built-in rerankers. Some of the rerankers that are available in LanceDB are:

@@ -1,4 +1,9 @@
-# IBM watsonx.ai Embeddings
+---
+title: IBM WatsonX AI Embedding Function | Enterprise AI Integration Guide
+description: Learn how to use IBM WatsonX AI embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with IBM's enterprise AI services.
+---
+
+# IBM watsonx.ai Embedding Model
 
 Generate text embeddings using IBM's watsonx.ai platform.
 

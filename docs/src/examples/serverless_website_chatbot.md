@@ -1,3 +1,8 @@
+---
+title: Serverless Website Chatbot with LanceDB | Next.js & Vercel Guide
+description: Learn how to build a serverless website chatbot using LanceDB, Next.js, and Vercel. Includes setup, deployment, and best practices for embedding LanceDB in Next.js applications.
+---
+
 # LanceDB Chatbot - Vercel Next.js Template
 Use an AI chatbot with website context retrieved from a vector store like LanceDB. LanceDB is lightweight and can be embedded directly into Next.js, with data stored on-prem.
 

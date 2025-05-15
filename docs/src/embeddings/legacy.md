@@ -1,3 +1,8 @@
+---
+title: Legacy Embedding API in LanceDB | Python Integration Guide
+description: Learn about LanceDB's legacy embedding API for Python. Includes examples for HuggingFace and OpenAI integration, data embedding, and vector search implementation.
+---
+
 The legacy `with_embeddings` API is for Python only and is deprecated.
 
 ### Hugging Face

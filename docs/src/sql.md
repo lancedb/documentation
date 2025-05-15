@@ -1,3 +1,8 @@
+---
+title: SQL in LanceDB | Query Language Support
+description: Use SQL to query and manipulate data in LanceDB. Features comprehensive SQL support including filtering, aggregation, joins, and integration with vector search capabilities.
+---
+
 # Filtering
 
 ## Pre and post-filtering

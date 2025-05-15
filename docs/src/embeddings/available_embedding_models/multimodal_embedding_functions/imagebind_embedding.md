@@ -1,4 +1,10 @@
-# Imagebind embeddings
+---
+title: ImageBind Embedding Function | Multimodal Embedding Guide
+description: Learn how to use the ImageBind embedding function in LanceDB. Includes setup, configuration, and best practices for multimodal embedding generation.
+---
+
+# ImageBind Embedding Models
+
 We have support for [imagebind](https://github.com/facebookresearch/ImageBind) model embeddings. You can download our version of the packaged model via - `pip install imagebind-packaged==0.1.2`.
 
 This function is registered as `imagebind` and supports Audio, Video and Text modalities(extending to Thermal,Depth,IMU data):

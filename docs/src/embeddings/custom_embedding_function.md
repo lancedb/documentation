@@ -1,3 +1,10 @@
+---
+title: Custom Embedding Functions in LanceDB | Model Integration Guide
+description: Learn how to create and integrate custom embedding functions in LanceDB. Includes implementation examples, model integration, and best practices for custom vector embeddings.
+---
+
+# Custom Embedding Functions in LanceDB
+
 To use your own custom embedding function, you can follow these 2 simple steps:
 
 1. Create your embedding function by implementing the `EmbeddingFunction` interface

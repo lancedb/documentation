@@ -1,3 +1,8 @@
+---
+title: Recommender System with LanceDB | Python Implementation Guide
+description: Learn how to build a recommender system using LanceDB in Python. Includes examples for content-based filtering, collaborative filtering, and best practices for recommendation engines.
+---
+
 **Recommender Systems: Personalized Discovery🍿📺**
 ==============================================================
 Deliver personalized experiences with Recommender Systems. 🎁

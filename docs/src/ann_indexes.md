@@ -1,3 +1,8 @@
+---
+title: ANN Indexes in LanceDB | Approximate Nearest Neighbor Guide
+description: Learn about approximate nearest neighbor (ANN) indexes in LanceDB. Includes HNSW, IVF-PQ, and other index types, with configuration options and performance tuning guidelines.
+---
+
 # Approximate Nearest Neighbor (ANN) Indexes
 
 An ANN or a vector index is a data structure specifically designed to efficiently organize and

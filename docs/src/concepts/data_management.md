@@ -1,4 +1,9 @@
-# Data management
+---
+title: Data Management in LanceDB | Storage & Organization
+description: Learn about LanceDB's data management capabilities including versioning, schema evolution, and data organization. Includes best practices for efficient vector data storage and retrieval.
+---
+
+# Data Management in LanceDB
 
 This section covers concepts related to managing your data over time in LanceDB.
 
@@ -34,7 +39,7 @@ Compaction performs the following tasks in the background:
 
 Depending on the use case and dataset, optimal compaction will have different requirements. As a rule of thumb:
 
-- It’s always better to use *batch* inserts rather than adding 1 row at a time (to avoid too small fragments). If single-row inserts are unavoidable, run compaction on a regular basis to merge them into larger fragments.
+- It's always better to use *batch* inserts rather than adding 1 row at a time (to avoid too small fragments). If single-row inserts are unavoidable, run compaction on a regular basis to merge them into larger fragments.
 - Keep the number of fragments under 100, which is suitable for most use cases (for *really* large datasets of >500M rows, more fragments might be needed)
 
 ## Deletion

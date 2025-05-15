@@ -1,4 +1,9 @@
-# Jina Reranker
+---
+title: Jina Reranker in LanceDB | Multilingual Search Enhancement
+description: Integrate Jina's multilingual reranking API with LanceDB for improved search results. Features model selection, API key management, and flexible scoring options for all search types.
+---
+
+# Jina Reranker in LanceDB
 
 This reranker uses the [Jina](https://jina.ai/reranker/) API to rerank the search results. You can use this reranker by passing `JinaReranker()` to the `rerank()` method. Note that you'll either need to set the `JINA_API_KEY` environment variable or pass the `api_key` argument to use this reranker.
 

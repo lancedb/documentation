@@ -1,4 +1,9 @@
-# OpenAI embeddings
+---
+title: OpenAI Embedding Function | GPT Integration Guide
+description: Learn how to use OpenAI's embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with GPT models.
+---
+
+# OpenAI Embedding Model
 
 LanceDB registers the OpenAI embeddings function in the registry by default, as `openai`. Below are the parameters that you can customize when creating the instances:
 

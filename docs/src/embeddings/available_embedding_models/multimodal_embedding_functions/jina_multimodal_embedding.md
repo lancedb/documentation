@@ -1,4 +1,9 @@
-# Jina Embeddings : Multimodal
+---
+title: Jina Multimodal Embedding Function | Text & Image Embedding Guide
+description: Learn how to use the Jina multimodal embedding function in LanceDB. Includes setup, configuration, and best practices for text and image embedding generation.
+---
+
+# Jina Multimodal Embedding Models
 
 Jina embeddings can also be used to embed both text and image data, only some of the models support image data and you can check the list
 under [https://jina.ai/embeddings/](https://jina.ai/embeddings/)

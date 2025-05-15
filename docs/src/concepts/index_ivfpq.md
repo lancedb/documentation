@@ -1,4 +1,9 @@
-# Understanding LanceDB's IVF-PQ index
+---
+title: IVF-PQ Index in LanceDB | Product Quantization Guide
+description: Learn about LanceDB's IVF-PQ index implementation for efficient vector search. Covers product quantization, clustering, and performance optimization for large-scale vector databases.
+---
+
+# IVF-PQ Index in LanceDB
 
 An ANN (Approximate Nearest Neighbors) index is a data structure that represents data in a way that makes it more efficient to search and retrieve. Using an ANN index is faster, but less accurate than kNN or brute force search because, in essence, the index is a lossy representation of the data.
 

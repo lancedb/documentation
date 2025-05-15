@@ -1,3 +1,8 @@
+---
+title: Building LanceDB from Scratch | Python Implementation Guide
+description: Learn how to build a vector database from scratch using LanceDB in Python. Includes examples for database setup, data ingestion, and best practices for custom implementations.
+---
+
 # **Build from Scratch with LanceDB 🛠️🚀**
 
 Start building your GenAI applications from the ground up using **LanceDB's** efficient vector-based document retrieval capabilities! 📑

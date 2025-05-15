@@ -1,3 +1,8 @@
+---
+title: Graph RAG in LanceDB | Knowledge Graph Enhanced Retrieval
+description: Learn how to implement Graph RAG with LanceDB for improved information retrieval using knowledge graphs. Covers Microsoft's GraphRAG implementation, entity relationships, and advanced retrieval techniques.
+---
+
 **Graph RAG 📊**
 ====================================================================
 Graph RAG uses knowledge graphs together with large language models (LLMs) to improve how information is retrieved and generated. It overcomes the limits of traditional search methods by using knowledge graphs, which organize data as connected entities and relationships.

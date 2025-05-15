@@ -1,3 +1,10 @@
+---
+title: Embedding Functions in LanceDB | Model Integration Guide
+description: Master LanceDB's embedding function system for converting data into vector representations. Learn about function types, configuration, and integration with vector search.
+---
+
+# Embedding Functions in LanceDB
+
 Representing multi-modal data as vector embeddings is becoming a standard practice. Embedding functions can themselves be thought of as key part of the data processing pipeline that each request has to be passed through. The assumption here is: after initial setup, these components and the underlying methodology are not expected to change for a particular project.
 
 For this purpose, LanceDB introduces an **embedding functions API**, that allow you simply set up once, during the configuration stage of your project. After this, the table remembers it, effectively making the embedding functions *disappear in the background* so you don't have to worry about manually passing callables, and instead, simply focus on the rest of your data engineering pipeline.

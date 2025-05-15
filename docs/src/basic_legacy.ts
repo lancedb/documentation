@@ -1,3 +1,5 @@
+// LanceDB Legacy Basic Example | JavaScript/TypeScript
+// Example code for basic table operations using the legacy vectordb package in LanceDB. Demonstrates table creation, schema usage, indexing, search, and deletion.
 // --8<-- [start:import]
 import * as lancedb from "vectordb";
 import {

@@ -1,3 +1,8 @@
+---
+title: Serverless QA Bot with Modal & LangChain | RAG Implementation Guide
+description: Learn how to build a serverless question-answering bot using LanceDB, Modal, and LangChain. Includes setup, configuration, and best practices for RAG applications.
+---
+
 # Serverless QA Bot with Modal and LangChain
 
 ## use LanceDB's LangChain integration with Modal to run a serverless app

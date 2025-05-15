@@ -1,3 +1,8 @@
+---
+title: Multi-Vector Search in LanceDB | Advanced Vector Operations
+description: Learn how to use LanceDB's multi-vector search capabilities for complex vector operations. Includes support for multiple vectors per item, late interaction techniques, and advanced search strategies.
+---
+
 # Late interaction & MultiVector embedding type
 Late interaction is a technique used in retrieval that calculates the relevance of a query to a document by comparing their multi-vector representations. The key difference between late interaction and other popular methods:
 

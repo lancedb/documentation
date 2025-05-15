@@ -1,3 +1,8 @@
+---
+title: JavaScript Examples for LanceDB | Code Samples & Tutorials
+description: Learn how to use LanceDB with JavaScript through practical examples. Includes vector search, embeddings, and integration with Node.js applications.
+---
+
 # Examples: JavaScript
 
 To help you get started, we provide some examples, projects and applications that use the LanceDB JavaScript API. You can always find the latest examples in our [VectorDB Recipes](https://github.com/lancedb/vectordb-recipes) repository.

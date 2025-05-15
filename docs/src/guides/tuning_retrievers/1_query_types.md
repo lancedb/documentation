@@ -1,3 +1,8 @@
+---
+title: Query Types in LanceDB | Search Strategy Guide
+description: Master different query types in LanceDB for optimal search results. Learn about vector search, hybrid search, and query optimization techniques for improved retrieval performance.
+---
+
 ## Improving retriever performance
 
 Try it yourself: <a href="https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/lancedb_reranking.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a><br/>

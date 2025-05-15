@@ -1,4 +1,9 @@
-# Quick start
+---
+title: Getting Started with LanceDB | Quick Start Guide
+description: Start using LanceDB with this comprehensive guide. Learn core concepts, installation, basic operations, and best practices for vector database management.
+---
+
+# Getting Started with LanceDB
 
 !!! info "LanceDB can be run in a number of ways:"
 

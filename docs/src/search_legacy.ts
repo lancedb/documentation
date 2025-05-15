@@ -1,3 +1,5 @@
+// LanceDB Legacy Search Example | JavaScript/TypeScript
+// Example code for performing vector search using the legacy vectordb package in LanceDB. Demonstrates table creation, search, and metric type usage.
 // --8<-- [start:import]
 import * as lancedb from "vectordb";
 // --8<-- [end:import]

@@ -1,3 +1,8 @@
+---
+title: Reranking in LanceDB | Search Result Optimization
+description: Learn how to use rerankers in LanceDB to improve search result quality. Includes CohereReranker, CrossEncoderReranker, and custom rerankers with performance benchmarks.
+---
+
 Continuing from the previous section, we can now rerank the results using more complex rerankers.
 
 Try it yourself: <a href="https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/lancedb_reranking.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a><br/>

@@ -1,3 +1,8 @@
+---
+title: Multimodal Search with LanceDB | Python Implementation Guide
+description: Learn how to implement multimodal search using LanceDB in Python. Includes examples for text-image search, cross-modal retrieval, and best practices for multimodal applications.
+---
+
 # **Multimodal Search with LanceDB 🤹‍♂️🔍**
 
 Using LanceDB's multimodal capabilities, combine text and image queries to find the most relevant results in your corpus ! 🔓💡

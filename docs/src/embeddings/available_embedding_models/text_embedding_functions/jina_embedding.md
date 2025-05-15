@@ -1,4 +1,9 @@
-# Jina Embeddings
+---
+title: Jina Embedding Function | Text Embedding Guide
+description: Learn how to use Jina's embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with Jina's AI models.
+---
+
+# Jina Embedding Model
 
 Jina embeddings are used to generate embeddings for text and image data.
 You also need to set the `JINA_API_KEY` environment variable to use the Jina API.

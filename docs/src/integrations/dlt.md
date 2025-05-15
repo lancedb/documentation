@@ -1,3 +1,8 @@
+---
+title: dlt Integration with LanceDB | Data Loading & Transformation
+description: Learn how to use LanceDB with dlt for efficient data loading and transformation. Includes setup, configuration, and best practices for data pipeline integration.
+---
+
 # dlt  
 
 [dlt](https://dlthub.com/docs/intro) is an open-source library that you can add to your Python scripts to load data from various and often messy data sources into well-structured, live datasets. dlt's [integration with LanceDB](https://dlthub.com/docs/dlt-ecosystem/destinations/lancedb) lets you ingest data from any source (databases, APIs, CSVs, dataframes, JSONs, and more) into LanceDB with a few lines of simple python code. The integration enables automatic normalization of nested data, schema inference, incremental loading and embedding the data. dlt also has integrations with several other tools like dbt, airflow, dagster etc. that can be inserted into your LanceDB workflow.

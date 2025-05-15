@@ -1,3 +1,8 @@
+---
+title: LangChain Integration with LanceDB | Vector Store & Retriever
+description: Learn how to use LanceDB as a vector store and retriever in LangChain applications. Includes setup, configuration, and best practices for RAG implementations.
+---
+
 **LangChain** is a framework designed for building applications with large language models (LLMs) by chaining together various components. It supports a range of functionalities including memory, agents, and chat models, enabling developers to create context-aware applications.
 
 ![Illustration](https://raw.githubusercontent.com/lancedb/assets/refs/heads/main/docs/assets/integration/langchain_rag.png)

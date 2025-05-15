@@ -1,4 +1,9 @@
-# Cross Encoder Reranker
+---
+title: Cross Encoder Reranker in LanceDB | Semantic Search Enhancement
+description: Implement semantic search reranking in LanceDB using Cross Encoder models. Features configurable model selection, device optimization, and comprehensive scoring options for all search types.
+---
+
+# Cross Encoder Reranker in LanceDB
 
 This reranker uses Cross Encoder models from sentence-transformers to rerank the search results. You can use this reranker by passing `CrossEncoderReranker()` to the `rerank()` method. 
 !!! note

@@ -1,3 +1,8 @@
+---
+title: LlamaIndex Integration with LanceDB | Vector Store Guide
+description: Learn how to use LanceDB as a vector store with LlamaIndex. Includes setup, filtering, hybrid search, and best practices for document retrieval and indexing.
+---
+
 # Llama-Index
 ![Illustration](../assets/llama-index.jpg)
 

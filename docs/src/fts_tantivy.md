@@ -1,3 +1,8 @@
+---
+title: Full-Text Search with Tantivy | Advanced Text Search Engine
+description: Learn how to use Tantivy-based full-text search in LanceDB for high-performance text search capabilities. Includes tokenization, stemming, and advanced query features.
+---
+
 # Full-text search (Tantivy-based FTS)
 
 LanceDB also provides support for full-text search via [Tantivy](https://github.com/quickwit-oss/tantivy), allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.

@@ -1,3 +1,8 @@
+---
+title: Voxel51 Integration with LanceDB | Computer Vision & Video Analysis
+description: Learn how to use LanceDB with Voxel51 for computer vision and video analysis. Includes setup, configuration, and best practices for video data storage and retrieval.
+---
+
 # FiftyOne
 
 FiftyOne is an open source toolkit that enables users to curate better data and build better models. It includes tools for data exploration, visualization, and management, as well as features for collaboration and sharing. 

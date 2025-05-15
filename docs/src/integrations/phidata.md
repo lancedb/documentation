@@ -1,3 +1,8 @@
+---
+title: phidata Integration with LanceDB | AI Assistant Framework Guide
+description: Learn how to build AI assistants with LanceDB using the phidata framework. Includes knowledge base setup, memory management, and best practices for context-aware AI applications.
+---
+
 **phidata** is a framework for building **AI Assistants** with long-term memory, contextual knowledge, and the ability to take actions using function calling. It helps turn general-purpose LLMs into specialized assistants tailored to your use case by extending its capabilities using **memory**, **knowledge**, and **tools**. 
 
 - **Memory**: Stores chat history in a **database** and enables LLMs to have long-term conversations.
@@ -232,7 +237,7 @@ Let's see all the parameters that `TextKnowledgeBase` takes -
     
     When the user queries over vectorDB, the queries are converted into embeddings, and a nearest neighbor search is performed over these query embeddings which returns the embeddings that correspond to most semantically similar chunks(parts of our data) present in vectorDB. 
 
-    Here, a “Document” is a class in phidata. Since there is an option to let phidata create and manage embeddings, it splits our data into smaller chunks(as expected). It does not directly create embeddings on it. Instead, it takes each chunk and encapsulates it inside the object of the `Document` class along with various other metadata related to the chunk. Then embeddings are created on these `Document` objects and stored in vectorDB.
+    Here, a "Document" is a class in phidata. Since there is an option to let phidata create and manage embeddings, it splits our data into smaller chunks(as expected). It does not directly create embeddings on it. Instead, it takes each chunk and encapsulates it inside the object of the `Document` class along with various other metadata related to the chunk. Then embeddings are created on these `Document` objects and stored in vectorDB.
 
     ```python
     class Document(BaseModel):

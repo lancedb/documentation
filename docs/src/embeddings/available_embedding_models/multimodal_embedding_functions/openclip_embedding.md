@@ -1,4 +1,10 @@
-# OpenClip embeddings
+---
+title: OpenCLIP Embedding Function | Image & Text Embedding Guide
+description: Learn how to use the OpenCLIP embedding function in LanceDB. Includes setup, configuration, and best practices for image and text embedding generation.
+---
+
+# OpenClip Embedding Models
+
 We support CLIP model embeddings using the open source alternative, [open-clip](https://github.com/mlfoundations/open_clip) which supports various customizations. It is registered as `open-clip` and supports the following customizations:
 
 | Parameter | Type | Default Value | Description |

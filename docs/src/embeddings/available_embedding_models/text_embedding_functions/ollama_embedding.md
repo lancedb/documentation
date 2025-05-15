@@ -1,4 +1,9 @@
-# Ollama embeddings
+---
+title: Ollama Embedding Function | Local Model Guide
+description: Learn how to use Ollama's embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with local AI models.
+---
+
+# Ollama Embedding Model
 
 Generate embeddings via the [ollama](https://github.com/ollama/ollama-python) python library. More details:
 

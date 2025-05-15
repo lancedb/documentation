@@ -1,3 +1,8 @@
+---
+title: Python Examples for LanceDB | Code Samples & Tutorials
+description: Learn how to use LanceDB with Python through practical examples. Includes vector search, embeddings, and integration with popular AI frameworks.
+---
+
 # Overview : Python Examples 
 
 To help you get started, we provide some examples, projects, and applications that use the LanceDB Python API. These examples are designed to get you right into the code with minimal introduction, enabling you to move from an idea to a proof of concept in minutes. 
@@ -11,7 +16,7 @@ Explore applied examples available as Colab notebooks or Python scripts to integ
 | Explore                                         | Description                                                                                                                                                      |
 |----------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Build from Scratch with LanceDB** 🛠️🚀](python_examples/build_from_scratch.md)               | Start building your **GenAI applications** from the **ground up** using **LanceDB's** efficient vector-based document retrieval capabilities! Get started quickly with a solid foundation.      |
-| [**Multimodal Search with LanceDB** 🤹‍♂️🔍](python_examples/multimodal.md)               | Combine **text** and **image queries** to find the most relevant results using **LanceDB’s multimodal** capabilities. Leverage the efficient vector-based similarity search.   |
+| [**Multimodal Search with LanceDB** 🤹‍♂️🔍](python_examples/multimodal.md)               | Combine **text** and **image queries** to find the most relevant results using **LanceDB's multimodal** capabilities. Leverage the efficient vector-based similarity search.   |
 | [**RAG (Retrieval-Augmented Generation) with LanceDB** 🔓🧐](python_examples/rag.md) | Build RAG (Retrieval-Augmented Generation) with **LanceDB** for efficient **vector-based information retrieval** and more accurate responses from AI.                    |
 | [**Vector Search: Efficient Retrieval** 🔓👀](python_examples/vector_search.md) | Use **LanceDB's** vector search capabilities to perform efficient and accurate **similarity searches**, enabling rapid discovery and retrieval of relevant documents in Large datasets.                                                 |
 | [**Chatbot applications with LanceDB** 🤖](python_examples/chatbot.md)                | Create **chatbots** that retrieves relevant context for **coherent and context-aware replies**, enhancing user experience through advanced conversational AI. |

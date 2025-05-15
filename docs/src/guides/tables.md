@@ -1,3 +1,7 @@
+---
+title: Working with Tables in LanceDB | Data Management Guide
+description: Comprehensive guide to managing tables in LanceDB. Learn about table creation, schema management, data operations, and best practices for efficient vector data organization.
+---
 
 <a href="https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/tables_guide.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a><br/>
 

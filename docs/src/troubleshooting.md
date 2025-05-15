@@ -1,3 +1,8 @@
+---
+title: Troubleshooting LanceDB | Common Issues & Solutions
+description: Find solutions to common issues in LanceDB. Includes error handling, performance optimization, and best practices for resolving technical challenges.
+---
+
 ## Getting help
 
 The following sections provide various diagnostics and troubleshooting tips for LanceDB.

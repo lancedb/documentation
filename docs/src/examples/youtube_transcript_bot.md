@@ -1,3 +1,8 @@
+---
+title: YouTube Transcript Bot with LanceDB | Video Content Analysis Guide
+description: Learn how to build a bot that analyzes YouTube video transcripts using LanceDB. Includes setup, configuration, and best practices for video content processing.
+---
+
 # YouTube transcript search
 
 ## Search through youtube transcripts using natural language with LanceDB

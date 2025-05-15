@@ -1,7 +1,11 @@
+---
+title: HNSW Index in LanceDB | Hierarchical Navigable Small World
+description: Learn about LanceDB's HNSW index implementation for fast approximate nearest neighbor search. Covers graph-based indexing, search parameters, and performance optimization.
+---
 
-# Understanding HNSW index
+# HNSQ Index in LanceDB
 
-Approximate Nearest Neighbor (ANN) search is a method for finding data points near a given point in a dataset, though not always the exact nearest one. HNSW is one of the most accurate and fastest Approximate Nearest Neighbour search algorithms, It’s beneficial in high-dimensional spaces where finding the same nearest neighbor would be too slow and costly
+Approximate Nearest Neighbor (ANN) search is a method for finding data points near a given point in a dataset, though not always the exact nearest one. HNSW is one of the most accurate and fastest Approximate Nearest Neighbour search algorithms, It's beneficial in high-dimensional spaces where finding the same nearest neighbor would be too slow and costly
 
 [Jump to usage](#usage)
 There are three main types of ANN search algorithms:

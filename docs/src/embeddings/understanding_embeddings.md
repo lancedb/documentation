@@ -1,4 +1,9 @@
-# Understand Embeddings
+---
+title: Understanding Embeddings in LanceDB | Vector Representation Guide
+description: Learn the fundamentals of vector embeddings in LanceDB. Includes embedding concepts, model selection, and best practices for vector representation in AI applications.
+---
+
+# Understanding Embeddings in LanceDB
 
 The term **dimension** is a synonym for the number of elements in a feature vector. Each feature can be thought of as a different axis in a geometric space. 
 
@@ -21,10 +26,10 @@ In a way, it captures the most important aspects of the data while ignoring the 
 
 ??? question "Are vectors and embeddings the same thing?"
 
-    When we say “vectors” we mean - **list of numbers** that **represents the data**. 
-    When we say “embeddings” we mean - **list of numbers** that **capture important details and relationships**.
+    When we say "vectors" we mean - **list of numbers** that **represents the data**. 
+    When we say "embeddings" we mean - **list of numbers** that **capture important details and relationships**.
 
-    Although the terms are often used interchangeably, “embeddings” highlight how the data is represented with meaning and structure, while “vector” simply refers to the numerical form of that representation.
+    Although the terms are often used interchangeably, "embeddings" highlight how the data is represented with meaning and structure, while "vector" simply refers to the numerical form of that representation.
 
 ## Embedding vs Indexing
 

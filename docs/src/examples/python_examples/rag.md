@@ -1,3 +1,8 @@
+---
+title: RAG Implementation with LanceDB | Python Guide
+description: Learn how to implement Retrieval Augmented Generation (RAG) using LanceDB in Python. Includes examples for document retrieval, context generation, and best practices for RAG applications.
+---
+
 **RAG (Retrieval-Augmented Generation) with LanceDB 🔓🧐**
 ====================================================================
 

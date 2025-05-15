@@ -1,3 +1,8 @@
+---
+title: Storage in LanceDB | Data Persistence & Management
+description: Master LanceDB's storage capabilities for efficient data management. Covers local storage, cloud storage, data versioning, and best practices for large-scale vector data persistence.
+---
+
 # Configuring cloud storage
 
 <!-- TODO: When we add documentation for how to configure other storage types

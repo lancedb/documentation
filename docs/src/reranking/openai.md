@@ -1,4 +1,9 @@
-# OpenAI Reranker (Experimental)
+---
+title: OpenAI Reranker in LanceDB | Experimental GPT-Powered Search
+description: Explore experimental search reranking using OpenAI's GPT models in LanceDB. Features configurable model selection, API key management, and comprehensive scoring options for all search types.
+---
+
+# OpenAI Reranker (Experimental) in LanceDB
 
 This reranker uses OpenAI chat model to rerank the search results. You can use this reranker by passing `OpenAI()` to the `rerank()` method. 
 !!! note

@@ -1,4 +1,9 @@
-# Storage
+---
+title: Storage in LanceDB | Data Persistence Guide
+description: Learn about LanceDB's storage architecture and data persistence mechanisms. Covers local storage, cloud storage options, and best practices for efficient vector data management.
+---
+
+# Storage in LanceDB
 
 LanceDB is among the only vector databases built on top of multiple modular components designed from the ground-up to be efficient on disk. This gives it the unique benefit of being flexible enough to support multiple storage backends, including local NVMe, EBS, EFS and many other third-party APIs that connect to the cloud.
 
@@ -14,7 +19,7 @@ When architecting your system, you'd typically ask yourself the following questi
 
 1. **Latency**: How fast do I need results? What do the p50 and also p95 look like?
 2. **Scalability**: Can I scale up the amount of data and QPS easily?
-3. **Cost**: To serve my application, what’s the all-in cost of *both* storage and serving infra?
+3. **Cost**: To serve my application, what's the all-in cost of *both* storage and serving infra?
 4. **Reliability/Availability**: How does replication work? Is disaster recovery addressed?
 
 ## Tradeoffs
@@ -61,9 +66,9 @@ Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-co
 
 !!! info "Very low latency (<30ms), higher cost"
 
-    - **Latency** ⇒ Very good, pretty close to local disk. You’re looking at <30ms latency in most cases
+    - **Latency** ⇒ Very good, pretty close to local disk. You're looking at <30ms latency in most cases
     - **Scalability** ⇒ EBS is not shareable between instances. If deployed via k8s, it can be shared between pods that live on the same instance, but beyond that you would need to shard data or make an additional copy
-    - **Cost** ⇒ Higher than EFS. There are some hidden costs to EBS as well if you’re paying for IO.
+    - **Cost** ⇒ Higher than EFS. There are some hidden costs to EBS as well if you're paying for IO.
     - **Reliability/Availability** ⇒ Not shareable between instances but can be shared between pods on the same instance. Survives instance termination. No automatic backups.
 
 Just like EFS, an EBS or persistent disk setup requires more manual work to manage data sharding, backups and capacity.
@@ -74,7 +79,7 @@ Just like EFS, an EBS or persistent disk setup requires more manual work to mana
 
     - **Latency** ⇒ Lowest latency with modern NVMe drives, <10ms p95
     - **Scalability** ⇒ Difficult to scale on cloud. Also need additional copies / sharding if QPS needs to be higher
-    - **Cost** ⇒ Highest cost; the main issue with keeping your application and storage tightly integrated is that it’s just not really possible to scale this up in cloud environments
+    - **Cost** ⇒ Highest cost; the main issue with keeping your application and storage tightly integrated is that it's just not really possible to scale this up in cloud environments
     - **Reliability/Availability** ⇒ If the instance goes down, so does your data. You have to be _very_ diligent about backing up your data
 
-As a rule of thumb, local disk should be your storage option if you require absolutely *crazy low* latency and you’re willing to do a bunch of data management work to make it happen.
+As a rule of thumb, local disk should be your storage option if you require absolutely *crazy low* latency and you're willing to do a bunch of data management work to make it happen.

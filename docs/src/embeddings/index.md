@@ -1,3 +1,10 @@
+---
+title: Embeddings in LanceDB | Vector Representation Guide
+description: Learn about LanceDB's embedding capabilities for converting data into vector representations. Includes model integration, customization options, and best practices for vector embeddings.
+---
+
+# Working with Embeddings in LanceDB 
+
 Due to the nature of vector embeddings, they can be used to represent any kind of data, from text to images to audio.
 This makes them a very powerful tool for machine learning practitioners.
 However, there's no one-size-fits-all solution for generating embeddings - there are many different libraries and APIs

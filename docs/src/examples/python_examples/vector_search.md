@@ -1,3 +1,8 @@
+---
+title: Vector Search Examples in LanceDB | Python Implementation Guide
+description: Learn how to implement vector search in LanceDB using Python. Includes examples for similarity search, filtering, and best practices for efficient vector queries.
+---
+
 **Vector Search: Efficient Retrieval 🔓👀**
 ====================================================================
 

@@ -1,3 +1,8 @@
+---
+title: Code Documentation QA Bot with LangChain | Documentation Search Guide
+description: Learn how to build a question-answering bot for code documentation using LanceDB and LangChain. Includes setup, configuration, and best practices for documentation search.
+---
+
 # Code documentation Q&A bot with LangChain
 
 ## use LanceDB's LangChain integration to build a Q&A bot for your documentation

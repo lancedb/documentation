@@ -1,4 +1,10 @@
-# Instructor Embeddings
+---
+title: Instructor Embedding Function | Instruction-Tuned Model Guide
+description: Learn how to use the Instructor embedding function in LanceDB. Includes setup, configuration, and best practices for text embedding generation with instruction-tuned models.
+---
+
+# Instructor Embedding Model
+
 [Instructor](https://instructor-embedding.github.io/) is an instruction-finetuned text embedding model that can generate text embeddings tailored to any task (e.g. classification, retrieval, clustering, text evaluation, etc.) and domains (e.g. science, finance, etc.) by simply providing the task instruction, without any finetuning.
 
 If you want to calculate customized embeddings for specific sentences, you can follow the unified template to write instructions.

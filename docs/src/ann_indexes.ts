@@ -1,3 +1,5 @@
+// LanceDB ANN Index Example | JavaScript/TypeScript
+// Example code for creating and querying Approximate Nearest Neighbor (ANN) indexes using the legacy vectordb package in LanceDB. Demonstrates index creation, search, and filtering.
 // --8<-- [start:import]
 import * as vectordb from "vectordb";
 // --8<-- [end:import]

@@ -1,9 +1,9 @@
 ---
-title: "Query Performance Tuning in LanceDB Enterprise | Performance Optimization Guide"
-description: "Learn how to optimize query performance in LanceDB Enterprise. Includes performance analysis, tuning techniques, and best practices for enterprise workloads."
+title: "Query Performance Tuning in LanceDB | Performance Optimization Guide"
+description: "Learn how to optimize query performance in LanceDB. Includes performance analysis, tuning techniques, and best practices for workloads."
 ---
 
-# Query Optimization with LanceDB Enterprise
+# Query Optimization with LanceDB 
 
 LanceDB provides two powerful tools for query analysis and optimization:
 

@@ -1,9 +1,9 @@
 ---
-title: "Data Ingestion in LanceDB Enterprise | Data Loading Guide"
-description: "Learn how to ingest data into LanceDB Enterprise. Includes batch loading, streaming ingestion, and best practices for enterprise data management."
+title: "Data Ingestion in LanceDB | Data Loading Guide"
+description: "Learn how to ingest data into LanceDB. Includes batch loading, streaming ingestion, and best practices for data management."
 ---
 
-# Ingesting Data with LanceDB Enterprise
+# Ingesting Data with LanceDB
 
 We support high-throughput writes, comfortably handling 4GB per second. 
 Our client SDK maintains 1:1 parity with the open-source version, 

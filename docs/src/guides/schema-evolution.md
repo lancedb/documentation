@@ -1,9 +1,9 @@
 ---
-title: "Schema Evolution in LanceDB Enterprise | Schema Management Guide"
-description: "Learn how to manage schema evolution in LanceDB Enterprise. Includes schema updates, backward compatibility, and best practices for schema changes."
+title: "Schema Evolution in LanceDB | Schema Management Guide"
+description: "Learn how to manage schema evolution in LanceDB. Includes schema updates, backward compatibility, and best practices for schema changes."
 ---
 
-# Schema Evolution with LanceDB Enterprise
+# Schema Evolution with LanceDB
 
 Schema evolution enables non-breaking modifications to a database table's structure — such as adding columns, 
 altering data types, or dropping fields — to adapt to evolving data requirements without service interruptions. 

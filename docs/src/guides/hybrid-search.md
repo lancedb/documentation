@@ -1,9 +1,9 @@
 ---
-title: "Hybrid Search in LanceDB Enterprise | Combined Search Guide"
-description: "Learn how to implement hybrid search in LanceDB Enterprise. Includes combining vector and keyword search, reranking, and optimizing search results."
+title: "Hybrid Search in LanceDB | Combined Search Guide"
+description: "Learn how to implement hybrid search in LanceDB. Includes combining vector and keyword search, reranking, and optimizing search results."
 ---
 
-# Hybrid Search with LanceDB Enterprise
+# Hybrid Search with LanceDB
 
 We support hybrid search that combines semantic and full-text search via a 
 reranking algorithm of your choice, to get the best of both worlds. LanceDB 

@@ -1,9 +1,9 @@
 ---
-title: "Data Updates in LanceDB Enterprise | Data Modification Guide"
-description: "Learn how to update and modify data in LanceDB Enterprise. Includes incremental updates, batch modifications, and best practices for data maintenance."
+title: "Data Updates in LanceDB | Data Modification Guide"
+description: "Learn how to update and modify data in LanceDB. Includes incremental updates, batch modifications, and best practices for data maintenance."
 ---
 
-# Updating Data with LanceDB Enterprise
+# Updating Data with LanceDB 
 
 Our enterprise solution efficiently manages updates across millions of tables, 
 supporting several hundred transactions per second (TPS) per table.

@@ -106,17 +106,25 @@ markdown_extensions:
 
 nav:
   - Documentation:
-      - Homepage: index.md
+      - Overview:
+          - Homepage: index.md
+          - What is LanceDB?: overview.md
       - Getting Started:
           - Quickstart Local: basic.md
           - Quickstart Cloud: quickstart-cloud.md
-          - Concepts:
-              - Vector Search: concepts/vector_search.md
-              - Indexing:
-                  - IVFPQ Index: concepts/index_ivfpq.md
-                  - HNSW Index: concepts/index_hnsw.md
-              - Storage: concepts/storage.md
-              - Data Management: concepts/data_management.md
+      - Enterprise:
+          - Overview: enterprise/index.md
+          - Architecture: enterprise/architecture.md
+          - Deployment: enterprise/deployment.md
+          - Benchmark: enterprise/benchmark.md
+          - Security: enterprise/security.md
+      - Key Concepts:
+          - Vector Search: concepts/vector_search.md
+          - Storage: concepts/storage.md
+          - Data Management: concepts/data_management.md
+          - Indexing:
+              - IVFPQ Index: concepts/index_ivfpq.md
+              - HNSW Index: concepts/index_hnsw.md
       - Core Usage:
           - Working with Tables: 
               - Table Operations: guides/tables.md
@@ -190,19 +198,11 @@ nav:
               - Versioning Guide: guides/versioning.md
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
-      - LanceDB Enterprise:
-          - Overview: 
-              - LanceDB Enterprise: enterprise/index.md
-              - Architecture: enterprise/architecture.md
-              - Deployment: enterprise/deployment.md
-              - Benchmark: enterprise/benchmark.md
-              - Security: enterprise/security.md
+
       - Support:
           - Migration Guide: migration.md
           - FAQs: faq.md
           - Troubleshooting: troubleshooting.md
-
-
 
   - Tutorials & Integrations:
       - Integrations:

@@ -1,8 +1,8 @@
 ---
-title: "SQL Queries in LanceDB Enterprise | SQL Query Guide"
-description: "Learn how to use SQL queries in LanceDB Enterprise. Includes SQL syntax, query optimization, and best practices for SQL-based data access."
+title: "SQL Queries in LanceDB | SQL Query Guide"
+description: "Learn how to use SQL queries in LanceDB. Includes SQL syntax, query optimization, and best practices for SQL-based data access."
 ---
-# SQL Queries with LanceDB Enterprise
+# SQL Queries with LanceDB
 
 > Note: This is a preview feature that is only available in LanceDB Enterprise.
 

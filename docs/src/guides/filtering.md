@@ -1,9 +1,9 @@
 ---
-title: "Metadata Filtering in LanceDB Enterprise | Query Filtering Guide"
-description: "Learn how to implement metadata filtering in LanceDB Enterprise. Includes scalar filtering, complex conditions, and optimizing filtered queries."
+title: "Metadata Filtering in LanceDB | Query Filtering Guide"
+description: "Learn how to implement metadata filtering in LanceDB. Includes scalar filtering, complex conditions, and optimizing filtered queries."
 ---
 
-# Metadata Filtering with LanceDB Enterprise
+# Metadata Filtering with LanceDB
 
 We support rich filtering features of query results based on metadata fields. 
 While joint vector and metadata search at scale presents a significant challenge, 

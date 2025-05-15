@@ -1,9 +1,9 @@
 ---
-title: "Full-Text Search in LanceDB Enterprise | Text Search Guide"
-description: "Learn how to implement full-text search in LanceDB Enterprise. Includes text indexing, query syntax, and performance optimization for text search."
+title: "Full-Text Search in LanceDB | Text Search Guide"
+description: "Learn how to implement full-text search in LanceDB. Includes text indexing, query syntax, and performance optimization for text search."
 ---
 
-# Full Text Search with LanceDB Enterprise
+# Full Text Search with LanceDB
 
 The full-text search allows you to 
 incorporate keyword-based search (based on BM25) in your retrieval solutions.

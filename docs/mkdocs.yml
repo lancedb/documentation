@@ -1,6 +1,6 @@
 site_name: LanceDB Documentation
 site_url: https://lancedb.github.io/docs
-repo_url: https://github.com/lancedb/lancedb
+repo_url: https://github.com/lancedb/documentation
 edit_uri: https://github.com/lancedb/documentation
 repo_name: lancedb/documentation
 docs_dir: src
@@ -109,16 +109,17 @@ nav:
       - Overview:
           - Homepage: index.md
           - What is LanceDB?: overview.md
+          - LanceDB Cloud: cloud/index.md
+          - LanceDB Enterprise:
+            - Overview: enterprise/index.md
+            - Architecture: enterprise/architecture.md
+            - Deployment: enterprise/deployment.md
+            - Benchmark: enterprise/benchmark.md
+            - Security: enterprise/security.md
       - Getting Started:
           - Quickstart Local: basic.md
           - Quickstart Cloud: quickstart-cloud.md
-      - Enterprise:
-          - Overview: enterprise/index.md
-          - Architecture: enterprise/architecture.md
-          - Deployment: enterprise/deployment.md
-          - Benchmark: enterprise/benchmark.md
-          - Security: enterprise/security.md
-      - Key Concepts:
+      - Concepts:
           - Vector Search: concepts/vector_search.md
           - Storage: concepts/storage.md
           - Data Management: concepts/data_management.md

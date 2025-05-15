@@ -5,17 +5,7 @@ hide:
 
 # LanceDB Documentation Portal
 
-![hero-image](assets/hero-image.png)
-
-!!! info inline end "How is LanceDB different?"
-
-    Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Nulla et euismod nulla.
-    Curabitur feugiat, tortor non consequat
-    finibus, justo purus auctor massa, nec
-    semper lorem quam in massa.
-
-[**LanceDB is an open-source vector database**](overview.md) designed for efficient storage, retrieval, and management of vectors and multimodal data. Use our documentation to build a production-grade service with a simple API for inserting, querying, and filtering vectors. 
+[**LanceDB is an open-source multimodal database**](overview.md) designed for efficient storage, retrieval, and management of vectors and multimodal data. Use our documentation to build a production-grade service with a simple API for inserting, querying, and filtering vectors. 
 
 LanceDB is ideal for **semantic search**, **recommendation systems**, and **Generative AI applications**. 
 
@@ -34,7 +24,7 @@ LanceDB is ideal for **semantic search**, **recommendation systems**, and **Gene
 
 ## **First-Time Users**
 
-|  |  |  |  |
+| Tutorial | Description | Tutorial | Description |
 |-------|-------------|-------|-------------|
 | [**Connect to your database**](../guides/storage-setup.md) | Configure local or cloud storage | [**Build a RAG app**](../guides/rag.md) | Create a question-answering system  |
 | [**Ingest blob storage data**](../guides/data-ingestion.md) | Load data from S3, GCS, Azure and more | [**Deploy to production**](../guides/deployment.md) | Best practices for production deployment |

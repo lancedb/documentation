@@ -1,9 +1,10 @@
 ---
-title: Multi-Vector Search in LanceDB | Advanced Vector Operations
+title: Multivector Search in LanceDB | Advanced Vector Operations
 description: Learn how to use LanceDB's multi-vector search capabilities for complex vector operations. Includes support for multiple vectors per item, late interaction techniques, and advanced search strategies.
 ---
 
-# Late interaction & MultiVector embedding type
+# Multivector Search in LanceDB
+
 Late interaction is a technique used in retrieval that calculates the relevance of a query to a document by comparing their multi-vector representations. The key difference between late interaction and other popular methods:
 
 ![late interaction vs other methods](https://raw.githubusercontent.com/lancedb/assets/b035a0ceb2c237734e0d393054c146d289792339/docs/assets/integration/colbert-blog-interaction.svg)
@@ -49,7 +50,8 @@ S(q,d) := Σ max(Eqi⋅EdjT)
 • This finds the best matching document embedding for each query embedding
 • Captures relevance based on strongest local matches between contextual embeddings
 
-## LanceDB MultiVector type
+## LanceDB Multi Vector Type
+
 LanceDB supports multivector type, this is useful when you have multiple vectors for a single item (e.g. with ColBert and ColPali).
 
 You can index on a column with multivector type and search on it, the query can be single vector or multiple vectors. For now, only cosine metric is supported for multivector search. The vector value type can be float16, float32 or float64. LanceDB integrateds [ConteXtualized Token Retriever(XTR)](https://arxiv.org/abs/2304.01982), which introduces a simple, yet novel, objective function that encourages the model to retrieve the most important document tokens first. 

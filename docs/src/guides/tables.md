@@ -3,6 +3,8 @@ title: Working with Tables in LanceDB | Data Management Guide
 description: Comprehensive guide to managing tables in LanceDB. Learn about table creation, schema management, data operations, and best practices for efficient vector data organization.
 ---
 
+# Working with Tables in LanceDB
+
 <a href="https://colab.research.google.com/github/lancedb/lancedb/blob/main/docs/src/notebooks/tables_guide.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a><br/>
 
 A Table is a collection of Records in a LanceDB Database. Tables in Lance have a schema that defines the columns and their types. These schemas can include nested columns and can evolve over time.

@@ -1,11 +1,11 @@
 ---
-title: SQL in LanceDB | Query Language Support
+title: Filtering & SQL in LanceDB | Query Language Support
 description: Use SQL to query and manipulate data in LanceDB. Features comprehensive SQL support including filtering, aggregation, joins, and integration with vector search capabilities.
 ---
 
-# Filtering
+# Filtering & SQL in LanceDB
 
-## Pre and post-filtering
+## Pre and Post-Filtering
 
 LanceDB supports filtering of query results based on metadata fields. By default, post-filtering is
 performed on the top-k results returned by the vector search. However, pre-filtering is also an
@@ -74,7 +74,7 @@ const tbl = await db.createTable('myVectors', data)
 
     Creating a [scalar index](guides/scalar_index.md) accelerates filtering.
 
-## SQL filters
+## SQL Filtering
 
 Because it's built on top of [DataFusion](https://github.com/apache/arrow-datafusion), LanceDB
 embraces the utilization of standard SQL expressions as predicates for filtering operations.

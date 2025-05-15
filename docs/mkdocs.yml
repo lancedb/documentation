@@ -108,7 +108,8 @@ nav:
   - Documentation:
       - Homepage: index.md
       - Getting Started:
-          - Quickstart: basic.md
+          - Quickstart Local: basic.md
+          - Quickstart Cloud: quickstart-cloud.md
           - Concepts:
               - Vector Search: concepts/vector_search.md
               - Indexing:
@@ -176,10 +177,33 @@ nav:
           - Versioning & Reproducibility:
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
+      - LanceDB Enterprise:
+          - Overview: 
+              - LanceDB Enterprise: enterprise/index.md
+              - Architecture: enterprise/architecture.md
+              - Deployment: enterprise/deployment.md
+              - Benchmark: enterprise/benchmark.md
+              - Security: enterprise/security.md
+          - Core Usage: 
+            - Ingest Data: enterprise/guides/ingestion.md
+            - Update Data: enterprise/guides/update.md
+            - Build an Index: enterprise/guides/build-index.md
+            - Vector Search: enterprise/guides/vector-search.md
+            - Multivector Search: enterprise/guides/multivector-search.md
+            - Full Text Search: enterprise/guides/full-text-search.md
+            - Hybrid Search: enterprise/guides/hybrid-search.md
+            - Metadata Filtering: enterprise/guides/filtering.md
+            - Schema Evolution: enterprise/guides/schema-evolution.md
+            - Versioning & Reproducibility: enterprise/guides/versioning.md
+            - Query Data with SQL: enterprise/guides/sql-query.md
+          - Advanced Usage: 
+            - Query Performance Turning: enterprise/guides/understand-query-perf.md
       - Support:
           - Migration Guide: migration.md
           - FAQs: faq.md
           - Troubleshooting: troubleshooting.md
+
+
 
   - Tutorials & Integrations:
       - Integrations:

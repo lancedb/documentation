@@ -1,0 +1,38 @@
+[package]
+name = "lancedb-python"
+version = "0.22.1-beta.4"
+edition.workspace = true
+description = "Python bindings for LanceDB"
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+categories.workspace = true
+rust-version = "1.75.0"
+
+[lib]
+name = "_lancedb"
+crate-type = ["cdylib"]
+
+[dependencies]
+arrow = { version = "54.1", features = ["pyarrow"] }
+lancedb = { path = "../rust/lancedb", default-features = false }
+env_logger.workspace = true
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py39"] }
+pyo3-async-runtimes = { version = "0.23", features = [
+    "attributes",
+    "tokio-runtime",
+] }
+pin-project = "1.1.5"
+futures.workspace = true
+tokio = { version = "1.40", features = ["sync"] }
+
+[build-dependencies]
+pyo3-build-config = { version = "0.23", features = [
+    "extension-module",
+    "abi3-py39",
+] }
+
+[features]
+default = ["remote"]
+fp16kernels = ["lancedb/fp16kernels"]
+remote = ["lancedb/remote"]

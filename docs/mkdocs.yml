@@ -110,7 +110,9 @@ nav:
   - Documentation:
       - Overview:
           - Homepage: index.md
-          - What is LanceDB?: overview.md
+          - What is LanceDB?: 
+              - Overview: overview.md
+              - FAQs: faq.md
           - LanceDB Cloud: cloud/index.md
           - LanceDB Enterprise:
             - Overview: enterprise/index.md
@@ -121,13 +123,13 @@ nav:
       - Getting Started:
           - Quickstart Local: basic.md
           - Quickstart Cloud: quickstart-cloud.md
-      - Concepts:
-          - Vector Search: concepts/vector_search.md
-          - Storage: concepts/storage.md
-          - Data Management: concepts/data_management.md
-          - Indexing:
-              - IVFPQ Index: concepts/index_ivfpq.md
-              - HNSW Index: concepts/index_hnsw.md
+          - Key Concepts:
+              - Vector Search: concepts/vector_search.md
+              - Storage: concepts/storage.md
+              - Data Management: concepts/data_management.md
+              - Indexing:
+                  - IVFPQ Index: concepts/index_ivfpq.md
+                  - HNSW Index: concepts/index_hnsw.md
       - Core Usage:
           - Working with Tables: 
               - Table Operations: guides/tables.md
@@ -138,7 +140,7 @@ nav:
               - Building a Vector Index: ann_indexes.md
               - Building a Scalar Index: guides/scalar_index.md
               - Building Indexes: guides/build-index.md
-          - Structuring Search Queries:
+          - Structuring Queries:
               - Vector Search: search.md
               - How to Build a Search Query: guides/vector-search.md
               - Full-Text Search (native): fts.md
@@ -174,12 +176,12 @@ nav:
                   - Building Custom Rerankers: reranking/custom_reranker.md
                   - Example: notebooks/lancedb_reranking.ipynb
           - Working with Embeddings:
-              - Understand Embeddings: embeddings/understanding_embeddings.md
-              - Get Started: embeddings/index.md
-              - Embedding Functions: embeddings/embedding_functions.md
+              - What are Embeddings?: embeddings/understanding_embeddings.md
+              - Getting Started: embeddings/index.md
+              - Embedding Models: embeddings/embedding_functions.md
               - Available Models:
                   - Overview: embeddings/default_embedding_functions.md
-                  - Text Embedding Functions:
+                  - Text Embedding Models:
                       - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
                       - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
                       - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
@@ -191,32 +193,61 @@ nav:
                       - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
                       - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
                       - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
-                  - Multimodal Embedding Functions:
+                  - Multimodal Embedding Models:
                       - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
                       - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
                       - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
-              - User-Defined Embedding Functions: embeddings/custom_embedding_function.md
+              - User-Defined Embedding Models: embeddings/custom_embedding_function.md
               - Variables and Secrets: embeddings/variables_and_secrets.md
           - Versioning & Reproducibility:
               - Versioning Guide: guides/versioning.md
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
-
-      - Support:
-          - Migration Guide: migration.md
-          - FAQs: faq.md
           - Troubleshooting: troubleshooting.md
+    
 
   - Tutorials & Integrations:
       - Integrations:
           - Overview: integrations/index.md
-          - Platforms & Data Tools:
+          - Platforms:
               - Pandas and PyArrow: python/pandas_and_pyarrow.md
               - Polars: python/polars_arrow.md
               - DuckDB: python/duckdb.md
               - Voxel51: integrations/voxel51.md
               - dlt: integrations/dlt.md
               - phidata: integrations/phidata.md
+          - Embeddings:
+              - Available Models:
+                  - Overview: embeddings/default_embedding_functions.md
+                  - Text Embedding Models:
+                      - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
+                      - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
+                      - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
+                      - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
+                      - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
+                      - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
+                      - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
+                      - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
+                      - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
+                      - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
+                      - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
+                  - Multimodal Embedding Models:
+                      - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
+                      - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
+                      - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
+          - Rerankers:
+              - Quickstart: reranking/index.md
+              - Cohere Reranker: reranking/cohere.md
+              - Linear Combination Reranker: reranking/linear_combination.md
+              - Reciprocal Rank Fusion Reranker: reranking/rrf.md
+              - Cross Encoder Reranker: reranking/cross_encoder.md
+              - ColBERT Reranker: reranking/colbert.md
+              - Jina Reranker: reranking/jina.md
+              - OpenAI Reranker: reranking/openai.md
+              - AnswerDotAi Rerankers: reranking/answerdotai.md
+              - Voyage AI Rerankers: reranking/voyageai.md
+              - Building Custom Rerankers: reranking/custom_reranker.md
+              - Example: notebooks/lancedb_reranking.ipynb
           - Frameworks:
               - LangChain:
                   - LangChain 🔗: integrations/langchain.md
@@ -265,6 +296,7 @@ nav:
 
   - API & SDK Reference:
       - Overview: api_reference.md
+      - API Migration: migration.md
       - LanceDB Cloud REST API: cloud/rest.md
       - LanceDB SDKs:
           - Python: python/python.md

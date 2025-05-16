@@ -298,11 +298,12 @@ nav:
       - Overview: api_reference.md
       - API Migration: migration.md
       - LanceDB Cloud REST API: cloud/rest.md
-      - LanceDB SDKs:
-          - Python: python/python.md
-          - JavaScript (vectordb): javascript/modules.md
-          - JavaScript (lancedb): js/globals.md
-          - Rust: https://docs.rs/lancedb/latest/lancedb/
+      - Client SDKs:
+          - Python SDK: python/python.md
+          - JavaScript SDK:
+              - Current SDK (@lancedb/lancedb): js/globals.md
+              - Legacy SDK (vectordb): javascript/modules.md
+          - Rust SDK: https://docs.rs/lancedb/latest/lancedb/
 
   - Studies:
       - Overview: studies/overview.md

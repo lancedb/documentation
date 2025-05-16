@@ -22,11 +22,9 @@ LanceDB is ideal for **semantic search**, **recommendation systems**, and **Gene
 
 </div>
 
-## **First-Time Users**
+## **First-Time Users:**
 
 | Tutorial | Description | Tutorial | Description |
 |-------|-------------|-------|-------------|
-| [**Connect to your database**](../guides/storage-setup.md) | Configure local or cloud storage | [**Build a RAG app**](../guides/rag.md) | Create a question-answering system  |
-| [**Ingest blob storage data**](../guides/data-ingestion.md) | Load data from S3, GCS, Azure and more | [**Deploy to production**](../guides/deployment.md) | Best practices for production deployment |
-| [**Work with Lance tables**](../guides/tables.md) | Create, query and manage tables | [**Optimize performance**](../guides/performance.md) | Tips for maximizing query performance |
-| [**Build search queries**](../guides/vector-search.md) | Perform vector search and filtering | [**Monitor & debug**](../guides/monitoring.md) | Monitor your database and fix issues |
+| [**Connect to your database**](quickstart-cloud.md) | Configure local or cloud storage | [**Build a RAG app**](examples/rag.md) | Create a question-answering system |
+| [**Ingest blob storage data**](basic.md) | Load data from S3, GCS, Azure and more | [**Build search queries**](guides/vector-search.md) | Perform vector search and filtering |

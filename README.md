@@ -1,94 +1,122 @@
-<a href="https://cloud.lancedb.com" target="_blank">
-  <img src="https://github.com/user-attachments/assets/92dad0a2-2a37-4ce1-b783-0d1b4f30a00c" alt="LanceDB Cloud Public Beta" width="100%" style="max-width: 100%;">
-</a>
+# LanceDB Documentation
 
-<div align="center">
-<p align="center">
+This repository contains the documentation for [LanceDB](https://github.com/lancedb/lancedb), a vector database for AI applications. The documentation is built using MkDocs and deployed to [lancedb.github.io/documentation](https://lancedb.github.io/documentation/).
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/ac270358-333e-4bea-a132-acefaa94040e">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/b864d814-0d29-4784-8fd9-807297c758c0">
-  <img alt="LanceDB Logo" src="https://github.com/user-attachments/assets/b864d814-0d29-4784-8fd9-807297c758c0" width=300>
-</picture>
+## Building the Documentation Site
 
-**Search More, Manage Less**
+### Prerequisites
 
-<a href='https://github.com/lancedb/vectordb-recipes/tree/main' target="_blank"><img alt='LanceDB' src='https://img.shields.io/badge/VectorDB_Recipes-100000?style=for-the-badge&logo=LanceDB&logoColor=white&labelColor=645cfb&color=645cfb'/></a>
-<a href='https://lancedb.github.io/lancedb/' target="_blank"><img alt='lancdb' src='https://img.shields.io/badge/DOCS-100000?style=for-the-badge&logo=lancdb&logoColor=white&labelColor=645cfb&color=645cfb'/></a>
-[![Blog](https://img.shields.io/badge/Blog-12100E?style=for-the-badge&logoColor=white)](https://blog.lancedb.com/)
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/zMM32dvNtd)
-[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/lancedb)
-[![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20LanceDB%20Guru-006BFF?style=for-the-badge)](https://gurubase.io/g/lancedb)
+- Python 3.8 or higher
+- Node.js and npm (for TypeScript examples)
+- LanceDB Python package installed
 
-</p>
+### Setup
 
-<img max-width="750px" alt="LanceDB Multimodal Search" src="https://github.com/lancedb/lancedb/assets/917119/09c5afc5-7816-4687-bae4-f2ca194426ec">
+1. **Install LanceDB Python**:
+   ```bash
+   # From the LanceDB repository root
+   cd python
+   make develop
+   ```
 
-</p>
-</div>
+2. **Install documentation dependencies**:
+   ```bash
+   pip install -r docs/requirements.txt
+   ```
 
-<hr />
+### Building and Previewing
 
-LanceDB is an open-source database for vector-search built with persistent storage, which greatly simplifies retrieval, filtering and management of embeddings.
+To preview the documentation locally with live reloading:
 
-The key features of LanceDB include:
-
-* Production-scale vector search with no servers to manage.
-
-* Store, query and filter vectors, metadata and multi-modal data (text, images, videos, point clouds, and more).
-
-* Support for vector similarity search, full-text search and SQL.
-
-* Native Python and Javascript/Typescript support.
-
-* Zero-copy, automatic versioning, manage versions of your data without needing extra infrastructure.
-
-* GPU support in building vector index(*).
-
-* Ecosystem integrations with [LangChain 🦜️🔗](https://python.langchain.com/docs/integrations/vectorstores/lancedb/), [LlamaIndex 🦙](https://gpt-index.readthedocs.io/en/latest/examples/vector_stores/LanceDBIndexDemo.html), Apache-Arrow, Pandas, Polars, DuckDB and more on the way.
-
-LanceDB's core is written in Rust 🦀 and is built using <a href="https://github.com/lancedb/lance">Lance</a>, an open-source columnar format designed for performant ML workloads.
-
-## Quick Start
-
-**Javascript**
-```shell
-npm install @lancedb/lancedb
+```bash
+cd docs
+mkdocs serve
 ```
 
-```javascript
-import * as lancedb from "@lancedb/lancedb";
+The documentation will be available at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
-const db = await lancedb.connect("data/sample-lancedb");
-const table = await db.createTable("vectors", [
-	{ id: 1, vector: [0.1, 0.2], item: "foo", price: 10 },
-	{ id: 2, vector: [1.1, 1.2], item: "bar", price: 50 },
-], {mode: 'overwrite'});
+To generate static HTML files:
 
-
-const query = table.vectorSearch([0.1, 0.3]).limit(2);
-const results = await query.toArray();
-
-// You can also search for rows by specific criteria without involving a vector search.
-const rowsByCriteria = await table.query().where("price >= 10").toArray();
+```bash
+PYTHONPATH=. mkdocs build -f docs/mkdocs.yml
 ```
 
-**Python**
-```shell
-pip install lancedb
+This will create a `docs/site` directory with the built documentation, which you can open in a browser to verify locally.
+
+## Contributing to LanceDB Documentation
+
+### General Guidelines
+
+1. **Clear and Concise**: Write documentation that is easy to understand.
+2. **Examples**: Include practical examples where appropriate.
+3. **Consistency**: Follow the existing documentation style and structure.
+4. **Correctness**: Ensure all examples are tested and work correctly.
+
+### Directory Structure
+
+- `docs/src/` - Source markdown files for the documentation
+- `docs/overrides/` - Custom template overrides for MkDocs
+- `docs/test/` - Documentation tests
+
+### Adding or Updating Documentation
+
+1. Create or modify markdown files in the appropriate directory under `docs/src/`.
+2. Add code examples in the relevant test directories to ensure they are verified by tests.
+3. Preview your changes locally using `mkdocs serve`.
+4. Submit a pull request with your changes.
+
+### Testing Examples
+
+Examples in the documentation are maintained as executable test files to ensure they remain correct.
+
+#### Python Examples
+
+Python examples are located in `python/python/tests/docs/`:
+
+```bash
+cd python
+pytest -vv python/tests/docs
 ```
 
-```python
-import lancedb
+#### TypeScript Examples
 
-uri = "data/sample-lancedb"
-db = lancedb.connect(uri)
-table = db.create_table("my_table",
-                         data=[{"vector": [3.1, 4.1], "item": "foo", "price": 10.0},
-                               {"vector": [5.9, 26.5], "item": "bar", "price": 20.0}])
-result = table.search([100, 100]).limit(2).to_pandas()
+TypeScript examples are in `nodejs/examples/`:
+
+1. Build the LanceDB TypeScript package:
+   ```bash
+   cd nodejs
+   npm ci
+   npm run build
+   ```
+
+2. Run the examples:
+   ```bash
+   cd nodejs/examples
+   npm ci
+   npm test
+   ```
+
+### API Documentation
+
+#### Python API
+
+Python API documentation is organized based on `docs/src/python/python.md`. When adding new types or functions, they must be manually added to this file to appear in the reference documentation.
+
+#### TypeScript API
+
+TypeScript API documentation is generated using [typedoc](https://typedoc.org/). After adding new APIs, regenerate the documentation:
+
+```bash
+cd nodejs
+npm run docs
 ```
 
-## Blogs, Tutorials & Videos
-* 📈 <a href="https://blog.lancedb.com/benchmarking-random-access-in-lance/">2000x better performance with Lance over Parquet</a>
-* 🤖 <a href="https://github.com/lancedb/vectordb-recipes/tree/main/examples/Youtube-Search-QA-Bot">Build a question and answer bot with LanceDB</a>
+The generated files should be committed to the repository.
+
+## Deployment
+
+The documentation is automatically built and deployed by GitHub Actions whenever a commit is pushed to the `main` branch. This means the documentation may include unreleased features.
+
+## License
+
+The documentation is licensed under the same license as LanceDB.

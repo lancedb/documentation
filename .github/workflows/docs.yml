@@ -29,9 +29,25 @@ jobs:
         working-directory: docs
         run: pip install -r requirements.txt
 
+      - name: Install LanceDB Python
+        run: |
+          # Install LanceDB from source with development dependencies
+          cd python
+          pip install -e .
+          cd ..
+          
+      - name: Debug Python modules
+        run: |
+          echo "Checking for lancedb.pydantic module..."
+          python -c "import sys; print('Python path:', sys.path)"
+          python -c "import lancedb; print('LanceDB version:', lancedb.__version__)"
+          python -c "from lancedb import pydantic; print('Pydantic module exists')" || echo "Failed to import lancedb.pydantic"
+          
       - name: Build docs
         working-directory: docs
-        run: mkdocs build
+        run: |
+          # Set Python path to include the repository root
+          PYTHONPATH=.:../python mkdocs build -v
         
       - name: Setup Pages
         uses: actions/configure-pages@v4

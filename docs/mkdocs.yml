@@ -47,6 +47,8 @@ theme:
 
 plugins:
   - search
+  - neoteroi.mkdocsoad:
+      use_pymdownx: true
   - autorefs
   - mkdocstrings:
       handlers:
@@ -263,16 +265,19 @@ nav:
 
   - API & SDK Reference:
       - Overview: api_reference.md
-      - Python: python/python.md
-      - JavaScript (vectordb): javascript/modules.md
-      - JavaScript (lancedb): js/globals.md
-      - Rust: https://docs.rs/lancedb/latest/lancedb/
+      - LanceDB Cloud REST API: cloud/rest.md
+      - LanceDB SDKs:
+          - Python: python/python.md
+          - JavaScript (vectordb): javascript/modules.md
+          - JavaScript (lancedb): js/globals.md
+          - Rust: https://docs.rs/lancedb/latest/lancedb/
 
   - Studies:
       - Overview: studies/overview.md
       - ↗Improve retrievers with hybrid search and reranking: https://blog.lancedb.com/hybrid-search-and-reranking-report/
 
-# extra_css:
+extra_css:
+  - styles/mkdocsoad.css
 #  - styles/global.css
 #  - styles/extra.css
 

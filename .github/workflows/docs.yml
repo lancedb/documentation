@@ -48,7 +48,7 @@ jobs:
         working-directory: docs
         run: |
           # Use the mock modules path instead of the actual project code
-          PYTHONPATH=.:../mock_modules mkdocs build --strict=false
+          PYTHONPATH=.:../mock_modules mkdocs build
         
       - name: Setup Pages
         uses: actions/configure-pages@v4

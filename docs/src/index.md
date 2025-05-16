@@ -17,7 +17,7 @@ LanceDB is ideal for **semantic search**, **recommendation systems**, and **Gene
 </a>
 
 1. [**LanceDB Cloud:**](quickstart-cloud.md) Create a LanceDB Cloud cluster that's completely serverless. Your application simply connects over HTTP/HTTPS, and LanceDB handles scaling, storage, and indexing for you. 
-2. [**LanceDB OSS:**](basic.md) If self-hosting, embed LanceDB directly into your backend, whether that’s a Django, Flask, FastAPI, or Node.js service. Check out our available [client libraries](api/index.md).
+2. [**LanceDB OSS:**](basic.md) If self-hosting, embed LanceDB directly into your backend, whether that’s a Django, Flask, FastAPI, or Node.js service. Check out our available [client libraries](api-reference.md).
 3. [**LanceDB Enterprise:**](enterprise/index.md) Build the best private environment that suits your needs. Manage your own clusters via our [Dashboard UI](https://accounts.lancedb.com/sign-up), but continue to run them within your own private infrastructure for complete security and sovereignty.
 
 </div>
@@ -26,5 +26,5 @@ LanceDB is ideal for **semantic search**, **recommendation systems**, and **Gene
 
 | Tutorial | Description | Tutorial | Description |
 |-------|-------------|-------|-------------|
-| [**Connect to your database**](quickstart-cloud.md) | Configure local or cloud storage | [**Build a RAG app**](examples/rag.md) | Create a question-answering system |
+| [**Connect to your database**](quickstart-cloud.md) | Configure local or cloud storage | [**Build a RAG app**](examples/index.md) | Create a question-answering system |
 | [**Ingest blob storage data**](basic.md) | Load data from S3, GCS, Azure and more | [**Build search queries**](guides/vector-search.md) | Perform vector search and filtering |

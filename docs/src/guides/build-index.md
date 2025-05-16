@@ -102,7 +102,7 @@ Vector index creation is fast - typically a few minutes for 1 million vectors wi
 #### Option 1: Dashboard
 
 Navigate to your table page - the "Index" column shows index status. It remains blank if no index exists or if creation is in progress.
-![index_status](../../assets/enterprise/index_status.png)
+![index_status](../assets/index_status.png)
 
 #### Option 2: API
 

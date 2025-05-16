@@ -8,7 +8,7 @@ description: "Learn how to implement full-text search in LanceDB. Includes text 
 The full-text search allows you to 
 incorporate keyword-based search (based on BM25) in your retrieval solutions.
 LanceDB can deliver **26ms** query latency for full-text search. 
-Our benchmark tests have more details.
+[Our benchmark tests](../enterprise/benchmark.md) have more details.
 
 === "Python"
     ```python
@@ -404,6 +404,6 @@ in your queries. This feature is particularly useful when you need to:
 
     - Create full-text search indices on text columns that will be frequently searched
     - For hybrid search combining text and vectors, see our [hybrid search guide](./hybrid-search.md)
-    - For performance benchmarks, check our [benchmark results](../benchmark.md)
+    - For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
     - For complex queries, use SQL to combine FTS with other filter conditions
 

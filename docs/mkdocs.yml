@@ -132,10 +132,12 @@ nav:
                   - HNSW Index: concepts/index_hnsw.md
       - Core Usage:
           - Working with Tables: 
-              - Table Operations: guides/tables.md
-              - Ingesting Data: guides/ingestion.md
-              - Updating Data: guides/update.md
-              - Schema Evolution: guides/schema-evolution.md
+              - Overview: guides/tables/index.md
+              - Creating Tables: guides/tables/create.md
+              - Updating Tables: guides/tables/update.md
+              - Schema Management: guides/tables/schema.md
+              - Consistency Settings: guides/tables/consistency.md
+              - Merge Insert: guides/tables/merge-insert.md
           - Building an Index:
               - Building a Vector Index: ann_indexes.md
               - Building a Scalar Index: guides/scalar_index.md

@@ -53,6 +53,7 @@ plugins:
         'concepts/vector_search.md': 'concepts/search.md'
         'concepts/index_ivfpq.md': 'concepts/indexing.md'
         'concepts/index_hnsw.md': 'concepts/indexing.md'
+        'troubleshooting.md': 'index.md'
   - search
   - neoteroi.mkdocsoad:
       use_pymdownx: true
@@ -120,7 +121,9 @@ nav:
           - What is LanceDB?: 
               - Overview: overview.md
               - FAQs: faq.md
-          - LanceDB Cloud: cloud/index.md
+          - LanceDB Cloud: 
+              - Overview: cloud/index.md
+              - Logging: cloud/logging.md
           - LanceDB Enterprise:
             - Overview: enterprise/index.md
             - Architecture: enterprise/architecture.md
@@ -149,6 +152,7 @@ nav:
               - Building a Scalar Index: guides/scalar_index.md
               - Building Indexes: guides/build-index.md
           - Structuring Queries:
+              - Query Planning: guides/search/query-planning.md
               - Vector Search: search.md
               - How to Build a Search Query: guides/vector-search.md
               - Full-Text Search (native): fts.md

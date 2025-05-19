@@ -161,3 +161,8 @@ rows nearest to a query vector and can be created with the
 ::: lancedb.query.AsyncHybridQuery
     options:
       inherited_members: true
+
+## Common issues
+
+Multiprocessing with `fork` is not supported. You should use `spawn` instead.
+

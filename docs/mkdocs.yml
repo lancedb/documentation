@@ -54,6 +54,9 @@ plugins:
         'concepts/index_ivfpq.md': 'concepts/indexing.md'
         'concepts/index_hnsw.md': 'concepts/indexing.md'
         'troubleshooting.md': 'index.md'
+        'guides/build-index.md': 'guides/indexing/vector-index.md'
+        'guides/indexing/build-indexes.md': 'guides/indexing/vector-index.md'
+        'guides/scalar_index.md': 'guides/indexing/scalar-index.md'
   - search
   - neoteroi.mkdocsoad:
       use_pymdownx: true
@@ -148,9 +151,11 @@ nav:
               - Consistency Settings: guides/tables/consistency.md
               - Merge Insert: guides/tables/merge-insert.md
           - Building an Index:
-              - Building a Vector Index: ann_indexes.md
-              - Building a Scalar Index: guides/scalar_index.md
-              - Building Indexes: guides/build-index.md
+              - Vector Index: guides/indexing/vector-index.md
+              - Scalar Index: guides/indexing/scalar-index.md
+              - Full Text Index: guides/indexing/fts-index.md
+              - Reindexing: guides/indexing/reindexing.md
+              - GPU Indexing: guides/indexing/gpu-indexing.md
           - Structuring Queries:
               - Query Planning: guides/search/query-planning.md
               - Vector Search: search.md

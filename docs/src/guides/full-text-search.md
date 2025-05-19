@@ -407,3 +407,153 @@ in your queries. This feature is particularly useful when you need to:
     - For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
     - For complex queries, use SQL to combine FTS with other filter conditions
 
+### Full-Text Search on Array Fields
+
+LanceDB supports full-text search on string array columns, enabling efficient keyword-based search across multiple values within a single field (e.g., tags, keywords).
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+
+    table_name = "fts-array-field-test"
+    schema = pa.schema([
+        pa.field("id", pa.string()),
+        pa.field("tags", pa.list_(pa.string())),
+        pa.field("description", pa.string())
+    ])
+
+    # Generate sample data
+    data = {
+        "id": [f"doc_{i}" for i in range(10)],
+        "tags": [
+            ["python", "machine learning", "data science"],
+            ["deep learning", "neural networks", "AI"],
+            ["database", "indexing", "search"],
+            ["vector search", "embeddings", "AI"],
+            ["full text search", "indexing", "database"],
+            ["python", "web development", "flask"],
+            ["machine learning", "deep learning", "pytorch"],
+            ["database", "SQL", "postgresql"],
+            ["search engine", "elasticsearch", "indexing"],
+            ["AI", "transformers", "NLP"]
+        ],
+        "description": [
+            "Python for data science projects",
+            "Deep learning fundamentals",
+            "Database indexing techniques",
+            "Vector search implementations",
+            "Full-text search guide",
+            "Web development with Python",
+            "Machine learning with PyTorch",
+            "Database management systems",
+            "Search engine optimization",
+            "AI and NLP applications"
+        ]
+    }
+
+    # Create table and add data
+    table = db.create_table(table_name, schema=schema, mode="overwrite")
+    table_data = pa.Table.from_pydict(data, schema=schema)
+    table.add(table_data)
+
+    # Create FTS index
+    table.create_fts_index("tags")
+    wait_for_index(table, "tags_idx")
+
+    # Search examples
+    print("\nSearching for 'learning' in tags with a typo:")
+    result = table.search(MatchQuery("learnin", column="tags", fuzziness=1), query_type="fts").select(['id', 'tags', 'description']).to_arrow()
+
+    print("\nSearching for 'machine learning' in tags:")
+    result = table.search(PhraseQuery("machine learning", column="tags"), query_type="fts").select(['id', 'tags', 'description']).to_arrow()
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+
+    const tableName = "fts-array-field-test-ts";
+
+    // Create schema
+    const schema = new Schema([
+      new Field("id", new Utf8(), false),
+      new Field("tags", new List(new Field("item", new Utf8()))),
+      new Field("description", new Utf8(), false)
+    ]);
+
+    // Generate sample data
+    const data = makeArrowTable(
+      Array(10).fill(0).map((_, i) => ({
+        id: `doc_${i}`,
+        tags: [
+          ["python", "machine learning", "data science"],
+          ["deep learning", "neural networks", "AI"],
+          ["database", "indexing", "search"],
+          ["vector search", "embeddings", "AI"],
+          ["full text search", "indexing", "database"],
+          ["python", "web development", "flask"],
+          ["machine learning", "deep learning", "pytorch"],
+          ["database", "SQL", "postgresql"],
+          ["search engine", "elasticsearch", "indexing"],
+          ["AI", "transformers", "NLP"]
+        ][i],
+        description: [
+          "Python for data science projects",
+          "Deep learning fundamentals",
+          "Database indexing techniques",
+          "Vector search implementations",
+          "Full-text search guide",
+          "Web development with Python",
+          "Machine learning with PyTorch",
+          "Database management systems",
+          "Search engine optimization",
+          "AI and NLP applications"
+        ][i]
+      })),
+      { schema }
+    );
+
+    // Create table
+    const table = await db.createTable(tableName, data, { mode: "overwrite" });
+    console.log(`Created table: ${tableName}`);
+
+    // Create FTS index
+    console.log("Creating FTS index on 'tags' column...");
+    await table.createIndex("tags", {
+      config: Index.fts()
+    });
+
+    // Wait for index
+    const ftsIndexName = "tags_idx";
+    await waitForIndex(table, ftsIndexName);
+
+    // Search examples
+    console.log("\nSearching for 'learning' in tags with a typo:");
+    const fuzzyResults = await table.query()
+      .fullTextSearch(new MatchQuery("learnin", "tags", {
+        fuzziness: 2,
+      }))
+      .select(["id", "tags", "description"])
+      .toArray();
+    console.log(fuzzyResults);
+
+    console.log("\nSearching for 'machine learning' in tags:");
+    const phraseResults = await table.query()
+      .fullTextSearch(new PhraseQuery("machine learning", "tags"))
+      .select(["id", "tags", "description"])
+      .toArray();
+    console.log(phraseResults);
+    ```

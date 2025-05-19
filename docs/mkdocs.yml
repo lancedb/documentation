@@ -46,6 +46,9 @@ theme:
   custom_dir: overrides
 
 plugins:
+  - redirects:
+      redirect_maps:
+        'basic.md': 'quickstart.md'
   - search
   - neoteroi.mkdocsoad:
       use_pymdownx: true
@@ -121,7 +124,7 @@ nav:
             - Benchmark: enterprise/benchmark.md
             - Security: enterprise/security.md
       - Getting Started:
-          - Quickstart Local: basic.md
+          - Quickstart Local: quickstart.md
           - Quickstart Cloud: quickstart-cloud.md
           - Key Concepts:
               - Vector Search: concepts/vector_search.md

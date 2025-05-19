@@ -4,7 +4,7 @@ hide:
   - navigation
 ---
 
-[Return to the previous page](../api_reference.md)
+[Return to the previous page.](index.md)
 
 [OAD(../docs/openapi.yml)]
 

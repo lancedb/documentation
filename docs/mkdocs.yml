@@ -57,6 +57,10 @@ plugins:
         'guides/build-index.md': 'guides/indexing/vector-index.md'
         'guides/indexing/build-indexes.md': 'guides/indexing/vector-index.md'
         'guides/scalar_index.md': 'guides/indexing/scalar-index.md'
+        'cloud/rest.md': 'api/cloud.md'
+        'api_reference.md': 'api/index.md'
+        'migration.md': 'api/api-changes.md'
+
   - search
   - neoteroi.mkdocsoad:
       use_pymdownx: true
@@ -220,7 +224,6 @@ nav:
               - Versioning Guide: guides/versioning.md
               - Sync API: notebooks/reproducibility.ipynb
               - Async API: notebooks/reproducibility_async.ipynb
-          - Troubleshooting: troubleshooting.md
     
 
   - Tutorials & Integrations:
@@ -312,9 +315,9 @@ nav:
                   - FLARE: rag/advanced_techniques/flare.md
 
   - API & SDK Reference:
-      - Overview: api_reference.md
-      - API Migration: migration.md
-      - LanceDB Cloud REST API: cloud/rest.md
+      - Overview: api/index.md
+      - API Changes: api/api-changes.md
+      - LanceDB Cloud REST API: api/cloud.md
       - Client SDKs:
           - Python SDK: python/python.md
           - JavaScript SDK:

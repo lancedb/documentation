@@ -62,6 +62,14 @@ plugins:
         'migration.md': 'api/api-changes.md'
         'faq.md': 'overview/faq.md'
         'cloud/cloud_faq.md': 'cloud/cloud-faq.md'
+        'ann_indexes.md': 'guides/indexing/vector-index.md'
+        'search.md': 'guides/search/vector-search.md'
+        'fts.md': 'guides/search/full-text-search.md'
+        'fts_tantivy.md': 'guides/search/full-text-search.md'
+        'sql.md': 'guides/search/filtering.md'
+        'hybrid_search/hybrid_search.md': 'guides/search/hybrid-search.md'
+        'guides/multi-vector.md': 'guides/search/multivector-search.md'
+        'hybrid_search/eval.md': 'reranking/eval.md'
 
   - search
   - neoteroi.mkdocsoad:
@@ -164,27 +172,21 @@ nav:
               - Reindexing: guides/indexing/reindexing.md
               - GPU Indexing: guides/indexing/gpu-indexing.md
           - Structuring Queries:
+              - Vector Search: guides/search/vector-search.md
+              - Full-Text Search: guides/search/full-text-search.md
+              - Filtering: guides/search/filtering.md
+              - SQL Queries: guides/search/sql-queries.md
               - Query Planning: guides/search/query-planning.md
-              - Vector Search: search.md
-              - How to Build a Search Query: guides/vector-search.md
-              - Full-Text Search (native): fts.md
-              - Full-Text Search (tantivy-based): fts_tantivy.md
-              - Full-Text Search: guides/full-text-search.md
-              - Metadata Filtering: guides/filtering.md
-              - Filtering & SQL: sql.md
-              - Building SQL Queries: guides/sql-query.md
-              - Query Performance: guides/understanding-query-performance.md
           - Configuring Storage: guides/storage.md
       - Advanced Usage:
           - Complex Queries:
+              - Optimizing Query Performance: guides/understanding-query-perf.md
               - Hybrid Search:
-                  - Overview: hybrid_search/hybrid_search.md
-                  - Building Hybrid Searches: guides/hybrid-search.md
-                  - Comparing Rerankers: hybrid_search/eval.md
+                  - Overview: guides/search/hybrid-search.md
+                  - Comparing Rerankers: reranking/eval.md
                   - Airbnb financial data example: notebooks/hybrid_search.ipynb
               - Multivector Search:
-                  - Overview: guides/multi-vector.md
-                  - Building Multivector Queries: guides/multivector-search.md
+                  - Overview: guides/search/multivector-search.md
                   - Example: notebooks/Multivector_on_LanceDB.ipynb
               - Reranking:
                   - Quickstart: reranking/index.md

@@ -48,7 +48,7 @@ theme:
 plugins:
   - redirects:
       redirect_maps:
-        'basic.md': 'quickstart.md'
+        'basic.md': 'overview/quickstart.md'
         'concepts/data_management.md': 'concepts/data.md'
         'concepts/vector_search.md': 'concepts/search.md'
         'concepts/index_ivfpq.md': 'concepts/indexing.md'
@@ -60,6 +60,8 @@ plugins:
         'cloud/rest.md': 'api/cloud.md'
         'api_reference.md': 'api/index.md'
         'migration.md': 'api/api-changes.md'
+        'faq.md': 'overview/faq.md'
+        'cloud/cloud_faq.md': 'cloud/cloud-faq.md'
 
   - search
   - neoteroi.mkdocsoad:
@@ -126,11 +128,12 @@ nav:
       - Overview:
           - Homepage: index.md
           - What is LanceDB?: 
-              - Overview: overview.md
-              - FAQs: faq.md
+              - Overview: overview/index.md
+              - FAQs: overview/faq.md
           - LanceDB Cloud: 
               - Overview: cloud/index.md
               - Logging: cloud/logging.md
+              - Cloud FAQ: cloud/cloud-faq.md
           - LanceDB Enterprise:
             - Overview: enterprise/index.md
             - Architecture: enterprise/architecture.md
@@ -138,8 +141,8 @@ nav:
             - Benchmark: enterprise/benchmark.md
             - Security: enterprise/security.md
       - Getting Started:
-          - Quickstart Local: quickstart.md
-          - Quickstart Cloud: quickstart-cloud.md
+          - Quickstart Local: overview/quickstart.md
+          - Quickstart Cloud: cloud/quickstart.md
           - Concepts:
               - Data: concepts/data.md
               - Vectors: concepts/vectors.md

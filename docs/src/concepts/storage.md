@@ -1,15 +1,15 @@
 ---
-title: Storage in LanceDB | Data Persistence Guide
-description: Learn about LanceDB's storage architecture and data persistence mechanisms. Covers local storage, cloud storage options, and best practices for efficient vector data management.
+title: LanceDB Storage Guide | Complete Guide to Data Persistence
+description: Master LanceDB's storage architecture with our comprehensive guide. Learn about local storage, cloud storage options, and best practices for efficient vector data management and persistence.
 ---
 
-# Storage in LanceDB
+# Storage Architecture in LanceDB
 
 LanceDB is among the only vector databases built on top of multiple modular components designed from the ground-up to be efficient on disk. This gives it the unique benefit of being flexible enough to support multiple storage backends, including local NVMe, EBS, EFS and many other third-party APIs that connect to the cloud.
 
 It is important to understand the tradeoffs between cost and latency for your specific application and use case. This section will help you understand the tradeoffs between the different storage backends.
 
-## Storage options
+## Storage Backend Selection Guide
 
 We've prepared a simple diagram to showcase the thought process that goes into choosing a storage backend when using LanceDB OSS, Cloud or Enterprise.
 
@@ -22,13 +22,13 @@ When architecting your system, you'd typically ask yourself the following questi
 3. **Cost**: To serve my application, what's the all-in cost of *both* storage and serving infra?
 4. **Reliability/Availability**: How does replication work? Is disaster recovery addressed?
 
-## Tradeoffs
+## Storage Backend Comparison
 
 This section reviews the characteristics of each storage option in four dimensions: latency, scalability, cost and reliability.
 
 **We begin with the lowest cost option, and end with the lowest latency option.**
 
-### 1. S3 / GCS / Azure Blob Storage
+### 1. Object Storage (S3 / GCS / Azure Blob)
 
 !!! tip "Lowest cost, highest latency"
 
@@ -39,7 +39,7 @@ This section reviews the characteristics of each storage option in four dimensio
 
 Another important point to note is that LanceDB is designed to separate storage from compute, and the underlying Lance format stores the data in numerous immutable fragments. Due to these factors, LanceDB is a great storage option that addresses the _N + 1_ query problem. i.e., when a high query throughput is required, query processes can run in a stateless manner and be scaled up and down as needed.
 
-### 2. EFS / GCS Filestore / Azure File Storage
+### 2. File Storage (EFS / GCS Filestore / Azure File)
 
 !!! info "Moderately low cost, moderately low latency (<100ms)"
 
@@ -50,7 +50,7 @@ Another important point to note is that LanceDB is designed to separate storage 
 
 A recommended best practice is to keep a copy of the data on S3 for disaster recovery scenarios. If any downtime is unacceptable, then you would need another EFS with a copy of the data. This is still much cheaper than EC2 instances holding multiple copies of the data.
 
-### 3. Third-party storage solutions
+### 3. Third-party Storage Solutions
 
 Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-complexity/), WekaFS, etc. that deliver S3 compatible API with much better performance than S3.
 
@@ -61,8 +61,7 @@ Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-co
     - **Cost** ⇒ Definitely higher than S3. The cost can be marginally higher than EFS until you get to maybe >10TB scale with high utilization
     - **Reliability/Availability** ⇒ These are all shareable by lots of nodes, quality/cost of replication/backup depends on the vendor
 
-
-### 4. EBS / GCP Persistent Disk / Azure Managed Disk
+### 4. Block Storage (EBS / GCP Persistent Disk / Azure Managed Disk)
 
 !!! info "Very low latency (<30ms), higher cost"
 
@@ -73,7 +72,7 @@ Solutions like [MinIO](https://blog.min.io/lancedb-trusted-steed-against-data-co
 
 Just like EFS, an EBS or persistent disk setup requires more manual work to manage data sharding, backups and capacity.
 
-### 5. Local disk (SSD/NVMe)
+### 5. Local Storage (SSD/NVMe)
 
 !!! danger "Lowest latency (<10ms), highest cost"
 

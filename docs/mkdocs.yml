@@ -49,6 +49,10 @@ plugins:
   - redirects:
       redirect_maps:
         'basic.md': 'quickstart.md'
+        'concepts/data_management.md': 'concepts/data.md'
+        'concepts/vector_search.md': 'concepts/search.md'
+        'concepts/index_ivfpq.md': 'concepts/indexing.md'
+        'concepts/index_hnsw.md': 'concepts/indexing.md'
   - search
   - neoteroi.mkdocsoad:
       use_pymdownx: true
@@ -126,13 +130,12 @@ nav:
       - Getting Started:
           - Quickstart Local: quickstart.md
           - Quickstart Cloud: quickstart-cloud.md
-          - Key Concepts:
-              - Vector Search: concepts/vector_search.md
+          - Concepts:
+              - Data: concepts/data.md
+              - Vectors: concepts/vectors.md
+              - Indexing: concepts/indexing.md
+              - Search: concepts/search.md
               - Storage: concepts/storage.md
-              - Data Management: concepts/data_management.md
-              - Indexing:
-                  - IVFPQ Index: concepts/index_ivfpq.md
-                  - HNSW Index: concepts/index_hnsw.md
       - Core Usage:
           - Working with Tables: 
               - Overview: guides/tables/index.md

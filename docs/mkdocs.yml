@@ -70,6 +70,12 @@ plugins:
         'hybrid_search/hybrid_search.md': 'guides/search/hybrid-search.md'
         'guides/multi-vector.md': 'guides/search/multivector-search.md'
         'hybrid_search/eval.md': 'reranking/eval.md'
+        'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
+        'core/ingestion.md': 'guides/tables/ingestion.md'
+        'core/update.md': 'guides/tables/update.md'
+        'core/schema-evolution.md': 'guides/tables/schema.md'
+        'core/versioning.md': 'guides/tables/versioning.md'
+
 
   - search
   - neoteroi.mkdocsoad:
@@ -161,10 +167,11 @@ nav:
           - Working with Tables: 
               - Overview: guides/tables/index.md
               - Creating Tables: guides/tables/create.md
+              - Inserting Data: guides/tables/ingestion.md
               - Updating Tables: guides/tables/update.md
               - Schema Management: guides/tables/schema.md
+              - Versioning: guides/tables/versioning.md
               - Consistency Settings: guides/tables/consistency.md
-              - Merge Insert: guides/tables/merge-insert.md
           - Building an Index:
               - Vector Index: guides/indexing/vector-index.md
               - Scalar Index: guides/indexing/scalar-index.md
@@ -180,7 +187,7 @@ nav:
           - Configuring Storage: guides/storage.md
       - Advanced Usage:
           - Complex Queries:
-              - Optimizing Query Performance: guides/understanding-query-perf.md
+              - Optimizing Query Performance: guides/search/optimize-queries.md
               - Hybrid Search:
                   - Overview: guides/search/hybrid-search.md
                   - Comparing Rerankers: reranking/eval.md

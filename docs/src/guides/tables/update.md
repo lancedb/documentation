@@ -1,4 +1,546 @@
 ---
+title: "Data Updates in LanceDB | Data Modification Guide"
+description: "Learn how to update and modify data in LanceDB. Includes incremental updates, batch modifications, and best practices for data maintenance."
+---
+
+# Updating Data with LanceDB 
+
+Our enterprise solution efficiently manages updates across millions of tables, 
+supporting several hundred transactions per second (TPS) per table.
+
+LanceDB supports various data modification operations:
+
+- **Basic Operations**: Update and delete existing data
+- **Merge Insert Operations**: Upsert, insert-if-not-exists, and replace range
+
+## Basic Operations
+
+### Update
+
+Update existing rows that match a condition.
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+
+    data = [
+        {"vector": [3.1, 4.1], "item": "foo", "price": 10.0},
+        {"vector": [5.9, 26.5], "item": "bar", "price": 20.0},
+        {"vector": [2.9, 18.2], "item": "zoo", "price": 30.0},
+    ]
+
+    table = db.create_table("update_table_example", data, mode="overwrite")
+
+    # Update with direct values
+    table.update(where="price < 20.0", values={"vector": [2, 2], "item": "foo-updated"})
+
+    # Update using SQL expression
+    table.update(where="price < 20.0", values_sql={"price": "price * 1.1"})
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    // Connect to LanceDB
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+
+    // Create a table with sample data
+    const data = [
+      { vector: [3.1, 4.1], item: "foo", price: 10.0 },
+      { vector: [5.9, 26.5], item: "bar", price: 20.0 },
+      { vector: [2.9, 18.2], item: "zoo", price: 30.0},
+    ];
+
+    const table = await db.createTable("update_table_example", data, { mode: "overwrite" });
+
+    // Update with direct values
+    await table.update({
+      where: "price < 20.0",
+      values: { vector: [2, 2], item: "foo-updated" },
+    });
+
+    // Update using SQL expression
+    await table.update({
+      where: "price < 20.0", 
+      valuesSql: { price: "price * 1.1" },
+    });
+    ```
+
+!!! info "Index Updates"
+    When rows are updated, LanceDB will update the existing index on the column. 
+    The updated data is available for search immediately.
+
+Check out the details of `update` from [Python SDK](https://lancedb.github.io/lancedb/python/python/#lancedb.table.Table.update) and [TypeScript SDK](https://lancedb.github.io/lancedb/js/classes/Table/#update).
+
+### Delete
+
+Remove rows that match a condition.
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+    table = db.open_table("update_table_example")
+
+    # delete data
+    predicate = "price = 30.0"
+    table.delete(predicate)
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    // Connect to LanceDB
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+    table = await db.openTable("update_table_example");
+
+    // delete data
+    const predicate = "price = 30.0";
+    await table.delete(predicate);
+    ```
+
+!!! warning "Permanent Deletion"
+    Delete operations are permanent and cannot be undone. Always ensure you have backups or are certain before deleting data.
+
+Check out the details of `delete` from [Python SDK](https://lancedb.github.io/lancedb/python/python/#lancedb.table.Table.delete) and [TypeScript SDK](https://lancedb.github.io/lancedb/js/classes/Table/#delete).
+
+
+## Merge Operations
+
+The merge insert command is a flexible API that can be used to perform _upsert_, 
+_insert_if_not_exists_, and _replace_range_ operations.
+
+!!! tip "Update Performance Optimization"
+    For optimal update performance:
+    - Use batch updates when possible (add multiple rows at once)
+    - Consider creating a [scalar index](../guides/build-index.md#scalar-index) on your ID column if updating by ID frequently
+    - For large-scale updates, consider using multiple concurrent connections
+
+!!! info "Embedding Functions"
+    Like the create table and add APIs, the merge insert API will automatically compute embeddings 
+    if the table has an embedding definition in its schema. If the input data doesn't contain the 
+    source column, or the vector column is already filled, the embeddings won't be computed.
+
+### Upsert
+
+`upsert` updates rows if they exist and inserts them if they don't. To do this with merge insert, 
+enable both `when_matched_update_all()` and `when_not_matched_insert_all()`.
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+
+    # Create example table
+    users_table_name = "users_example"
+    table = db.create_table(
+        users_table_name,
+        [
+            {"id": 0, "name": "Alice"},
+            {"id": 1, "name": "Bob"},
+        ],
+        mode="overwrite",
+    )
+    print(f"Created users table with {table.count_rows()} rows")
+
+    # Prepare data for upsert
+    new_users = [
+        {"id": 1, "name": "Bobby"},  # Will update existing record
+        {"id": 2, "name": "Charlie"},  # Will insert new record
+    ]
+
+    # Upsert by id
+    (
+        users_table.merge_insert("id")
+        .when_matched_update_all()
+        .when_not_matched_insert_all()
+        .execute(new_users)
+    )
+
+    # Verify results - should be 3 records total
+    print(f"Total users: {users_table.count_rows()}")  # 3
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    // Connect to LanceDB
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+
+    // Create example table
+    const table = await db.createTable("users", [
+      { id: 0, name: "Alice" },
+      { id: 1, name: "Bob" },
+    ]);
+
+    // Prepare data for upsert
+    const newUsers = [
+      { id: 1, name: "Bobby" },  // Will update existing record
+      { id: 2, name: "Charlie" },  // Will insert new record
+    ];
+
+    // Upsert by id
+    await table
+      .mergeInsert("id")
+      .whenMatchedUpdateAll()
+      .whenNotMatchedInsertAll()
+      .execute(newUsers);
+
+    // Verify results - should be 3 records total
+    const count = await table.countRows();
+    console.log(`Total users: ${count}`);  // 3
+    ```
+
+### Insert-if-not-exists
+
+This will only insert rows that do not have a match in the target table, thus 
+preventing duplicate rows. To do this with merge insert, enable just 
+`when_not_matched_insert_all()`.
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+
+    # Create example table
+    table = db.create_table(
+        "domains",
+        [
+            {"domain": "google.com", "name": "Google"},
+            {"domain": "github.com", "name": "GitHub"},
+        ],
+    )
+
+    # Prepare new data - one existing and one new record
+    new_domains = [
+        {"domain": "google.com", "name": "Google"},
+        {"domain": "facebook.com", "name": "Facebook"},
+    ]
+
+    # Insert only if domain doesn't exist
+    table.merge_insert("domain").when_not_matched_insert_all().execute(new_domains)
+
+    # Verify count - should be 3 (original 2 plus 1 new)
+    print(f"Total domains: {table.count_rows()}")  # 3
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    // Connect to LanceDB
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+
+    // Create example table
+    const table = await db.createTable(
+      "domains", 
+      [
+        { domain: "google.com", name: "Google" },
+        { domain: "github.com", name: "GitHub" },
+      ]
+    );
+
+    // Prepare new data - one existing and one new record
+    const newDomains = [
+      { domain: "google.com", name: "Google" },
+      { domain: "facebook.com", name: "Facebook" },
+    ];
+
+    // Insert only if domain doesn't exist
+    await table.merge_insert("domain")
+      .whenNotMatchedInsertAll()
+      .execute(newDomains);
+
+    // Verify count - should be 3 (original 2 plus 1 new)
+    const count = await table.countRows();
+    console.log(`Total domains: ${count}`);  // 3
+    ```
+
+### Replace range
+
+You can also replace a range of rows in the target table with the input data. 
+For example, if you have a table of document chunks, where each chunk has both 
+a `doc_id` and a `chunk_id`, you can replace all chunks for a given `doc_id` with updated chunks. 
+
+This can be tricky otherwise because if you try to use `upsert` when the new data has fewer 
+chunks you will end up with extra chunks. To avoid this, add another clause to delete any chunks 
+for the document that are not in the new data, with `when_not_matched_by_source_delete`.
+
+=== "Python"
+    ```python
+    import lancedb
+
+    # Connect to LanceDB
+    db = lancedb.connect(
+      uri="db://your-project-slug",
+      api_key="your-api-key",
+      region="us-east-1"
+    )
+
+    # Create example table with document chunks
+    table = db.create_table(
+        "chunks",
+        [
+            {"doc_id": 0, "chunk_id": 0, "text": "Hello"},
+            {"doc_id": 0, "chunk_id": 1, "text": "World"},
+            {"doc_id": 1, "chunk_id": 0, "text": "Foo"},
+            {"doc_id": 1, "chunk_id": 1, "text": "Bar"},
+            {"doc_id": 2, "chunk_id": 0, "text": "Baz"},
+        ],
+    )
+
+    # New data - replacing all chunks for doc_id 1 with just one chunk
+    new_chunks = [
+        {"doc_id": 1, "chunk_id": 0, "text": "Zoo"},
+    ]
+
+    # Replace all chunks for doc_id 1
+    (
+        table.merge_insert(["doc_id"])
+        .when_matched_update_all()
+        .when_not_matched_insert_all()
+        .when_not_matched_by_source_delete("doc_id = 1")
+        .execute(new_chunks)
+    )
+
+    # Verify count for doc_id = 1 - should be 2 
+    print(f"Chunks for doc_id = 1: {table.count_rows('doc_id = 1')}")  # 2
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import * as lancedb from "@lancedb/lancedb"
+
+    // Connect to LanceDB
+    const db = await lancedb.connect({
+      uri: "db://your-project-slug",
+      apiKey: "your-api-key",
+      region: "us-east-1"
+    });
+
+    // Create example table with document chunks
+    const table = await db.createTable(
+      "chunks", 
+      [
+        { doc_id: 0, chunk_id: 0, text: "Hello" },
+        { doc_id: 0, chunk_id: 1, text: "World" },
+        { doc_id: 1, chunk_id: 0, text: "Foo" },
+        { doc_id: 1, chunk_id: 1, text: "Bar" },
+        { doc_id: 2, chunk_id: 0, text: "Baz" },
+      ]
+    );
+
+    // New data - replacing all chunks for doc_id 1 with just one chunk
+    const newChunks = [
+      { doc_id: 1, chunk_id: 0, text: "Zoo" }
+    ];
+
+    // Replace all chunks for doc_id 1
+    await table.merge_insert(["doc_id"])
+      .whenMatchedUpdateAll()
+      .whenNotMatchedInsertAll()
+      .whenNotMatchedBySourceDelete("doc_id = 1")
+      .execute(newChunks);
+
+    // Verify count for doc_id = 1 - should be 2 
+    const count = await table.countRows("doc_id = 1");
+    console.log(`Chunks for doc_id =1: ${count}`);  // 2
+    ```
+
+For more detailed information, refer to the [`merge_insert` from Python SDK](https://lancedb.github.io/lancedb/python/python/#lancedb.table.Table.merge_insert)
+and [`mergeInsert from TypeScript SDK`](https://lancedb.github.io/lancedb/js/classes/Table/#mergeinsert)
+
+
+
+---
+title: Merge Insert in LanceDB | Upsert, Insert-if-Not-Exists & Replace Range
+description: Learn how to use the merge insert command in LanceDB for upserts, insert-if-not-exists, and range replacements. Covers performance tips, embedding functions, and API usage in Python and TypeScript.
+---
+
+The merge insert command is a flexible API that can be used to perform:
+
+1. Upsert
+2. Insert-if-not-exists
+3. Replace range
+
+It works by joining the input data with the target table on a key you provide.
+Often this key is a unique row id key. You can then specify what to do when
+there is a match and when there is not a match. For example, for upsert you want
+to update if the row has a match and insert if the row doesn't have a match.
+Whereas for insert-if-not-exists you only want to insert if the row doesn't have
+a match.
+
+You can also read more in the API reference:
+
+* Python
+    * Sync: [lancedb.table.Table.merge_insert][]
+    * Async: [lancedb.table.AsyncTable.merge_insert][]
+* Typescript: [lancedb.Table.mergeInsert](../../js/classes/Table.md/#mergeinsert)
+
+!!! tip "Use scalar indices to speed up merge insert"
+
+    The merge insert command needs to perform a join between the input data and the
+    target table on the `on` key you provide. This requires scanning that entire
+    column, which can be expensive for large tables. To speed up this operation,
+    you can create a scalar index on the `on` column, which will allow LanceDB to
+    find matches without having to scan the whole tables.
+
+    Read more about scalar indices in [Building a Scalar Index](../scalar_index.md)
+    guide.
+
+!!! info "Embedding Functions"
+
+    Like the create table and add APIs, the merge insert API will automatically
+    compute embeddings if the table has a embedding definition in its schema.
+    If the input data doesn't contain the source column, or the vector column
+    is already filled, then the embeddings won't be computed. See the
+    [Embedding Functions](../../embeddings/embedding_functions.md) guide for more
+    information.
+
+## Upsert
+
+Upsert updates rows if they exist and inserts them if they don't. To do this
+with merge insert, enable both `when_matched_update_all()` and
+`when_not_matched_insert_all()`.
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:upsert_basic"
+        ```
+
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:upsert_basic_async"
+        ```
+
+=== "Typescript"
+
+    === "@lancedb/lancedb"
+
+        ```typescript
+        --8<-- "nodejs/examples/merge_insert.test.ts:upsert_basic"
+        ```
+
+!!! note "Providing subsets of columns"
+
+    If a column is nullable, it can be omitted from input data and it will be
+    considered `null`. Columns can also be provided in any order.
+
+## Insert-if-not-exists
+
+To avoid inserting duplicate rows, you can use the insert-if-not-exists command.
+This will only insert rows that do not have a match in the target table. To do
+this with merge insert, enable just `when_not_matched_insert_all()`.
+
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:insert_if_not_exists"
+        ```
+
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:insert_if_not_exists_async"
+        ```
+
+=== "Typescript"
+
+    === "@lancedb/lancedb"
+
+        ```typescript
+        --8<-- "nodejs/examples/merge_insert.test.ts:insert_if_not_exists"
+        ```
+
+
+## Replace range
+
+You can also replace a range of rows in the target table with the input data.
+For example, if you have a table of document chunks, where each chunk has
+both a `doc_id` and a `chunk_id`, you can replace all chunks for a given
+`doc_id` with updated chunks. This can be tricky otherwise because if you
+try to use upsert when the new data has fewer chunks you will end up with
+extra chunks. To avoid this, add another clause to delete any chunks for
+the document that are not in the new data, with
+`when_not_matched_by_source_delete`.
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:replace_range"
+        ```
+
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_merge_insert.py:replace_range_async"
+        ```
+
+=== "Typescript"
+
+    === "@lancedb/lancedb"
+
+        ```typescript
+        --8<-- "nodejs/examples/merge_insert.test.ts:replace_range"
+        ```
+
+
+
+
+---
 title: Modifying Tables in LanceDB
 description: Learn how to add, update, and delete data in LanceDB tables.
 ---

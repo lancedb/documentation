@@ -70,29 +70,29 @@ plugins:
         'hybrid_search/hybrid_search.md': 'guides/search/hybrid-search.md'
         'guides/multi-vector.md': 'guides/search/multivector-search.md'
         'hybrid_search/eval.md': 'reranking/eval.md'
-        'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
-        'core/ingestion.md': 'guides/tables/ingestion.md'
-        'core/update.md': 'guides/tables/update.md'
-        'core/schema-evolution.md': 'guides/tables/schema.md'
-        'core/versioning.md': 'guides/tables/versioning.md'
-        'core/vector-search.md': 'guides/search/vector-search.md'
-        'core/multivector-search.md': 'guides/search/multivector-search.md'
-        'core/full-text-search.md': 'guides/search/full-text-search.md'
-        'core/filtering.md': 'guides/search/filtering.md'
-        'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
-        'core/hybrid-search.md': 'guides/search/hybrid-search.md'
-        'core/index.md': 'guides/indexing/vector-index.md'
-        'core/sql-query.md': 'guides/search/sql-queries.md'
+        'cloud/introduction.md': 'cloud/index.md'
+        'enterprise/quickstart.md': 'cloud/quickstart.md'
         'enterprise/architecture/architecture.md': 'enterprise/architecture.md'
         'enterprise/deploy/deployment.md': 'enterprise/deployment.md'
         'enterprise/benchmark/benchmark.md': 'enterprise/benchmark.md'
         'enterprise/security/security.md': 'enterprise/security.md'
         'api-reference/introduction.md': 'api/index.md'
-        
+        'resource/faq.md': 'cloud/cloud-faq.md'
+        'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
+        'core/sql-query.md': 'guides/search/sql-queries.md'
+        'core/versioning.md': 'guides/tables/versioning.md'
+        'core/schema-evolution.md': 'guides/tables/schema.md'
+        'core/filtering.md': 'guides/search/filtering.md'
+        'core/hybrid-search.md': 'guides/search/hybrid-search.md'
+        'core/full-text-search.md': 'guides/search/full-text-search.md'
+        'core/multivector-search.md': 'guides/search/multivector-search.md'
+        'core/vector-search.md': 'guides/search/vector-search.md'
+        'core/index.md': 'guides/indexing/vector-index.md'
+        'core/update.md': 'guides/tables/update.md'
+        'core/ingestion.md': 'guides/tables/ingestion.md'
+        'changelog/changelog.md': 'changelog/index..md'
 
- 
 
-        
 
   - search
   - neoteroi.mkdocsoad:
@@ -353,7 +353,8 @@ nav:
               - Current SDK (@lancedb/lancedb): js/globals.md
               - Legacy SDK (vectordb): javascript/modules.md
           - Rust SDK: https://docs.rs/lancedb/latest/lancedb/
-
+  - Changelog:
+      - Overview: changelog/index.md
   - Studies:
       - Overview: studies/overview.md
       - ↗Improve retrievers with hybrid search and reranking: https://blog.lancedb.com/hybrid-search-and-reranking-report/

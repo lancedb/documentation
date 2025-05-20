@@ -1,15 +1,15 @@
 ---
-title: Quickstart Guide
+title: Quickstart Guide: LanceDB Cloud and Enterprise
 description: "Effortlessly transform Open Source experience to Cloud/Enterprise"
 ---
 
 # Quickstart: LanceDB Cloud and Enterprise
 
-Explore the full implementation in this Quickstart guide:
+Get started quickly with LanceDB Cloud and Enterprise by following this guide. For complete examples, check out:
 
 → [Python Notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  | [TypeScript Example](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
 
-## Prerequisite:
+## Prerequisites
 Install the LanceDB SDK with your preferred language.
 
 === "Python"
@@ -25,9 +25,9 @@ Install the LanceDB SDK with your preferred language.
 
 ## 1. Connect to LanceDB Cloud/Enterprise
 
-- For LanceDB Cloud users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions,refer to our [onboarding tutorial](https://app.storylane.io/share/pudefwx54tun).
+- For LanceDB Cloud users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions, refer to our [onboarding tutorial](https://app.storylane.io/share/pudefwx54tun).
 
-- For LanceDB Enterprise user, please contact [our team](mailto:contact@lancedb.com) to obtain your database URI, API key and host_override URL.
+- For LanceDB Enterprise users, please contact [our team](mailto:contact@lancedb.com) to obtain your database URI, API key, and host_override URL.
 
 === "Python"
     ```python

@@ -17,7 +17,7 @@ The REST API allows you to interact with LanceDB Cloud instances using standard 
 
 | LanceDB Cloud | Documentation Link |
 |--------------|-------------------|
-| REST API | [REST API Documentation](cloud/rest.md) |
+| REST API | [REST API Documentation](api/cloud.md) |
 
 ## Client SDKs
 

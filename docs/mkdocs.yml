@@ -71,13 +71,14 @@ plugins:
         'guides/multi-vector.md': 'guides/search/multivector-search.md'
         'hybrid_search/eval.md': 'reranking/eval.md'
         'cloud/introduction.md': 'cloud/index.md'
+        'enterprise/introduction.md': 'enterprise/index.md'
         'enterprise/quickstart.md': 'cloud/quickstart.md'
         'enterprise/architecture/architecture.md': 'enterprise/architecture.md'
         'enterprise/deploy/deployment.md': 'enterprise/deployment.md'
         'enterprise/benchmark/benchmark.md': 'enterprise/benchmark.md'
         'enterprise/security/security.md': 'enterprise/security.md'
         'api-reference/introduction.md': 'api/index.md'
-        'resource/faq.md': 'cloud/cloud-faq.md'
+        'resource/faq.md': 'enterprise/enterprise-faq.md'
         'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
         'core/sql-query.md': 'guides/search/sql-queries.md'
         'core/versioning.md': 'guides/tables/versioning.md'
@@ -171,6 +172,7 @@ nav:
             - Deployment: enterprise/deployment.md
             - Benchmark: enterprise/benchmark.md
             - Security: enterprise/security.md
+            - FAQ: enterprise/enterprise-faq.md
       - Getting Started:
           - Quickstart Local: overview/quickstart.md
           - Quickstart Cloud: cloud/quickstart.md

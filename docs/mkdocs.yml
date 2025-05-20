@@ -75,7 +75,24 @@ plugins:
         'core/update.md': 'guides/tables/update.md'
         'core/schema-evolution.md': 'guides/tables/schema.md'
         'core/versioning.md': 'guides/tables/versioning.md'
+        'core/vector-search.md': 'guides/search/vector-search.md'
+        'core/multivector-search.md': 'guides/search/multivector-search.md'
+        'core/full-text-search.md': 'guides/search/full-text-search.md'
+        'core/filtering.md': 'guides/search/filtering.md'
+        'core/understand-query-perf.md': 'guides/search/optimize-queries.md'
+        'core/hybrid-search.md': 'guides/search/hybrid-search.md'
+        'core/index.md': 'guides/indexing/vector-index.md'
+        'core/sql-query.md': 'guides/search/sql-queries.md'
+        'enterprise/architecture/architecture.md': 'enterprise/architecture.md'
+        'enterprise/deploy/deployment.md': 'enterprise/deployment.md'
+        'enterprise/benchmark/benchmark.md': 'enterprise/benchmark.md'
+        'enterprise/security/security.md': 'enterprise/security.md'
+        'api-reference/introduction.md': 'api/index.md'
+        
 
+ 
+
+        
 
   - search
   - neoteroi.mkdocsoad:

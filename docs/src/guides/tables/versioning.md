@@ -3,16 +3,19 @@ title: "Versioning & Reproducibility in LanceDB | Data Versioning Guide"
 description: "Learn how to implement versioning and ensure reproducibility in LanceDB. Includes version control, data snapshots, and audit trails."
 ---
 
-# Version Control in LanceDB 
+# Version Control & Reproducibility in LanceDB
 
 LanceDB redefines data management for AI/ML workflows with built-in, 
 automatic versioning powered by the [Lance columnar format](https://github.com/lancedb/lance). 
 Every table mutation—appends, updates, deletions, or schema changes — is tracked with 
 zero configuration, enabling:
+
 - Time-Travel Debugging: Pinpoint production issues by querying historical table states.
 - Atomic Rollbacks: Revert terabyte-scale datasets to any prior version in seconds.
 - ML Reproducibility: Exactly reproduce training snapshots (vectors + metadata).
 - Branching Workflows: Conduct A/B tests on embeddings/models via lightweight table clones.
+
+## Check a Specific Table Version
 
 === "Python"
     ```python
@@ -115,7 +118,7 @@ zero configuration, enabling:
     console.log(`Current version: ${initialVersion}`);
     ```
 
-### Modifying Data
+## Modifying Data
 
 When you modify data through operations like update or delete, LanceDB automatically creates new versions.
 
@@ -180,13 +183,9 @@ When you modify data through operations like update or delete, LanceDB automatic
       console.log(`Current version: ${versionAfterMod}`);
     ```
 
-### Schema Evolution
+## Schema Evolution
 
-LanceDB's versioning system automatically tracks 
-every schema modification. This is critical when handling 
-evolving embedding models. For example, adding a new 
-_vector_minilm_ column creates a fresh version, enabling seamless A/B testing 
-between embedding generations without recreating the table. 
+LanceDB's versioning system automatically tracks every schema modification. This is critical when handling evolving embedding models. For example, adding a new _vector_minilm_ column creates a fresh version, enabling seamless A/B testing between embedding generations without recreating the table. 
 
 === "Python"
     ```python
@@ -314,7 +313,7 @@ between embedding generations without recreating the table.
     console.log(await table.schema())
     ```
 
-### Rollback to Previous Versions
+## Rollback to Previous Versions
 
 LanceDB supports fast rollbacks to any previous version without data duplication.
 
@@ -356,10 +355,9 @@ LanceDB supports fast rollbacks to any previous version without data duplication
     );
     ```
 
-### Making Changes from Previous Versions
-After restoring a table to an earlier version, you can continue making modifications. In this example, 
-we rolled back to a version before adding embeddings. This allows us to experiment with different 
-embedding models and compare their performance. Here's how to switch to a different model and add new embeddings:
+## Making Changes from Previous Versions
+
+After restoring a table to an earlier version, you can continue making modifications. In this example, we rolled back to a version before adding embeddings. This allows us to experiment with different embedding models and compare their performance. Here's how to switch to a different model and add new embeddings:
 
 === "Python"
     ```python
@@ -484,7 +482,7 @@ embedding models and compare their performance. Here's how to switch to a differ
     console.log(await table.schema())
     ```
 
-### Delete data from the table
+## Delete Data From the Table
 
 === "Python"
     ```python
@@ -512,49 +510,24 @@ embedding models and compare their performance. Here's how to switch to a differ
 Throughout this guide, we've demonstrated various operations that create new versions in LanceDB. 
 Here's a summary of the version history we created:
 
-!!! note "System Operations"
-    System operations like index updates and table compaction automatically increment
-    the table version number. These background processes are tracked in the version history,
-    though their version numbers are omitted from this example for clarity.
-
-1. **Initial Creation** (Version 1)
-   - Created the table with initial quotes data
-   - Set up the basic schema with `id`, `author`, and `quote` columns
-
-2. **First Update** (Version 2)
-   - Updated author names from "Richard" to "Richard Daniel Sanchez"
-   - Modified existing records while maintaining data integrity
-
-3. **Data Append** (Version 3)
-   - Added new quotes from Richard Daniel Sanchez and Morty
-   - Expanded the dataset with additional content
-
-4. **Schema Evolution** (Version 4)
-   - Added a new `vector_minilm` column for embeddings
-   - Modified the table structure to support vector search
-
-5. **Embedding Merge** (Version 5)
-   - Populated the `vector_minilm` column with embeddings
-   - Combined vector data with existing records
-
-6. **Version Rollback** (Version 6)
-   - Restored to Version 3 (pre-vector state)
-   - Demonstrated time-travel capabilities
-
-7. **Alternative Schema** (Version 7)
-   - Added a new `vector_mpnet` column
-   - Showed support for multiple embedding models
-
-8. **Alternative Embedding Merge** (Version 8)
-   - Populated the `vector_mpnet` column
-   - Implemented a different embedding strategy
-
-9. **Data Cleanup** (Version 9)
-   - Performed selective deletion of records
-   - Maintained only Richard Daniel Sanchez quotes
+1. **Initial Creation** (v1): Created table with quotes data and basic schema
+2. **First Update** (v2): Changed "Richard" to "Richard Daniel Sanchez"
+3. **Data Append** (v3): Added new quotes from both characters
+4. **Schema Evolution** (v4): Added `vector_minilm` column for embeddings
+5. **Embedding Merge** (v5): Populated `vector_minilm` with embeddings
+6. **Version Rollback** (v6): Restored to v3 (pre-vector state)
+7. **Alternative Schema** (v7): Added `vector_mpnet` column
+8. **Alternative Merge** (v8): Populated `vector_mpnet` embeddings
+9. **Data Cleanup** (v9): Kept only Richard Daniel Sanchez quotes
 
 Each version represents a distinct state of your data, allowing you to:
+
 - Track changes over time
 - Compare different embedding strategies
 - Revert to previous states
 - Maintain data lineage for ML reproducibility
+
+!!! note "System Operations"
+    System operations like index updates and table compaction automatically increment
+    the table version number. These background processes are tracked in the version history,
+    though their version numbers are omitted from this example for clarity.

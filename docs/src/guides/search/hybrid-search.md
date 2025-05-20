@@ -11,6 +11,7 @@ comes with [built-in rerankers](https://lancedb.github.io/lancedb/reranking/)
 and you can implement you own _customized reranker_ as well. 
 
 Explore the complete hybrid search example in our guided walkthroughs: 
+
 - [Python notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Hybrid_search.ipynb) 
 - [TypeScript example](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/hybrid-search)
 
@@ -146,12 +147,9 @@ Explore the complete hybrid search example in our guided walkthroughs:
 
     console.log("Hybrid search results:");
     console.log(hybridResults);
-    
+    ```
 
----
-title: Hybrid Search in LanceDB | Vector & Keyword Search Guide
-description: Learn how to implement hybrid search in LanceDB by combining vector and keyword-based search. Includes examples for reranking, score normalization, and best practices for search optimization.
----
+OSS______________
 
 # Hybrid Search
 

@@ -1,21 +1,19 @@
 ---
-title: "SQL Queries in LanceDB | SQL Query Guide"
+title: "SQL Queries in LanceDB Enterprise | SQL Query Guide"
 description: "Learn how to use SQL queries in LanceDB. Includes SQL syntax, query optimization, and best practices for SQL-based data access."
 ---
-# SQL Queries with LanceDB
+# SQL Queries in LanceDB Enterprise
 
-> Note: This is a preview feature that is only available in LanceDB Enterprise.
+!!! note
+        This is a preview feature that is only available in LanceDB Enterprise.
 
-Our solution includes an SQL endpoint that can be used for analytical queries and data exploration.
-The SQL endpoint is designed to be compatible with the
-[Arrow FlightSQL protocol](https://arrow.apache.org/docs/format/FlightSql.html), which allows you
-to use any Arrow FlightSQL-compatible client to query your data.
+Our solution includes an SQL endpoint that can be used for analytical queries and data exploration. The SQL endpoint is designed to be compatible with the
+[Arrow FlightSQL protocol](https://arrow.apache.org/docs/format/FlightSql.html), which allows you to use any Arrow FlightSQL-compatible client to query your data.
 
-### Installing a client
+## Installing a client
 
 There are Flight SQL clients available for most languages and tools.  If you find that your
-preferred language or tool is not listed here, please [reach out](mailto:contact@lancedb.com) to us and we can help you
-find a solution.  The following examples demonstrate how to install the Python and TypeScript
+preferred language or tool is not listed here, please [reach out](mailto:contact@lancedb.com) to us and we can help you find a solution.  The following examples demonstrate how to install the Python and TypeScript
 clients.
 
 === "Python"
@@ -36,7 +34,7 @@ clients.
     npm install --save @lancedb/flightsql-client
     ```
 
-### Usage
+## Usage
 
 LanceDB uses the powerful DataFusion query engine to execute SQL queries.  This means that
 you can use a wide variety of SQL syntax and functions to query your data.  For more detailed

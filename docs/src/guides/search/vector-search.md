@@ -15,21 +15,15 @@ data shows search latency from a 1M dataset with warmed up cache.
 | P99         | 35ms         |
 | Max         | 49ms         |
 
-Other than latency, users can also tune the following parameters for better search quality.
- - [nprobes](https://lancedb.github.io/lancedb/ann_indexes/#querying-an-ann-index): 
- the number of partitions to search (probe)
- - [refine factor](https://lancedb.github.io/lancedb/ann_indexes/#querying-an-ann-index): 
- a multiplier to control how many additional rows are taken during the refine step
- - [distance range](https://lancedb.github.io/lancedb/search/#search-with-distance-range): search for vectors within the distance range
+Other than latency, users can also tune the following parameters for better search quality:
 
-LanceDB delivers exceptional vector search performance with 
-metadata filtering.
-Benchmark results demonstrate **65ms** query latency at scale, tested on a 
-15-million vector dataset.This combination of fast vector 
-search and precise metadata filtering enables efficient, 
-accurate querying of large-scale datasets.
+- [nprobes](https://lancedb.github.io/lancedb/ann_indexes/#querying-an-ann-index): The number of partitions to search (probe)
+- [refine factor](https://lancedb.github.io/lancedb/ann_indexes/#querying-an-ann-index): A multiplier to control how many additional rows are taken during the refine step  
+- [distance range](https://lancedb.github.io/lancedb/search/#search-with-distance-range): Search for vectors within the distance range
 
-### Vector search with metadata _prefiltering_
+LanceDB delivers exceptional vector search performance with metadata filtering. Benchmark results demonstrate **65ms** query latency at scale, tested on a 15-million vector dataset.This combination of fast vector search and precise metadata filtering enables efficient, accurate querying of large-scale datasets.
+
+## Vector search with metadata prefiltering
 
 === "Python"
     ```python
@@ -96,12 +90,9 @@ accurate querying of large-scale datasets.
     console.log(vectorResults);
     ```
 
-### Vector search with metadata _postfiltering_
+## Vector search with metadata postfiltering
 
- By default, pre-filtering is performed to filter prior to vector search. 
- This can be useful to narrow down the search space of a very large dataset to 
- reduce query latency. Post-filtering is also an option that performs the filter 
- on the results returned by the vector search. You can use post-filtering as follows:
+By default, pre-filtering is performed to filter prior to vector search. This can be useful to narrow down the search space of a very large dataset to reduce query latency. Post-filtering is also an option that performs the filter on the results returned by the vector search. You can use post-filtering as follows:
 
 === "Python"
     ```python
@@ -130,10 +121,9 @@ accurate querying of large-scale datasets.
     console.log(vectorResultsWithPostFilter);
     ```
 
-### Batch query
-LanceDB can process multiple similarity search requests 
-simultaneously in a single operation, rather than handling 
-each query individually. 
+## Batch query
+
+LanceDB can process multiple similarity search requests simultaneously in a single operation, rather than handling each query individually. 
 
 === "Python"
     ```python
@@ -175,8 +165,9 @@ each query individually.
     to explicitly associate each result set with its corresponding query in 
     the input batch. 
 
-### Other search options
-**Fast search**
+## Other search options
+
+### Fast search
 
 While vector indexing occurs asynchronously, newly added vectors are immediately 
 searchable through a fallback brute-force search mechanism. This ensures zero 
@@ -203,7 +194,7 @@ enable the `fast_search` flag in your query to skip searching unindexed data.
       .toArray();
     ```
 
-**Bypass Vector Index**
+### Bypass Vector Index
 
 The bypass vector index feature prioritizes search accuracy over query speed by performing 
 an exhaustive search across all vectors. Instead of using the approximate nearest neighbor 
@@ -242,12 +233,9 @@ exact, ground-truth results. This is particularly useful when:
     - When deciding on distance metrics, consider your vector type and search objectives
 
 
----
-title: Search in LanceDB | Vector, FTS, and Hybrid Search
-description: Learn about LanceDB's powerful search capabilities including vector similarity search, full-text search, and hybrid search. Features comprehensive query options, filtering, and result customization.
----
+OSS_________
 
-# Vector Search
+## Vector Search
 
 A vector search finds the approximate or exact nearest neighbors to a given query vector.
 

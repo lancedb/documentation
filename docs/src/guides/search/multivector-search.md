@@ -3,25 +3,9 @@ title: "Multivector Search in LanceDB Enterprise | Advanced Search Guide"
 description: "Learn how to implement multivector search in LanceDB Enterprise. Includes multiple vector fields, cross-modal search, and complex query patterns."
 ---
 
-# Multivector Search with LanceDB Enterprise
+# Multivector Search with LanceDB 
 
-A complete example for Multivector search is in this [notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb)
-
-## Multivector Type
-
-LanceDB natively supports multivector data types, enabling advanced search scenarios where 
-a single data item is represented by multiple embeddings (e.g., using models like ColBERT 
-or CoLPali). In this framework, documents and queries are encoded as collections of 
-contextualized vectors—precomputed for documents and indexed for queries.
-
-Key features:
-- Indexing on multivector column: store and index multiple vectors per row.
-- Supporint query being a single vector or multiple vectors
-- Optimized search performance with [XTR](https://arxiv.org/abs/2501.17788) with improved recall.
-
-!!! info "Multivector Search Limitations"
-    Currently, only the `cosine` metric is supported for multivector search. 
-    The vector value type can be `float16`, `float32`, or `float64`.
+A complete example for Multivector Search is in this [notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb)
 
 ## Using Multivector in Python
 
@@ -72,13 +56,7 @@ results_single = tbl.search(query).limit(5).to_pandas()
 query_multi = np.random.random(size=(2, 256))
 results_multi = tbl.search(query_multi).limit(5).to_pandas()
 
-
----
-title: Multivector Search in LanceDB | Advanced Vector Operations
-description: Learn how to use LanceDB's multi-vector search capabilities for complex vector operations. Includes support for multiple vectors per item, late interaction techniques, and advanced search strategies.
----
-
-# Multivector Search in LanceDB
+OSS______________
 
 Late interaction is a technique used in retrieval that calculates the relevance of a query to a document by comparing their multi-vector representations. The key difference between late interaction and other popular methods:
 

@@ -118,9 +118,7 @@ vector search completes.
     ```
 
 !!! warning "Resource Usage Warning"
-    When querying large tables, omitting a `limit` clause may:
-    - Overwhelm Resources: return excessive data.
-    - Increase Costs: query pricing scales with data scanned and returned ([LanceDB Cloud pricing](https://lancedb.com/pricing)).
+    When querying large tables, omitting a `limit` clause may overwhelm resources and return excessive data. It can also increase costs as query pricing scales with data scanned and data returned ([LanceDB Cloud pricing](https://lancedb.com/pricing)).
 
 ## SQL filters
 
@@ -154,6 +152,7 @@ AND `nested with space`.`inner with space` < 2
 !!! warning "Field Name Limitation"
     Field names containing periods (.) are NOT supported.
 
+OSS______________
 
 # Filtering & SQL in LanceDB
 

@@ -258,10 +258,7 @@ Explore full documentation in our SDK guides: [Python](https://lancedb.github.io
 
 
 
----
-title: "Data Ingestion in LanceDB | Data Loading Guide"
-description: "Learn how to ingest data into LanceDB. Includes batch loading, streaming ingestion, and best practices for data management."
----
+OSS___________________
 
 # Ingesting Data with LanceDB
 

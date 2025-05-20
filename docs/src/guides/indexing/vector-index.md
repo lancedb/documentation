@@ -11,20 +11,21 @@ LanceDB provides a comprehensive suite of indexing strategies to optimize query 
 - **Scalar Index**: Accelerates filtering and sorting of structured numeric or categorical data (e.g., timestamps, prices)
 - **Full-Text Search Index**: Enables fast keyword-based searches by indexing words and phrases
 
+!!! tip
+    Scalar indices serve as a foundational optimization layer, accelerating filtering across diverse search workloads. They can be combined with:
 
-Scalar indices serve as a foundational optimization layer, accelerating filtering across diverse search workloads. They can be combined with:
-
-Vector search (prefilter or post-filter results using metadata)
-- Full-text search (combining keyword matching with structured filters)
-- SQL scans (optimizing WHERE clauses on scalar columns)
-- Key-value lookups (enabling rapid primary key-based retrievals)
+    - Vector search (prefilter or post-filter results using metadata)
+    - Full-text search (combining keyword matching with structured filters) 
+    - SQL scans (optimizing WHERE clauses on scalar columns)
+    - Key-value lookups (enabling rapid primary key-based retrievals)
 
 
-Compared to our open source version, LanceDB Cloud/Enterprise automates data indexing with low-latency, asynchronous indexing performed in the cloud.
+Compared to our open source version, LanceDB Cloud/Enterprise automates data indexing with low-latency, asynchronous indexing performed in the cloud:
+
 - **Auto-Indexing**: Automates index optimization for all types of indices as soon as data is updated
-- **Automatic Index Creation**: When a table contains a single vector column named `vector`, LanceDB:
-  - Infers the vector column from the table schema
-  - Creates an optimized IVF-PQ index without manual configuration
+- **Automatic Index Creation**: When a table contains a single vector column named `vector`, LanceDB automatically:
+    - Infers the vector column from the table schema
+    - Creates an optimized IVF-PQ index without manual configuration
 - **Parameter Autotuning**: LanceDB analyzes your data distribution to automatically configure indexing parameters
 
 ## Vector Index
@@ -38,8 +39,9 @@ LanceDB implements state-of-the-art indexing algorithms ([IVF-PQ](https://lanced
 
 You can create multiple vector indices within a table.
 
-> The `create_index` API returns immediately, but the building of the vector index is asynchronous. To wait until all data is fully indexed, you can specify the`wait_timeout`parameter.
+!!! note
 
+    The `create_index` API returns immediately, but the building of the vector index is asynchronous. To wait until all data is fully indexed, you can specify the`wait_timeout`parameter.
 
 === "Python"
     ```python
@@ -85,106 +87,14 @@ You can create multiple vector indices within a table.
       })
     });
     ```
-
-
-- If your vector column is named `vector` and contains more than 256 vectors, an IVF_PQ index with L2 distance is automatically created
-- You can create a new index with different parameters using `create_index` - this replaces any existing index
-- When using cosine similarity, distances range from 0 (identical vectors) to 2 (maximally dissimilar)
-- Available index types:
-- `IVF_PQ`: Default index type, optimized for high-dimensional vectors
-- `IVF_HNSW_SQ`: Combines IVF clustering with HNSW graph for improved search quality
-
-
-# Build HNSW Index
-
-There are three key parameters to set when constructing an HNSW index:
-
-* `metric`: Use an `l2` euclidean distance metric. We also support `dot` and `cosine` distance.
-* `m`: The number of neighbors to select for each vector in the HNSW graph.
-* `ef_construction`: The number of candidates to evaluate during the construction of the HNSW graph.
-
-
-We can combine the above concepts to understand how to build and query an HNSW index in LanceDB.
-
-### Construct index
-
-```python
-import lancedb
-import numpy as np
-uri = "/tmp/lancedb"
-db = lancedb.connect(uri)
-
-# Create 10,000 sample vectors
-data = [
-    {"vector": row, "item": f"item {i}"}
-    for i, row in enumerate(np.random.random((10_000, 1536)).astype('float32'))
-]
-
-# Add the vectors to a table
-tbl = db.create_table("my_vectors", data=data)
-
-# Create and train the HNSW index for a 1536-dimensional vector
-# Make sure you have enough data in the table for an effective training step
-tbl.create_index(index_type=IVF_HNSW_SQ)
-
-```
-
-### Query the index
-
-```python
-# Search using a random 1536-dimensional embedding
-tbl.search(np.random.random((1536))) \
-    .limit(2) \
-    .to_pandas()
-```
-
-
-## Putting it all together
-
-We can combine the above concepts to understand how to build and query an IVF-PQ index in LanceDB.
-
-### Construct index
-
-There are three key parameters to set when constructing an IVF-PQ index:
-
-* `metric`: Use an `l2` euclidean distance metric. We also support `dot` and `cosine` distance.
-* `num_partitions`: The number of partitions in the IVF portion of the index.
-* `num_sub_vectors`: The number of sub-vectors that will be created during Product Quantization (PQ).
-
-In Python, the index can be created as follows:
-
-```python
-# Create and train the index for a 1536-dimensional vector
-# Make sure you have enough data in the table for an effective training step
-tbl.create_index(metric="l2", num_partitions=256, num_sub_vectors=96)
-```
 !!! note
-    `num_partitions`=256 and `num_sub_vectors`=96 does not work for every dataset. Those values needs to be adjusted for your particular dataset.
 
-The `num_partitions` is usually chosen to target a particular number of vectors per partition. `num_sub_vectors` is typically chosen based on the desired recall and the dimensionality of the vector. See [here](../ann_indexes.md/#how-to-choose-num_partitions-and-num_sub_vectors-for-ivf_pq-index) for best practices on choosing these parameters.
-
-
-### Query the index
-
-```python
-# Search using a random 1536-dimensional embedding
-tbl.search(np.random.random((1536))) \
-    .limit(2) \
-    .nprobes(20) \
-    .refine_factor(10) \
-    .to_pandas()
-```
-
-The above query will perform a search on the table `tbl` using the given query vector, with the following parameters:
-
-* `limit`: The number of results to return
-* `nprobes`: The number of probes determines the distribution of vector space. While a higher number enhances search accuracy, it also results in slower performance. Typically, setting `nprobes` to cover 5–10% of the dataset proves effective in achieving high recall with minimal latency.
-* `refine_factor`: Refine the results by reading extra elements and re-ranking them in memory. A higher number makes the search more accurate but also slower (see the [FAQ](../faq.md#do-i-need-to-set-a-refine-factor-when-using-an-index) page for more details on this).
-* `to_pandas()`: Convert the results to a pandas DataFrame
-
-And there you have it! You now understand what an IVF-PQ index is, and how to create and query it in LanceDB.
-To see how to create an IVF-PQ index in LanceDB, take a look at the [ANN indexes](../ann_indexes.md) section.
-
+    - If your vector column is named `vector` and contains more than 256 vectors, an IVF_PQ index with L2 distance is automatically created
+    - You can create a new index with different parameters using `create_index` - this replaces any existing index
+    - When using cosine similarity, distances range from 0 (identical vectors) to 2 (maximally dissimilar)
+    - Available index types:
+        - `IVF_PQ`: Default index type, optimized for high-dimensional vectors
+        - `IVF_HNSW_SQ`: Combines IVF clustering with HNSW graph for improved search quality
 
 ### Check Index Status
 
@@ -234,9 +144,9 @@ Key points for binary vectors:
 - Use Hamming distance for similarity search
 - Pack binary vectors into bytes to save space
 
-<Info>
-  The dimension of binary vectors must be a multiple of 8. For example, a 128-dimensional vector is stored as a uint8 array of size 16.
-</Info>
+!!! info
+
+    The dimension of binary vectors must be a multiple of 8. For example, a 128-dimensional vector is stored as a uint8 array of size 16.
 
 === "Python"
     ```python
@@ -338,6 +248,100 @@ Key points for binary vectors:
     console.log("Binary vector search results:", unpackedResults);
     ```
 
+!!! note
+    `IVF_FLAT` with Hamming distance is used for indexing binary vectors.
 
-> `IVF_FLAT` with Hamming distance is used for indexing binary vectors.
+
+OSS_________
+
+# Build HNSW Index
+
+There are three key parameters to set when constructing an HNSW index:
+
+* `metric`: Use an `l2` euclidean distance metric. We also support `dot` and `cosine` distance.
+* `m`: The number of neighbors to select for each vector in the HNSW graph.
+* `ef_construction`: The number of candidates to evaluate during the construction of the HNSW graph.
+
+
+We can combine the above concepts to understand how to build and query an HNSW index in LanceDB.
+
+### Construct index
+
+```python
+import lancedb
+import numpy as np
+uri = "/tmp/lancedb"
+db = lancedb.connect(uri)
+
+# Create 10,000 sample vectors
+data = [
+    {"vector": row, "item": f"item {i}"}
+    for i, row in enumerate(np.random.random((10_000, 1536)).astype('float32'))
+]
+
+# Add the vectors to a table
+tbl = db.create_table("my_vectors", data=data)
+
+# Create and train the HNSW index for a 1536-dimensional vector
+# Make sure you have enough data in the table for an effective training step
+tbl.create_index(index_type=IVF_HNSW_SQ)
+
+```
+
+### Query the index
+
+```python
+# Search using a random 1536-dimensional embedding
+tbl.search(np.random.random((1536))) \
+    .limit(2) \
+    .to_pandas()
+```
+
+
+## Putting it all together
+
+We can combine the above concepts to understand how to build and query an IVF-PQ index in LanceDB.
+
+### Construct index
+
+There are three key parameters to set when constructing an IVF-PQ index:
+
+* `metric`: Use an `l2` euclidean distance metric. We also support `dot` and `cosine` distance.
+* `num_partitions`: The number of partitions in the IVF portion of the index.
+* `num_sub_vectors`: The number of sub-vectors that will be created during Product Quantization (PQ).
+
+In Python, the index can be created as follows:
+
+```python
+# Create and train the index for a 1536-dimensional vector
+# Make sure you have enough data in the table for an effective training step
+tbl.create_index(metric="l2", num_partitions=256, num_sub_vectors=96)
+```
+!!! note
+    `num_partitions`=256 and `num_sub_vectors`=96 does not work for every dataset. Those values needs to be adjusted for your particular dataset.
+
+The `num_partitions` is usually chosen to target a particular number of vectors per partition. `num_sub_vectors` is typically chosen based on the desired recall and the dimensionality of the vector. See [here](../ann_indexes.md/#how-to-choose-num_partitions-and-num_sub_vectors-for-ivf_pq-index) for best practices on choosing these parameters.
+
+
+### Query the index
+
+```python
+# Search using a random 1536-dimensional embedding
+tbl.search(np.random.random((1536))) \
+    .limit(2) \
+    .nprobes(20) \
+    .refine_factor(10) \
+    .to_pandas()
+```
+
+The above query will perform a search on the table `tbl` using the given query vector, with the following parameters:
+
+* `limit`: The number of results to return
+* `nprobes`: The number of probes determines the distribution of vector space. While a higher number enhances search accuracy, it also results in slower performance. Typically, setting `nprobes` to cover 5–10% of the dataset proves effective in achieving high recall with minimal latency.
+* `refine_factor`: Refine the results by reading extra elements and re-ranking them in memory. A higher number makes the search more accurate but also slower (see the [FAQ](../faq.md#do-i-need-to-set-a-refine-factor-when-using-an-index) page for more details on this).
+* `to_pandas()`: Convert the results to a pandas DataFrame
+
+And there you have it! You now understand what an IVF-PQ index is, and how to create and query it in LanceDB.
+To see how to create an IVF-PQ index in LanceDB, take a look at the [ANN indexes](../ann_indexes.md) section.
+
 

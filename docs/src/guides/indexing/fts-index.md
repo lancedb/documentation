@@ -1,8 +1,15 @@
-## Full-Text Search Index
+---
+title: "Full-Text Search (FTS) Index | LanceDB Documentation"
+description: "Learn how to implement performant full-text search in LanceDB using BM25. Includes configuration options, API examples in Python and TypeScript, and best practices for text search optimization."
+keywords: "LanceDB full-text search, BM25 search, text search index, FTS configuration, text tokenization, search optimization, Python TypeScript search API"
+---
+
+# Full-Text Search Index
 
 LanceDB Cloud and Enterprise provide performant full-text search based on BM25, allowing you to incorporate keyword-based search in your retrieval solutions.
 
-> The `create_fts_index` API returns immediately, but the building of the FTS index is asynchronous.
+!!! note
+    The `create_fts_index` API returns immediately, but the building of the FTS index is asynchronous.
 
 === "Python"
     ```python
@@ -65,7 +72,7 @@ LanceDB supports the following configurable parameters for full-text search:
 | stem              | bool | False     | Apply stemming (e.g., "running" → "run")                                                                                                      |
 | remove_stop_words | bool | False     | Remove common stop words                                                                                                                      |
 | ascii_folding     | bool | False     | Normalize accented characters                                                                                                                 |
-
-- The `max_token_length` parameter helps optimize indexing performance by filtering out non-linguistic content like base64 data and long URLs
-- When `with_position` is disabled, phrase queries will not work, but index size is reduced and indexing is faster
-- `ascii_folding` is useful for handling international text (e.g., "café" → "cafe")
+!!! note
+    - The `max_token_length` parameter helps optimize indexing performance by filtering out non-linguistic content like base64 data and long URLs
+    - When `with_position` is disabled, phrase queries will not work, but index size is reduced and indexing is faster
+    - `ascii_folding` is useful for handling international text (e.g., "café" → "cafe")

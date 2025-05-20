@@ -133,11 +133,13 @@ Check out the details of `delete` from [Python SDK](https://lancedb.github.io/la
 The merge insert command is a flexible API that can be used to perform _upsert_, 
 _insert_if_not_exists_, and _replace_range_ operations.
 
-!!! tip "Update Performance Optimization"
-    For optimal update performance:
-    - Use batch updates when possible (add multiple rows at once)
-    - Consider creating a [scalar index](../guides/build-index.md#scalar-index) on your ID column if updating by ID frequently
-    - For large-scale updates, consider using multiple concurrent connections
+!!! tip "Use scalar indexes to speed up merge insert"
+    The merge insert command performs a join between the input data and the target 
+    table `on` the key you provide. This requires scanning that entire column, which can be 
+    expensive for large tables. To speed up this operation, create a scalar index 
+    on the join column, which will allow LanceDB to find matches without scanning the whole table.
+
+    Read more about scalar indices in the [Scalar Index](../indexing/scalar-index.md) guide.
 
 !!! info "Embedding Functions"
     Like the create table and add APIs, the merge insert API will automatically compute embeddings 
@@ -396,10 +398,7 @@ and [`mergeInsert from TypeScript SDK`](https://lancedb.github.io/lancedb/js/cla
 
 
 
----
-title: Merge Insert in LanceDB | Upsert, Insert-if-Not-Exists & Replace Range
-description: Learn how to use the merge insert command in LanceDB for upserts, insert-if-not-exists, and range replacements. Covers performance tips, embedding functions, and API usage in Python and TypeScript.
----
+OSS________________
 
 The merge insert command is a flexible API that can be used to perform:
 

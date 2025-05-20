@@ -1,12 +1,20 @@
-# Incremental indexing
+---
+title: "Updating Indexes in LanceDB | Index Updates Guide"
+description: "Learn how to efficiently update and manage indexes in LanceDB using incremental indexing. Includes best practices for adding new records without full reindexing."
+keywords: "LanceDB incremental indexing, index updates, database optimization, vector search indexing, index management"
+---
 
-# Update an Index
+# Updating Indexes with New Data in LanceDB Cloud
 
 When new data is added to a table, LanceDB Cloud automatically updates indices in the background.
 
 To check index status, use `index_stats()` to view the number of unindexed rows. This will be zero when indices are fully up-to-date.
 
 While indices are being updated, queries use brute force methods for unindexed rows, which may temporarily increase latency. To avoid this, set `fast_search=True` to search only indexed data.
+
+OSS______________
+
+## Incremental Indexing in LanceDB OSS
 
 LanceDB supports incremental indexing, which means you can add new records to the table without reindexing the entire table.
 

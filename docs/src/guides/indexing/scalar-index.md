@@ -237,35 +237,6 @@ LanceDB supports scalar indices on UUID columns (stored as `FixedSizeBinary(16)`
 
 OSS______
 
-Scalar indices organize data by scalar attributes (e.g. numbers, categorical values), enabling fast filtering of vector data. In vector databases, scalar indices accelerate the retrieval of scalar data associated with vectors, thus enhancing the query performance when searching for vectors that meet certain scalar criteria. 
-
-Similar to many SQL databases, LanceDB supports several types of scalar indices to accelerate search
-over scalar columns.
-
-- `BTREE`: The most common type is BTREE. The index stores a copy of the
-  column in sorted order. This sorted copy allows a binary search to be used to
-  satisfy queries.
-- `BITMAP`: this index stores a bitmap for each unique value in the column. It 
-  uses a series of bits to indicate whether a value is present in a row of a table
-- `LABEL_LIST`: a special index that can be used on `List<T>` columns to
-  support queries with `array_contains_all` and `array_contains_any`
-  using an underlying bitmap index.
-  For example, a column that contains lists of tags (e.g. `["tag1", "tag2", "tag3"]`) can be indexed with a `LABEL_LIST` index.
-
-!!! tips "How to choose the right scalar index type"
-
-    `BTREE`: This index is good for scalar columns with mostly distinct values and does best when the query is highly selective.
-    
-    `BITMAP`: This index works best for low-cardinality numeric or string columns, where the number of unique values is small (i.e., less than a few thousands).
-    
-    `LABEL_LIST`: This index should be used for columns containing list-type data.
-
-| Data Type                                                       | Filter                                    | Index Type   |
-| --------------------------------------------------------------- | ----------------------------------------- | ------------ |
-| Numeric, String, Temporal                                       | `<`, `=`, `>`, `in`, `between`, `is null` | `BTREE`      |
-| Boolean, numbers or strings with fewer than 1,000 unique values | `<`, `=`, `>`, `in`, `between`, `is null` | `BITMAP`     |
-| List of low cardinality of numbers or strings                   | `array_has_any`, `array_has_all`          | `LABEL_LIST` |
-
 ### Create a scalar index
 === "Python"
 

@@ -169,11 +169,6 @@ keeping data reasonably fresh for most applications.
 
 ## Indexing
 
-### Can I use GPU for indexing?
-Yes! Please contact the LanceDB team to enable GPU-based indexing for your deployment.
-Then you just need to call `create_index`, and the backend will use GPU for indexing.
-LanceDB is able to index a few billion vectors under 4 hours.
-
 ## Cluster Configuration
 
 ### What are the parameters that can be configured for my LanceDB cluster?

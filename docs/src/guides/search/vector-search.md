@@ -350,7 +350,7 @@ an ANN search means that using an index often involves a trade-off between recal
 See the [IVF_PQ index](./concepts/index_ivfpq.md) for a deeper description of how `IVF_PQ`
 indexes work in LanceDB.
 
-## Binary vector
+## Search with Binary Vectors
 
 LanceDB supports binary vectors as a data type, and has the ability to search binary vectors with hamming distance. The binary vectors are stored as uint8 arrays (every 8 bits are stored as a byte):
 

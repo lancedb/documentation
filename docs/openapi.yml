@@ -45,6 +45,75 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    distance_type:
+      description: distance metric to use for search
+      type: string
+      enum:
+        - L2
+        - Cosine
+        - Dot
+    index_type:
+      description: type of index to create
+      type: string
+      enum:
+        - IVF_PQ
+        - IVF_HNSW_SQ
+        - BTREE
+        - BITMAP
+        - LABEL_LIST
+        - FTS
+    json_schema:
+      description: JSON representation of an Arrow schema.
+      type: object
+      required: ["fields"]
+      properties:
+        fields:
+          $ref: "#/components/schemas/json_schema_fields"
+        metadata:
+          type: object
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+      example:
+        fields:
+          - name: id
+            type:
+              name: int64
+          - name: name
+            type:
+              type: string
+          - name: vector
+            type:
+              type: float32
+              length: 128
+        metadata:
+          key: value
+    json_schema_fields:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/json_schema_type"
+        nullable:
+          type: boolean
+    json_schema_type:
+      type: object
+      required:
+        - name
+      properties:
+        type:
+          type: string
+          example: "int64"
+        fields:
+          type: array
+          items:
+            $ref: "#/components/schemas/json_schema_fields"
+        length:
+          type: integer
   responses:
     invalid_request:
       description: Invalid request
@@ -88,6 +157,8 @@ paths:
           description: Limits the number of items to return.
           schema:
             type: integer
+            minimum: 1
+            default: 10
         - name: page_token
           in: query
           description: Specifies the starting position of the next query
@@ -112,12 +183,13 @@ paths:
           $ref: "#/components/responses/invalid_request"
         "401":
           $ref: "#/components/responses/unauthorized"
-        "404":
-          $ref: "#/components/responses/not_found"
 
   /v1/table/{name}/create/:
     post:
-      description: Create a new table
+      description: |
+        Create a new table.
+
+        Will return 400 if table with requested name already exists.
       summary: Create a new table
       operationId: createTable
       tags:
@@ -126,9 +198,47 @@ paths:
         - $ref: "#/components/parameters/table_name"
       requestBody:
         $ref: "#/components/requestBodies/arrow_stream_buffer"
+
       responses:
         "200":
           description: Table successfully created
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+
+  /v1/table/{name}/count_rows/:
+    post:
+      description: |
+        Count the number of rows in a table.
+
+        Can optionally pass a predicate to count the rows that match.
+      tags:
+        - Tables
+      summary: Count rows in a table
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                predicate:
+                  type: string
+                  example: "category = 'shoes'"
+                  description: |
+                    A SQL filter expression that specifies the rows to count.
+      responses:
+        "200":
+          description: Number of rows in the table
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 1000
+
         "400":
           $ref: "#/components/responses/invalid_request"
         "401":
@@ -138,8 +248,9 @@ paths:
 
   /v1/table/{name}/query/:
     post:
-      description: Vector Query
-      url: https://{db-uri}.{aws-region}.api.lancedb.com/v1/table/{name}/query/
+      description: |
+        Search for rows, using any combination of vector search, full text
+        search, and SQL filter expressions.
       tags:
         - Data
       summary: Vector Query
@@ -153,77 +264,267 @@ paths:
               type: object
               properties:
                 vector:
-                  type: FixedSizeList
+                  type: array
+                  items:
+                    type: number
+                  example: [0.1, 0.2, 0.3]
                   description: |
-                    The targetted vector to search for. Required.
+                    The targeted vector to search for.
+                full_text_query:
+                  description: |
+                    The full text query to search for.
+                  type: object
+                  required: ["query"]
+                  properties:
+                    columns:
+                      type: array
+                      items:
+                        type: string
+                      example: ["name", "description"]
+                      description: |
+                        The columns to search within.
+                    query:
+                      type: string
+                      example: "sneakers"
+                      description: |
+                        The full text query to search for.
                 vector_column:
                   type: string
+                  example: vector
                   description: |
                     The column to query, it can be inferred from the schema if there is only one vector column.
                 prefilter:
                   type: boolean
+                  default: false
                   description: |
-                    Whether to prefilter the data. Optional.
+                    Whether to apply the filter before search.
                 k:
                   type: integer
+                  default: 10
                   description: |
-                    The number of search results to return. Default is 10.
+                    The number of search results to return.
+                offset:
+                  type: integer
+                  description: |
+                    The number of search results to skip.
                 distance_type:
-                  type: string
-                  description: |
-                    The distance metric to use for search. l2, Cosine, Dot and Hamming are supported. Default is l2.
+                  $ref: "#/components/schemas/distance_type"
+                  default: L2
                 bypass_vector_index:
                   type: boolean
+                  default: false
                   description: |
-                    Whether to bypass vector index. Optional.
+                    Whether to bypass vector index.
                 filter:
                   type: string
+                  example: "category = 'shoes'"
                   description: |
-                    A filter expression that specifies the rows to query. Optional.
+                    A SQL filter expression that specifies the rows to query.
                 columns:
                   type: array
                   items:
                     type: string
                   description: |
-                    The columns to return. Optional.
-                nprobe:
+                    The columns to return. Defaults to all columns in the table.
+                nprobes:
                   type: integer
+                  default: 10
                   description: |
-                    The number of probes to use for search. Optional.
+                    The number of partitions to search. Higher values yield
+                    better search results but are slower.
                 refine_factor:
                   type: integer
-                  description: |
-                    The refine factor to use for search. Optional.
+                  nullable: true
                   default: null
-                fast_search:
-                  type: boolean
                   description: |
-                    Whether to use fast search. Optional.
-                  default: false
-              required:
-                - vector
+                    The refine step re-ranks refine_factor * k results based on
+                    exact vectors. Null (the default) skips this step for faster
+                    queries.
 
       responses:
         "200":
           description: top k results if query is successfully executed
           content:
+            application/vnd.apache.arrow.file:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/create_index/:
+    post:
+      description: |
+        Create an index on a column.
+
+        Vector index options are: `IVF_PQ` and `IVF_HNSW_SQ`. The `distance_type`
+        parameter is required for vector indices.
+
+        For [full text search](https://lancedb.github.io/lancedb/fts/), use `FTS`.
+        For [scalar indices](https://lancedb.github.io/lancedb/guides/scalar_index/),
+        use `BTREE`, `BITMAP`, or `LABEL_LIST`.
+      tags:
+        - Index
+      summary: Create Vector Index
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["index_type"]
+              properties:
+                index_type:
+                  $ref: "#/components/schemas/index_type"
+                column:
+                  type: string
+                  example: vector
+                  description: |
+                    The targeted vector column to index. Required only if there are multiple vector columns.
+                distance_type:
+                  $ref: "#/components/schemas/distance_type"
+                with_position:
+                  type: boolean
+                  default: true
+                  description: |
+                    Whether to store the position of tokens in docs, required for phrase search.
+                base_tokenizer:
+                  type: string
+                  default: "simple"
+                  description: |
+                    The base tokenizer to use for full text search.
+                language:
+                  type: string
+                  default: "English"
+                  description: |
+                    The language to use for stemming and stop words.
+                max_token_length:
+                  type: integer
+                  default: 40
+                  description: |
+                    The maximum token length to index, longer tokens are ignored.
+                lower_case:
+                  type: boolean
+                  default: false
+                  description: |
+                    Whether to convert tokens to lowercase.
+                stem:
+                  type: boolean
+                  default: false
+                  description: |
+                    Whether to apply stemming to tokens.
+                remove_stop_words:
+                  type: boolean
+                  default: false
+                  description: |
+                    Whether to remove stop words from tokens.
+                ascii_folding:
+                  type: boolean
+                  default: false
+                  description: |
+                    Whether to convert non-ASCII characters to ASCII, used for accent folding.
+
+      responses:
+        "200":
+          description: Vector index is created successfully
+          content:
+            application/json:
+              # The response is empty right now. We can add fields later.
+              schema:
+                type: object
+
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/index/list/:
+    post:
+      description: List indices of a table
+      tags:
+        - Index
+      summary: List indices of a table
+      operationId: listIndexes
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      responses:
+        "200":
+          description: |
+            List of existing indices on the table.
+
+            Each entry represents a segment of an index. They can be grouped by
+            `index_name` to get the full index.
+          content:
             application/json:
               schema:
                 type: object
                 properties:
-                  results:
+                  indexes:
                     type: array
                     items:
                       type: object
                       properties:
-                        id:
-                          type: integer
-                        selected_col_1_to_return:
-                          type: col_1_type
-                        selected_col_n_to_return:
-                          type: col_n_type
-                        _distance:
-                          type: float
+                        index_name:
+                          type: string
+                          example: vector_idx
+                        index_uuid:
+                          type: string
+                          format: uuid
+                        columns:
+                          type: array
+                          example: ["vector"]
+                          items:
+                            type: string
+                        index_status:
+                          type: string
+                          enum:
+                            - pending
+                            - indexing
+                            - done
+                            - failed
+
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/index/{index_name}/stats/:
+    post:
+      description: List the details of an index
+      tags:
+        - Index
+      summary: List the details of an index
+      operationId: indexStats
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+        - $ref: "#/components/parameters/index_name"
+
+      responses:
+        "200":
+          description: Index details of an index.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  num_indexed_rows:
+                    type: integer
+                    example: 100000
+                  num_unindexed_rows:
+                    type: integer
+                  index_type:
+                    $ref: "#/components/schemas/index_type"
+                  distance_type:
+                    $ref: "#/components/schemas/distance_type"
 
         "400":
           $ref: "#/components/responses/invalid_request"
@@ -234,97 +535,87 @@ paths:
 
   /v1/table/{name}/insert/:
     post:
-      description: Insert new data to the Table.
+      description: Insert data to a table
       tags:
         - Data
       operationId: insertData
-      summary: Insert new data.
+      summary: Insert data to a table
       parameters:
         - $ref: "#/components/parameters/table_name"
+        - name: mode
+          in: query
+          description: |
+            The mode of insertion. If `overwrite`, the existing data will be
+            replaced. If `append`, the new data will be appended to the existing data.
+          schema:
+            type: string
+            enum:
+              - overwrite
+              - append
+            default: append
       requestBody:
         $ref: "#/components/requestBodies/arrow_stream_buffer"
+
       responses:
         "200":
           description: Insert successful
+
         "400":
           $ref: "#/components/responses/invalid_request"
         "401":
           $ref: "#/components/responses/unauthorized"
         "404":
           $ref: "#/components/responses/not_found"
-  /v1/table/{name}/merge_insert/:
+
+  /v1/table/{name}/update/:
     post:
-      description: Create a "merge insert" operation
-        This operation can add rows, update rows, and remove rows all in a single
-        transaction. See python method `lancedb.table.Table.merge_insert` for examples.
+      description: |
+        Update rows in a table, using SQL expressions and an optional predicate.
       tags:
         - Data
-      summary: Merge Insert
-      operationId: mergeInsert
+      operationId: updateData
+      summary: Apply a SQL update to a table.
       parameters:
         - $ref: "#/components/parameters/table_name"
-        - name: on
-          in: query
-          description: |
-            The column to use as the primary key for the merge operation.
-          required: true
-          schema:
-            type: string
-        - name: when_matched_update_all
-          in: query
-          description: |
-            Rows that exist in both the source table (new data) and
-            the target table (old data) will be updated, replacing
-            the old row with the corresponding matching row.
-          required: false
-          schema:
-            type: boolean
-        - name: when_matched_update_all_filt
-          in: query
-          description: |
-            If present then only rows that satisfy the filter expression will
-            be updated
-          required: false
-          schema:
-            type: string
-        - name: when_not_matched_insert_all
-          in: query
-          description: |
-            Rows that exist only in the source table (new data) will be
-            inserted into the target table (old data).
-          required: false
-          schema:
-            type: boolean
-        - name: when_not_matched_by_source_delete
-          in: query
-          description: |
-            Rows that exist only in the target table (old data) will be
-            deleted. An optional condition (`when_not_matched_by_source_delete_filt`)
-            can be provided to limit what data is deleted.
-          required: false
-          schema:
-            type: boolean
-        - name: when_not_matched_by_source_delete_filt
-          in: query
-          description: |
-            The filter expression that specifies the rows to delete.
-          required: false
-          schema:
-            type: string
       requestBody:
-        $ref: "#/components/requestBodies/arrow_stream_buffer"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["updates"]
+              properties:
+                updates:
+                  type: array
+                  description: |
+                    A list to column updates. Each item is a pair of strings. The
+                    first string is the column name to update, and the second
+                    string is a SQL expression to update the column.
+                  items:
+                    type: array
+                    minItems: 2
+                    maxItems: 2
+                    items:
+                      type: string
+                    example: ["price", "price + 0.10"]
+                predicate:
+                  type: string
+                  example: "id in (1, 2, 3)"
+                  description: |
+                    A filter expression that specifies the rows to update.
       responses:
         "200":
-          description: Merge Insert successful
+          description: Update successful
         "400":
           $ref: "#/components/responses/invalid_request"
         "401":
           $ref: "#/components/responses/unauthorized"
         "404":
           $ref: "#/components/responses/not_found"
+
   /v1/table/{name}/delete/:
     post:
-      description: Delete rows from a table.
+      description: Delete rows from a table using a SQL predicate.
       tags:
         - Data
       summary: Delete rows from a table
@@ -340,24 +631,293 @@ paths:
               properties:
                 predicate:
                   type: string
+                  example: "id in (1, 2, 3)"
                   description: |
                     A filter expression that specifies the rows to delete.
       responses:
         "200":
           description: Delete successful
+        "400":
+          $ref: "#/components/responses/invalid_request"
         "401":
           $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/merge_insert/:
+    post:
+      description: |
+        Perform a merge-insert SQL query against a table. This can be used
+        to perform upserts. To perform an upsert, set `when_matched_update_all`
+        and `when_not_matched_insert_all` to true.
+      tags:
+        - Data
+      summary: Merge-insert data to a table
+      operationId: mergeInsertData
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+        - name: on
+          in: query
+          description: |
+            The column to match on.
+          required: true
+          schema:
+            type: string
+            example: id
+        - name: when_matched_update_all
+          in: query
+          required: true
+          description: |
+            If true, update all columns when a match is found with the new values.
+          schema:
+            type: boolean
+        - name: when_matched_update_all_filt
+          in: query
+          schema:
+            type: string
+            example: "category = 'shoes'"
+            nullable: true
+            default: null
+          description: |
+            An additional filter to apply when updating all columns.
+        - name: when_not_matched_insert_all
+          in: query
+          required: true
+          schema:
+            type: boolean
+          description: |
+            If true, insert all columns when no match is found.
+        - name: when_not_matched_by_source_delete
+          in: query
+          required: true
+          schema:
+            type: boolean
+          description: |
+            If true, delete rows in the target table when there is no match in the source table.
+        - name: when_not_matched_by_source_delete_filt
+          in: query
+          schema:
+            type: string
+            example: "category = 'shoes'"
+            nullable: true
+            default: null
+          description: |
+            An additional filter to apply when deleting rows in the target table.
+      requestBody:
+        $ref: "#/components/requestBodies/arrow_stream_buffer"
+      responses:
+        "200":
+          description: Merge-insert successful
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/add_columns/:
+    post:
+      summary: Add columns to a table
+      description: |
+        Add new columns to a table. You must pass a SQL expression to generate
+        the new columns. This expression can reference existing columns.
+
+        For example, you can add a new column `new_column` that is `old_column + 1`:
+        ```
+        {
+          "new_columns": [
+            {
+              "name": "new_column",
+              "expression": "old_column + 1"
+            }
+          ]
+        }
+        ```
+
+        If you want to fill with null, you can use a NULL expression with a cast
+        to the correct type:
+        ```
+        {
+          "new_columns": [
+            {
+              "name": "new_column",
+              "expression": "CAST(NULL AS int64)"
+            }
+          ]
+        }
+        ```
+
+        Some example data types:
+        - int64
+        - float32
+        - string
+      tags:
+        - Data
+      operationId: addColumns
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_columns:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - name
+                      - expression
+                    properties:
+                      name:
+                        type: string
+                        description: The name of the new column.
+                        example: "new_column"
+                      expression:
+                        type: string
+                        description: |
+                          The SQL expression to generate the column.
+                        example: "old_column + 1"
+      responses:
+        "200":
+          description: Update successful
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/alter_columns/:
+    post:
+      summary: Alter name, type, or nullability of a column
+      description: |
+        Alter the name, type, or nullability of a column.
+      tags:
+        - Data
+      operationId: alterColumns
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                alterations:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - path
+                    properties:
+                      path:
+                        type: string
+                        description: |
+                          The path to the column to alter. To reference a nested
+                          column, separate pieces by dots.
+                        example: "outer.inner"
+                      rename:
+                        type: string
+                        description: |
+                          The new name of the column. If not provided, the name
+                          will not be changed.
+                        example: "new_name"
+                      data_type:
+                        $ref: "#/components/schemas/json_schema_type"
+                      nullable:
+                        type: boolean
+                        description: |
+                          Whether the column can contain null values. If not provided,
+                          the nullability will not be changed.
+      responses:
+        "200":
+          description: Update successful
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/drop_columns/:
+    post:
+      summary: Drop columns from a table
+      description: |
+        Drop columns from a table.
+      tags:
+        - Data
+      operationId: dropColumns
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns:
+                  type: array
+                  items:
+                    type: string
+                  description: |
+                    The columns to drop.
+      responses:
+        "200":
+          description: Update successful
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
+  /v1/table/{name}/rename:
+    post:
+      description: Rename a table
+      summary: Rename a table.
+      tags:
+        - Tables
+      operationId: renameTable
+      parameters:
+        - $ref: "#/components/parameters/table_name"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: ["new_table_name"]
+              properties:
+                new_table_name:
+                  type: string
+                  description: The new name of the table.
+      responses:
+        "200":
+          description: Table renamed successfully
+        "400":
+          $ref: "#/components/responses/invalid_request"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/not_found"
+
   /v1/table/{name}/drop/:
     post:
-      description: Drop a table
+      description: |
+        Drop a table
+
+        If the table does not exist, it will return 200.
       tags:
         - Tables
       summary: Drop a table
       operationId: dropTable
       parameters:
         - $ref: "#/components/parameters/table_name"
-      requestBody:
-        $ref: "#/components/requestBodies/arrow_stream_buffer"
       responses:
         "200":
           description: Drop successful
@@ -382,132 +942,22 @@ paths:
                 type: object
                 properties:
                   table:
+                    description: Name of the table
                     type: string
                   version:
+                    description: The latest version of the table
                     type: integer
                   schema:
-                    type: string
+                    $ref: "#/components/schemas/json_schema"
                   stats:
                     type: object
+                    properties:
+                      num_deleted_rows:
+                        type: integer
+                      num_fragments:
+                        type: integer
         "401":
           $ref: "#/components/responses/unauthorized"
         "404":
-          $ref: "#/components/responses/not_found"
-
-  /v1/table/{name}/index/list/:
-    post:
-      description: List indexes of a table
-      tags:
-        - Tables
-      summary: List indexes of a table
-      operationId: listIndexes
-      parameters:
-        - $ref: "#/components/parameters/table_name"
-      responses:
-        "200":
-          description: Available list of indexes on the table.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  indexes:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        columns:
-                          type: array
-                          items:
-                            type: string
-                        index_name:
-                          type: string
-                        index_uuid:
-                          type: string
-        "401":
-          $ref: "#/components/responses/unauthorized"
-        "404":
-          $ref: "#/components/responses/not_found"
-  /v1/table/{name}/create_index/:
-    post:
-      description: Create vector index on a Table
-      tags:
-        - Tables
-      summary: Create vector index on a Table
-      operationId: createIndex
-      parameters:
-        - $ref: "#/components/parameters/table_name"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                column:
-                  type: string
-                metric_type:
-                  type: string
-                  nullable: false
-                  description: |
-                    The metric type to use for the index. l2, Cosine, Dot are supported.
-                index_type:
-                  type: string
-      responses:
-        "200":
-          description: Index successfully created
-        "400":
-          $ref: "#/components/responses/invalid_request"
-        "401":
-          $ref: "#/components/responses/unauthorized"
-        "404":
-          $ref: "#/components/responses/not_found"
-  /v1/table/{name}/create_scalar_index/:
-    post:
-      description: Create a scalar index on a table
-      tags:
-        - Tables
-      summary: Create a scalar index on a table
-      operationId: createScalarIndex
-      parameters:
-        - $ref: "#/components/parameters/table_name"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                column:
-                  type: string
-                index_type:
-                  type: string
-                  required: false
-      responses:
-        "200":
-          description: Scalar Index successfully created
-        "400":
-          $ref: "#/components/responses/invalid_request"
-        "401":
-          $ref: "#/components/responses/unauthorized"
-        "404":
-          $ref: "#/components/responses/not_found"
-  /v1/table/{name}/index/{index_name}/drop/:
-    post:
-      description: Drop an index from the table
-      tags:
-        - Tables
-      summary: Drop an index from the table
-      operationId: dropIndex
-      parameters:
-        - $ref: "#/components/parameters/table_name"
-        - $ref: "#/components/parameters/index_name"
-      responses:
-        "200":
-          description: Index successfully dropped
-        "400":
-          $ref: "#/components/responses/invalid_request"
-        "401":
-          $ref: "#/components/responses/unauthorized"
-        "404":
+          description: Table not found
           $ref: "#/components/responses/not_found"

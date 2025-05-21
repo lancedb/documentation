@@ -159,7 +159,7 @@ nav:
   - Documentation:
       - Overview:
           - Homepage: index.md
-          - What is LanceDB?: 
+          - LanceDB Open Source: 
               - Overview: overview/index.md
               - FAQs: overview/faq.md
           - LanceDB Cloud: 

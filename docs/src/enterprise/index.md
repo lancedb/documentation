@@ -7,14 +7,13 @@ hide:
 
 # What is LanceDB Enterprise?
 
-**LanceDB Enterprise transforms your data lake into a high-performance vector database
-that can operate at extreme scale.**
+**LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance vector database that can operate at extreme scale.
 
-Serve millions of tables and tens of billions of rows in a single index,
-improve retrieval quality using hybrid search with blazing-fast metadata filters,
-and reduce costs by up to 200x with object storage.
+With a vector database built for lakehouse architecture, you can serve millions of tables and tens of billions of rows in a single index, improve retrieval quality using hybrid search with blazing-fast metadata filters, and reduce costs by up to 200x with object storage.
 
-### Benefits
+For private deployments, high performance at extreme scale, or if you have strict security requirements, [talk to us about LanceDB Enterprise](mailto:contact@lancedb.com).
+
+## Benefits
 
 - **Performance**: Tens of thousands of QPS with latency in single-digit milliseconds,
   hundreds of thousands of rows per second write throughput, and low-latency indexing across many tables.

@@ -17,7 +17,7 @@ keywords: "LanceDB incremental indexing, index updates, database optimization, v
 
 ## Incremental Indexing in LanceDB OSS
 
-LanceDB OSS supports incremental indexing, which means you can add new records to the table without reindexing the entire table.
+**LanceDB OSS** supports incremental indexing, which means you can add new records to the table without reindexing the entire table.
 
 This can make the query more efficient, especially when the table is large and the new records are relatively small.
 

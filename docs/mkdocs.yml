@@ -183,14 +183,13 @@ nav:
               - Search: concepts/search.md
               - Storage: concepts/storage.md
       - Core Usage:
-          - Working with Tables: 
-              - Overview: guides/tables/index.md
-              - Creating Tables: guides/tables/create.md
-              - Inserting Data: guides/tables/ingestion.md
-              - Updating Tables: guides/tables/update.md
-              - Schema Management: guides/tables/schema.md
-              - Versioning: guides/tables/versioning.md
-              - Consistency Settings: guides/tables/consistency.md
+          - Working with Tables and Data: 
+              - Getting Started: guides/tables/index.md
+              - Table Operations: guides/tables/create.md
+              - Data Operations: guides/tables/update.md
+              - Managing Schema: guides/tables/schema.md
+              - Versioning Tables: guides/tables/versioning.md
+              - Ensuring Consistency: guides/tables/consistency.md
           - Building an Index:
               - Vector Index: guides/indexing/vector-index.md
               - Scalar Index: guides/indexing/scalar-index.md

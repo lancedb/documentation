@@ -47,34 +47,27 @@ jobs:
         run: |
           PYTHONPATH=. mkdocs build
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: docs
           path: docs/site
 
-  # deploy:
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-  #   permissions:
-  #     contents: read
-  #     pages: write
-  #     id-token: write
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
 
-  #   # Allow one concurrent deployment
-  #   concurrency:
-  #     group: "pages"
-  #     cancel-in-progress: true
-  #   runs-on: ubuntu-24.04
-  #   steps:
-  #     - uses: Swatinem/rust-cache@v2
-  #     - name: Setup Pages
-  #       uses: actions/configure-pages@v2
-  #     - name: Upload artifact
-  #       uses: actions/upload-pages-artifact@v3
-  #       with:
-  #         path: "docs/site"
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+    # Allow one concurrent deployment
+    concurrency:
+      group: "pages"
+      cancel-in-progress: true
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

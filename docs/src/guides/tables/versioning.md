@@ -183,7 +183,7 @@ When you modify data through operations like update or delete, LanceDB automatic
       console.log(`Current version: ${versionAfterMod}`);
     ```
 
-## Schema Evolution
+## Tracking Changes in Schema
 
 LanceDB's versioning system automatically tracks every schema modification. This is critical when handling evolving embedding models. For example, adding a new _vector_minilm_ column creates a fresh version, enabling seamless A/B testing between embedding generations without recreating the table. 
 

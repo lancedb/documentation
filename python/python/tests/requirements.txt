@@ -1,0 +1,6 @@
+mlx
+pandas
+polars
+pytest
+pytest-asyncio
+tantivy

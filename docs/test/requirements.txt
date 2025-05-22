@@ -1,6 +1,8 @@
--e ../../python
+--extra-index-url https://pypi.fury.io/lancedb
+lancedb
 numpy
 pandas
+--extra-index-url https://pypi.fury.io/lancedb
 pylance
 duckdb
 tantivy==0.20.1

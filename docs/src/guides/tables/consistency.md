@@ -17,6 +17,8 @@ There are three possible settings for `read_consistency_interval`:
 
     This is only tune-able in LanceDB OSS. In LanceDB Cloud, readers are always eventually consistent.
 
+## Configuring Consistency Parameters
+
 === "Python"
 
     To set strong consistency, use `timedelta(0)`:
@@ -78,8 +80,24 @@ There are three possible settings for `read_consistency_interval`:
     const tbl = await db.openTable("my_table");
     ```
 
-## What's next?
+## Handling bad vectors
 
-Learn about [vector indexing](../ann_indexes.md) to optimize your vector search performance.
+In LanceDB Python, you can use the `on_bad_vectors` parameter to choose how
+invalid vector values are handled. Invalid vectors are vectors that are not valid
+because:
 
-[^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](../../migration.md) for more information. 
+1. They are the wrong dimension
+2. They contain NaN values
+3. They are null but are on a non-nullable field
+
+By default, LanceDB will raise an error if it encounters a bad vector. You can
+also choose one of the following options:
+
+* `drop`: Ignore rows with bad vectors
+* `fill`: Replace bad values (NaNs) or missing values (too few dimensions) with
+    the fill value specified in the `fill_value` parameter. An input like
+    `[1.0, NaN, 3.0]` will be replaced with `[1.0, 0.0, 3.0]` if `fill_value=0.0`.
+* `null`: Replace bad vectors with null (only works if the column is nullable).
+    A bad vector `[1.0, NaN, 3.0]` will be replaced with `null` if the column is
+    nullable. If the vector column is non-nullable, then bad vectors will cause an
+    error

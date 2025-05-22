@@ -24,8 +24,6 @@ LanceDB provides comprehensive table management capabilities:
 - **Schema Management**: Add, alter, or drop columns as your data needs evolve
 - **Consistency Control**: Configure read consistency settings for your use case
 
-## What's next?
 
-Learn about [creating tables](create.md), [modifying data](update.md), [managing schemas](schema.md), and [consistency settings](consistency.md).
-
-[^1]: The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. See the [migration guide](../../migration.md) for more information. 
+!!! note "Legacy Javascript SDK"
+    The `vectordb` package is a legacy package that is deprecated in favor of `@lancedb/lancedb`. The `vectordb` package will continue to receive bug fixes and security updates until September 2024. We recommend all new projects use `@lancedb/lancedb`. 

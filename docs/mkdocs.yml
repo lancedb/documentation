@@ -183,7 +183,7 @@ nav:
               - Search: concepts/search.md
               - Storage: concepts/storage.md
       - Core Usage:
-          - Working with Tables and Data: 
+          - Working with Tables: 
               - Getting Started: guides/tables/index.md
               - Table Operations: guides/tables/create.md
               - Data Operations: guides/tables/update.md

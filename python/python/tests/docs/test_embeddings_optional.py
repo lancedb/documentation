@@ -11,7 +11,7 @@ from lancedb.embeddings import get_registry
 import pytest
 
 
-@pytest.mark.slow
+@pytest.mark.skip(reason="OpenAI is not available in the test environment")
 def test_embeddings_openai():
     # --8<-- [start:openai_embeddings]
     db = lancedb.connect("/tmp/db")
@@ -30,7 +30,7 @@ def test_embeddings_openai():
     # --8<-- [end:openai_embeddings]
 
 
-@pytest.mark.slow
+@pytest.mark.skip(reason="OpenAI is not available in the test environment")
 @pytest.mark.asyncio
 async def test_embeddings_openai_async():
     uri = "memory://"

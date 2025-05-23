@@ -6,3 +6,6 @@ __pycache__/
 
 # Mkdocs
 site/
+
+# Node
+node_modules/

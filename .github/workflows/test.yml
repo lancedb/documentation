@@ -1,0 +1,50 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  # Disable full debug symbol generation to speed up CI build and keep memory down
+  # "1" means line tables only, which is useful for panic tracebacks.
+  RUSTFLAGS: "-C debuginfo=1 -C target-cpu=haswell -C target-feature=+f16c,+avx2,+fma"
+  RUST_BACKTRACE: "1"
+
+jobs:
+  test-python-examples:
+    name: Test python examples
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install base dependencies
+        run: |
+          pip install -r docs/requirements.txt
+      - name: Install python dependencies
+        run: |
+          pip install -r python/python/tests/requirements.txt
+          pip install --upgrade --pre --extra-index-url https://pypi.fury.io/lancedb/ lancedb[tests,dev,embeddings]
+      - name: Test
+        run: pytest python/python/tests/docs
+  test-nodejs-examples:
+    name: Test nodejs examples
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: nodejs/examples/package-lock.json
+      - name: Install dependencies
+        working-directory: nodejs/examples
+        run: |
+          npm install
+      - name: Test
+        working-directory: nodejs/examples
+        run: |
+          npm test

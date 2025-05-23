@@ -1,0 +1,40 @@
+:root {
+    --md-typeset-a-color: #e67e00; /* Darker orange */
+}
+
+.md-typeset a {
+    color: var(--md-typeset-a-color);
+}
+
+.md-typeset a:hover {
+    text-decoration: underline;
+}
+
+/* Make bold text orange */
+.md-typeset b,
+.md-typeset strong {
+    color: var(--md-typeset-a-color);
+}
+
+/* Override button colors to orange */
+.md-button {
+    color: #e67e00 !important;
+    border-color: #e67e00 !important;
+}
+
+.md-button:hover {
+    background-color: #e67e00 !important;
+    color: white !important;
+}
+
+/* Override primary button colors */
+.md-button--primary {
+    background-color: #e67e00 !important;
+    border-color: #e67e00 !important;
+    color: white !important;
+}
+
+.md-button--primary:hover {
+    background-color: #cc7000 !important; /* Even darker orange on hover */
+    border-color: #cc7000 !important;
+}

@@ -13,18 +13,9 @@ theme:
   logo: assets/logo.png
   favicon: assets/logo.png
   palette:
-    # Palette toggle for light mode
-    - scheme: lancedb
-      primary: custom
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    # Palette toggle for dark mode
     - scheme: slate
-      primary: custom
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+      primary: black
+      accent: orange
   features:
     - content.code.copy
     - content.tabs.link
@@ -362,11 +353,12 @@ nav:
 
 extra_css:
   - styles/mkdocsoad.css
+  - styles/links.css
 #  - styles/global.css
 #  - styles/extra.css
 
 extra_javascript:
-  - "extra_js/init_ask_ai_widget.js"
+  # - "extra_js/init_ask_ai_widget.js"
   - "extra_js/reo.js"
 
 extra:

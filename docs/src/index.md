@@ -2,29 +2,33 @@
 hide:
   - toc
 ---
+![lancedb-banner](assets/hero-image.png)
 
-# LanceDB Documentation Portal
+<div align="center">
 
-[**LanceDB is an open-source multimodal database**](overview.md) designed for efficient storage, retrieval, and management of vectors and multimodal data. Use our documentation to build a production-grade service with a simple API for inserting, querying, and filtering vectors. 
+<h1 style="text-align: center"><b>Lightning Fast | Petabyte Scale</b></h1>
+
+</div>
+
+[**LanceDB is an open-source multimodal database**](overview/index.md) designed for efficient storage, retrieval, and management of vectors and multimodal data. Use our documentation to build a production-grade service with a simple API for inserting, querying, and filtering vectors. 
 
 LanceDB is ideal for **semantic search**, **recommendation systems**, and **Generative AI applications**. 
+
+<div class="center" markdown>
+[LanceDB Quickstart](cloud/quickstart.md){ .md-button .md-button--primary }
+[Build a RAG app](examples/python_examples/chatbot.md){ .md-button }
+</div>
 
 ## **Product Release: Announcing LanceDB Cloud!**
 
 <div class="result" markdown>
 <a href="https://accounts.lancedb.com/sign-up" target="_blank">
-![product-announcement](assets/cta.jpg){ align=left width="300" }
+![product-announcement](assets/cta.png){ align=left width="300" }
 </a>
 
-1. [**LanceDB Cloud:**](quickstart-cloud.md) Create a LanceDB Cloud cluster that's completely serverless. Your application simply connects over HTTP/HTTPS, and LanceDB handles scaling, storage, and indexing for you. 
-2. [**LanceDB OSS:**](basic.md) If self-hosting, embed LanceDB directly into your backend, whether that’s a Django, Flask, FastAPI, or Node.js service. Check out our available [client libraries](api-reference.md).
-3. [**LanceDB Enterprise:**](enterprise/index.md) Build the best private environment that suits your needs. Manage your own clusters via our [Dashboard UI](https://accounts.lancedb.com/sign-up), but continue to run them within your own private infrastructure for complete security and sovereignty.
-
+1. [**LanceDB OSS:**](overview/index.md) If self-hosting, embed LanceDB directly into your backend, whether that's a Django, Flask, FastAPI, or Node.js service. Check out our available [client libraries](api-reference.md).
+2. [**LanceDB Cloud:**](cloud/quickstart.md) Create a LanceDB Cloud cluster that's completely serverless. Your application simply connects over HTTP/HTTPS, and LanceDB handles scaling, storage, and indexing for you. 
+3. [**LanceDB Enterprise - Private Cloud:**](enterprise/index.md) Deploy LanceDB in your own private cloud environment. Run LanceDB clusters in your existing cloud infrastructure for ultimate data sovereignty.
+4. [**LanceDB Enterprise - BYOC:**](enterprise/index.md) Bring Your Own Cloud gives you the best of both: use our Enterprise management features and support, while managing your clusters via our [Dashboard UI](https://accounts.lancedb.com/sign-up).
 </div>
 
-## **First-Time Users:**
-
-| Tutorial | Description | Tutorial | Description |
-|-------|-------------|-------|-------------|
-| [**Connect to your database**](quickstart-cloud.md) | Configure local or cloud storage | [**Build a RAG app**](examples/index.md) | Create a question-answering system |
-| [**Ingest blob storage data**](basic.md) | Load data from S3, GCS, Azure and more | [**Build search queries**](guides/vector-search.md) | Perform vector search and filtering |

@@ -5,17 +5,15 @@ import { withTempDirectory } from "./util.ts";
 
 import * as lancedb from "@lancedb/lancedb";
 import "@lancedb/lancedb/embedding/transformers";
-import { LanceSchema, getRegistry } from "@lancedb/lancedb/embedding";
-import type { EmbeddingFunction } from "@lancedb/lancedb/embedding";
 import { Utf8 } from "apache-arrow";
 
 test("full text search", async () => {
   await withTempDirectory(async (databaseDir) => {
     const db = await lancedb.connect(databaseDir);
-    console.log(getRegistry());
-    const func = (await getRegistry()
+    const func = (await lancedb.embedding
+      .getRegistry()
       .get("huggingface")
-      ?.create()) as EmbeddingFunction;
+      ?.create()) as lancedb.embedding.EmbeddingFunction;
 
     const facts = [
       "Albert Einstein was a theoretical physicist.",
@@ -45,7 +43,7 @@ test("full text search", async () => {
       "The first chatbot was ELIZA, created in the 1960s.",
     ].map((text) => ({ text }));
 
-    const factsSchema = LanceSchema({
+    const factsSchema = lancedb.embedding.LanceSchema({
       text: func.sourceField(new Utf8()),
       vector: func.vectorField(),
     });

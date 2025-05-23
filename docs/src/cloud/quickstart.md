@@ -1,6 +1,6 @@
 ---
-title: Quickstart Guide: LanceDB Cloud and Enterprise
-description: "Effortlessly transform Open Source experience to Cloud/Enterprise"
+title: "Quickstart Guide: LanceDB Cloud and Enterprise"
+description: "Get started with LanceDB Cloud and Enterprise - seamlessly transition from Open Source to managed solutions"
 ---
 
 # Quickstart: LanceDB Cloud and Enterprise

@@ -22,13 +22,13 @@ theme:
     - content.action.edit
     - content.tooltips
     - toc.follow
-    - navigation.top
+    # - navigation.top
     - navigation.tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky
     - navigation.sections
-    - navigation.footer
-    - navigation.tracking
-    - navigation.instant
+    # - navigation.footer
+    # - navigation.tracking
+    # - navigation.instant
     - navigation.indexes
     - content.footnote.tooltips
   icon:
@@ -148,9 +148,13 @@ markdown_extensions:
 
 nav:
   - Documentation:
-      - Overview:
+      - Getting Started:
           - Homepage: index.md
-          - LanceDB Open Source: 
+          - Quickstart:
+              - Local Quickstart: overview/quickstart.md
+              - Cloud Quickstart: cloud/quickstart.md
+      - Products:
+          - What is LanceDB OSS?: 
               - Overview: overview/index.md
               - FAQs: overview/faq.md
           - LanceDB Cloud: 
@@ -158,22 +162,19 @@ nav:
               - Logging: cloud/logging.md
               - Cloud FAQ: cloud/cloud-faq.md
           - LanceDB Enterprise:
-            - Overview: enterprise/index.md
-            - Architecture: enterprise/architecture.md
-            - Deployment: enterprise/deployment.md
-            - Benchmark: enterprise/benchmark.md
-            - Security: enterprise/security.md
-            - FAQ: enterprise/enterprise-faq.md
-      - Getting Started:
-          - Quickstart Local: overview/quickstart.md
-          - Quickstart Cloud: cloud/quickstart.md
+              - Overview: enterprise/index.md
+              - Architecture: enterprise/architecture.md
+              - Deployment: enterprise/deployment.md
+              - Benchmark: enterprise/benchmark.md
+              - Security: enterprise/security.md
+              - FAQ: enterprise/enterprise-faq.md
+      - Core Usage:
           - Concepts:
               - Data: concepts/data.md
               - Vectors: concepts/vectors.md
               - Indexing: concepts/indexing.md
               - Search: concepts/search.md
               - Storage: concepts/storage.md
-      - Core Usage:
           - Working with Tables: 
               - Getting Started: guides/tables/index.md
               - Table Operations: guides/tables/create.md

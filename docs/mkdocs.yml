@@ -13,7 +13,7 @@ theme:
   logo: assets/logo.png
   favicon: assets/logo.png
   palette:
-    - scheme: slate
+    - scheme: default
       primary: black
       accent: orange
   features:
@@ -63,7 +63,7 @@ plugins:
         'hybrid_search/eval.md': 'reranking/eval.md'
         'cloud/introduction.md': 'cloud/index.md'
         'enterprise/introduction.md': 'enterprise/index.md'
-        'enterprise/quickstart.md': 'cloud/quickstart.md'
+        'enterprise/quickstart.md': 'overview/quickstart.md'
         'enterprise/architecture/architecture.md': 'enterprise/architecture.md'
         'enterprise/deploy/deployment.md': 'enterprise/deployment.md'
         'enterprise/benchmark/benchmark.md': 'enterprise/benchmark.md'
@@ -151,8 +151,9 @@ nav:
       - Getting Started:
           - Homepage: index.md
           - Quickstart:
-              - Local Quickstart: overview/quickstart.md
-              - Cloud Quickstart: cloud/quickstart.md
+              - Quickstart: overview/quickstart.md
+              - Basic Usage: overview/basic-usage.md
+              - Working with Datasets: overview/datasets.md
       - Products:
           - What is LanceDB OSS?: 
               - Overview: overview/index.md

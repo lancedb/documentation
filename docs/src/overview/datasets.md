@@ -1,20 +1,23 @@
 ---
-title: "Quickstart Guide: LanceDB Cloud and Enterprise"
-description: "Get started with LanceDB Cloud and Enterprise - seamlessly transition from Open Source to managed solutions"
+title: Getting Started with LanceDB | Quick Start Guide
+description: Start using LanceDB with this comprehensive guide. Learn core concepts, installation, basic operations, and best practices for vector database management.
+alias: quickstart
 ---
 
-# Quickstart: LanceDB Cloud and Enterprise
+# **Ingesting a Dataset into LanceDB**
 
-Get started quickly with LanceDB Cloud and Enterprise by following this guide. For complete examples, check out:
+In this tutorial, you will ingest a dataset from Huggingface into your **LanceDB Cloud** table. For interactive code, check out the [**Python Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  or the [**TypeScript Example**](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
 
-→ [Python Notebook](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb)  | [TypeScript Example](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example/quickstart)
+## **Prerequisites**
 
-## Prerequisites
-Install the LanceDB SDK with your preferred language.
+You will connect to a remote LanceDB cluster, ingest data and run some searches. Before you start, make sure you [**sign up for LanceDB Cloud**](https://accounts.lancedb.com/sign-up) and get your API key and cluster URI.
+
+## **1. Installation**
+
+Install the [**LanceDB SDK**](../api/index.md) with your preferred language.
 
 === "Python"
     ```python
-    # Install lancedb and the optional datasets package used in the quickstart example
     pip install lancedb datasets
     ```
 
@@ -23,11 +26,11 @@ Install the LanceDB SDK with your preferred language.
     npm install @lancedb/lancedb
     ```
 
-## 1. Connect to LanceDB Cloud/Enterprise
+## **2. Connect to LanceDB**
 
-- For LanceDB Cloud users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions, refer to our [onboarding tutorial](https://app.storylane.io/share/pudefwx54tun).
+For **LanceDB Cloud** users, the database URI (which starts with `db://`) and API key can both be retrieved from the LanceDB Cloud UI. For step-by-step instructions, refer to our [**onboarding tutorial**](https://app.storylane.io/share/pudefwx54tun).
 
-- For LanceDB Enterprise users, please contact [our team](mailto:contact@lancedb.com) to obtain your database URI, API key, and host_override URL.
+For **LanceDB Enterprise** users, please contact [**our team**](mailto:contact@lancedb.com) to obtain your database URI, API key, and host_override URL.
 
 === "Python"
     ```python
@@ -72,33 +75,38 @@ Install the LanceDB SDK with your preferred language.
     });
     ```
 
-## 2. Load Dataset
+## **3. Load Dataset**
+
+For large datasets, the operation should be performed in batches to optimize memory usage.
+Let's see how it looks when we try to load a larger dataset.
 
 === "Python"
+
     ```python
     from datasets import load_dataset
-    
+
     # Load a sample dataset from HuggingFace with pre-computed embeddings
     sample_dataset = load_dataset("sunhaozhepy/ag_news_sbert_keywords_embeddings", split="test[:1000]")
     print(f"Loaded {len(sample_dataset)} samples")
     print(f"Sample features: {sample_dataset.features}")
     print(f"Column names: {sample_dataset.column_names}")
-    
+
     # Preview the first sample
     print(sample_dataset[0])
-    
+
     # Get embedding dimension
     vector_dim = len(sample_dataset[0]["keywords_embeddings"])
     print(f"Embedding dimension: {vector_dim}")
     ```
 
 === "TypeScript"
-    ```typescript 
+
+    ```typescript
     const BATCH_SIZE = 100; // HF API default limit
     const POLL_INTERVAL = 10000; // 10 seconds
     const MAX_RETRIES = 5;
     const INITIAL_RETRY_DELAY = 1000; // 1 second
-    
+
     interface Document {
         text: string;
         label: number;
@@ -106,7 +114,7 @@ Install the LanceDB SDK with your preferred language.
         embeddings?: number[];
         [key: string]: unknown;
     }
-    
+
     interface HfDatasetResponse {
         rows: {
             row: {
@@ -117,15 +125,17 @@ Install the LanceDB SDK with your preferred language.
             };
         }[];
     }
-    
-    // This loads documents from the Hugging Face dataset API in batches
+
+    /**
+     * Loads documents from the Hugging Face dataset API in batches
+     */
     async function loadDataset(datasetName: string, split: string = 'train', targetSize: number = 1000, offset: number = 0): Promise<Document[]> {    
         try {
             console.log('Fetching dataset...');
             const batches = Math.ceil(targetSize / BATCH_SIZE);
             let allDocuments: Document[] = [];
             const hfToken = process.env.HF_TOKEN; // Optional Hugging Face token
-    
+
             for (let i = 0; i < batches; i++) {
                 const offset = i * BATCH_SIZE;
                 const url = `https://datasets-server.huggingface.co/rows?dataset=${datasetName}&config=default&split=${split}&offset=${offset}&limit=${BATCH_SIZE}`;
@@ -135,7 +145,7 @@ Install the LanceDB SDK with your preferred language.
                 let retries = 0;
                 let success = false;
                 let data: HfDatasetResponse | null = null;
-    
+
                 while (!success && retries < MAX_RETRIES) {
                     try {
                         const headers: HeadersInit = {
@@ -198,7 +208,7 @@ Install the LanceDB SDK with your preferred language.
                     break;
                 }
             }
-    
+
             console.log(`Total documents loaded: ${allDocuments.length}`);
             return allDocuments;
         } catch (error) {
@@ -206,7 +216,7 @@ Install the LanceDB SDK with your preferred language.
             throw error;
         }
     }
-    
+
     // Load dataset
     console.log('Loading AG News dataset...');
     const datasetName = "sunhaozhepy/ag_news_sbert_keywords_embeddings";
@@ -215,26 +225,28 @@ Install the LanceDB SDK with your preferred language.
     const sampleData = await loadDataset(datasetName, split, targetSize);
     console.log(`Loaded ${sampleData.length} examples from AG News dataset`);
     ```
-
-## 3. Create a table and ingest data
+## 4. Ingest Data 
 
 === "Python"
+
     ```python
     import pyarrow as pa
-    
+
     # Create a table with the dataset
     table_name = "lancedb-cloud-quickstart"
     table = db.create_table(table_name, data=sample_dataset, mode="overwrite")
-    
+
     # Convert list to fixedsizelist on the vector column
     table.alter_columns(dict(path="keywords_embeddings", data_type=pa.list_(pa.float32(), vector_dim)))
     print(f"Table '{table_name}' created successfully")
     ```
 
-=== "TypeScript"
-    ```typescript 
+
+==== "TypeScript"
+
+    ```typescript
     const tableName = "lancedb-cloud-quickstart";
-    
+
     const dataWithEmbeddings: Document[] = sampleData;
     const firstDocWithEmbedding = dataWithEmbeddings.find((doc: Document) => 
         (doc.embeddings && Array.isArray(doc.embeddings) && doc.embeddings.length > 0));
@@ -243,7 +255,7 @@ Install the LanceDB SDK with your preferred language.
         throw new Error('No document with valid embeddings found in the dataset. Please check if keywords_embeddings field exists.');
     }
     const embeddingDimension = firstDocWithEmbedding.embeddings.length;
-    
+
     // Create schema
     const schema = new Schema([
         new Field('text', new Utf8(), true),
@@ -251,7 +263,7 @@ Install the LanceDB SDK with your preferred language.
         new Field('keywords', new Utf8(), true),
         new Field('embeddings', new FixedSizeList(embeddingDimension, new Field('item', new Float32(), true)), true)
     ]);
-    
+
     // Create table with data
     const table = await db.createTable(tableName, dataWithEmbeddings, { 
         schema,
@@ -260,42 +272,50 @@ Install the LanceDB SDK with your preferred language.
     console.log('Successfully created table');
     ```
 
-## 4. Create a vector index
+## 5. Build an Index
+
+After creating a table with vector data, you'll want to create an index to enable fast similarity searches. The index creation process optimizes the data structure for efficient vector similarity lookups, significantly improving query performance for large datasets.
+
+!!! note Asynchronous Operation
+    As opposed to LanceDB OSS, the `create_index`/`createIndex` operation executes asynchronously in LanceDB Cloud/Enterprise. To ensure the index is fully built, you can use the `wait_timeout` parameter or call `wait_for_index` on the table.
 
 === "Python"
-    ```python 
+
+    ```python
     from datetime import timedelta
-    
+
     # Create a vector index and wait for it to complete
     table.create_index("cosine", vector_column_name="keywords_embeddings", wait_timeout=timedelta(seconds=120))
     print(table.index_stats("keywords_embeddings_idx"))
     ```
 
-=== "TypeScript"
+==== "TypeScript"
+
     ```typescript
     // Create a vector index
     await table.createIndex("embeddings", {
-      config: Index.ivfPq({
+    config: Index.ivfPq({
         distanceType: "cosine",
-      }),
+    }),
     });
-    
+
     // Wait for the index to be ready
     const indexName = "embeddings_idx";
     await table.waitForIndex([indexName], 120);
     console.log(await table.indexStats(indexName));
     ```
 
-Note: The `create_index`/`createIndex` operation executes asynchronously in LanceDB Cloud/Enterprise. To ensure the index is fully built, you can use the `wait_timeout` parameter or call `wait_for_index` on the table.
+## 6. Vector Search
 
-## 5. Perform a vector search
+Once you have created and indexed your table, you can perform vector similarity searches. LanceDB provides a flexible search API that allows you to find similar vectors, apply filters, and select specific columns to return. The examples below demonstrate basic vector searches as well as filtered searches that combine vector similarity with traditional SQL-style filtering.
 
 === "Python"
-    ```python 
+
+    ```python
     query_dataset = load_dataset("sunhaozhepy/ag_news_sbert_keywords_embeddings", split="test[5000:5001]")
     print(f"Query keywords: {query_dataset[0]['keywords']}")
     query_embed = query_dataset["keywords_embeddings"][0]
-    
+
     # A vector search
     result = (
         table.search(query_embed)
@@ -305,20 +325,10 @@ Note: The `create_index`/`createIndex` operation executes asynchronously in Lanc
     )
     print("Search results:")
     print(result)
-    
-    # A vector search with a filter
-    filtered_result = (
-        table.search(query_embed)
-        .where("label > 2")
-        .select(["text", "keywords", "label"])
-        .limit(5)
-        .to_pandas()
-    )
-    print("Filtered search results (label > 2):")
-    print(filtered_result)
     ```
 
-=== "TypeScript"
+==== "TypeScript"
+
     ```typescript
     // Perform semantic search with a new query
     const queryDocs = await loadDataset(datasetName, split, 1, targetSize);
@@ -333,34 +343,46 @@ Note: The `create_index`/`createIndex` operation executes asynchronously in Lanc
         .limit(5)
         .select(['text','keywords','label'])
         .toArray();
-    
+
     console.log('Search Results:');
     console.log(results);
-    
-    // perform semantic search with a filter applied
+    ```
+
+## 7. Filtered Search
+
+Add filter to your vector search query. Your can use SQL statements, like `where` for filtering.
+
+=== "Python"
+
+    ```python
+    filtered_result = (
+        table.search(query_embed)
+        .where("label > 2")
+        .select(["text", "keywords", "label"])
+        .limit(5)
+        .to_pandas()
+    )
+    print("Filtered search results (label > 2):")
+    print(filtered_result)
+    ```
+
+==== "TypeScript"
+
+    ```typescript
     const filteredResultsesults = await table.search(queryDoc.embeddings)
         .where("label > 2")
         .limit(5)
         .select(['text', 'keywords','label'])
         .toArray();
-    
+
     console.log('Search Results with filter:');
     console.log(filteredResultsesults);
     ```
 
-## 6. Drop the table
+## What's Next?
 
-=== "Python"
-    ```python 
-    db.drop_table(table_name)
-    ```
+That's pretty much it for the **Getting Started** section.
 
-=== "TypeScript"
-    ```typescript 
-    await db.dropTable(tableName);
-    ```
+To learn more about vector databases, you may want to read about [**Indexing**](../concepts/indexing.md) to get familiar with the concepts.
 
-## Next Steps
-
-* Dive into the `Work with Data` section to unlock LanceDB's full potential.
-* Explore our [python notebooks](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/python_notebook) and [typescript examples](https://github.com/lancedb/vectordb-recipes/tree/main/examples/saas_examples/ts_example) for real-world use cases.
+If you've already worked with other vector databases, dive into the [**Table Guide**](../guides/tables/index.md) to learn how to work with LanceDB in more detail.

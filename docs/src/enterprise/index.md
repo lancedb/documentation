@@ -5,7 +5,7 @@ hide:
   - toc
 ---
 
-# What is LanceDB Enterprise?
+# **What is LanceDB Enterprise?**
 
 **LanceDB Enterprise** is both a **private cloud or a BYOC solution** that transforms your data lake into a high-performance vector database that can operate at extreme scale.
 

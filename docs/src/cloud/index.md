@@ -5,7 +5,7 @@ hide:
   - toc
 ---
 
-# What is LanceDB Cloud?
+# **What is LanceDB Cloud?**
 
 LanceDB Cloud is a serverless vector database service that makes it easy to build, deploy, and scale AI-powered applications.
 

@@ -242,7 +242,7 @@ Let's see how it looks when we try to load a larger dataset.
     ```
 
 
-==== "TypeScript"
+=== "TypeScript"
 
     ```typescript
     const tableName = "lancedb-cloud-quickstart";
@@ -289,7 +289,7 @@ After creating a table with vector data, you'll want to create an index to enabl
     print(table.index_stats("keywords_embeddings_idx"))
     ```
 
-==== "TypeScript"
+=== "TypeScript"
 
     ```typescript
     // Create a vector index
@@ -327,7 +327,7 @@ Once you have created and indexed your table, you can perform vector similarity 
     print(result)
     ```
 
-==== "TypeScript"
+=== "TypeScript"
 
     ```typescript
     // Perform semantic search with a new query
@@ -366,7 +366,7 @@ Add filter to your vector search query. Your can use SQL statements, like `where
     print(filtered_result)
     ```
 
-==== "TypeScript"
+=== "TypeScript"
 
     ```typescript
     const filteredResultsesults = await table.search(queryDoc.embeddings)

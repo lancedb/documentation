@@ -7,6 +7,14 @@ description: Find answers to common questions about LanceDB Cloud. Includes setu
 
 This section provides answers to the most common questions asked about LanceDB Cloud. By following these guidelines, you can ensure a smooth, performant experience with LanceDB Cloud.
 
+### What is the difference between LanceDB OSS and LanceDB Cloud?
+
+LanceDB OSS is an **embedded** (in-process) solution that can be used as the vector store of choice for your LLM and RAG applications. It can be embedded inside an existing application backend, or used in-process alongside existing ML and data engineering pipelines.
+
+LanceDB Cloud is a **serverless** solution — the database and data sit on the cloud and we manage the scalability of the application side via a remote client, without the need to manage any infrastructure.
+
+Both flavors of LanceDB benefit from the blazing fast Lance data format and are built on the same open source foundations.
+
 ### Should I reuse the database connection?
 Yes! It is recommended to establish a single database connection and maintain it throughout your interaction with the tables within. 
 

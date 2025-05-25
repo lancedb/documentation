@@ -1,7 +1,3 @@
----
-title: LanceDB FAQ | Frequently Asked Questions
-description: Find answers to common questions about LanceDB, including installation, configuration, performance optimization, and best practices for vector database operations.
----
 
 This section covers some common questions and issues that you may encounter when using LanceDB.
 
@@ -23,13 +19,7 @@ As we mention in our talk titled "[Lance, a modern columnar data format](https:/
 
 We believe that the Rust ecosystem has attained mainstream maturity and that Rust will form the underpinnings of large parts of the data and ML landscape in a few years. Performance, latency and reliability are paramount to a vector DB, and building in Rust allows us to iterate and release updates more rapidly due to Rust's safety guarantees. Both Lance (the data format) and LanceDB (the database) are written entirely in Rust. We also provide Python, JavaScript, and Rust client libraries to interact with the database.
 
-### What is the difference between LanceDB OSS and LanceDB Cloud?
 
-LanceDB OSS is an **embedded** (in-process) solution that can be used as the vector store of choice for your LLM and RAG applications. It can be embedded inside an existing application backend, or used in-process alongside existing ML and data engineering pipelines.
-
-LanceDB Cloud is a **serverless** solution — the database and data sit on the cloud and we manage the scalability of the application side via a remote client, without the need to manage any infrastructure.
-
-Both flavors of LanceDB benefit from the blazing fast Lance data format and are built on the same open source foundations.
 
 ### What makes LanceDB different?
 
@@ -65,7 +55,7 @@ For example, if you're retrieving the top 10 results and set `refine_factor` to 
 
 When using an IVF-PQ index, there's a trade-off between recall and latency at query time. You can improve recall by increasing the number of probes and the `refine_factor`. In our benchmark on the GIST-1M dataset, we show that it's possible to achieve >0.95 recall with a latency of under 10 ms on most systems, using ~50 probes and a `refine_factor` of 50. This is, of course, subject to the dataset at hand and a quick sensitivity study can be performed on your own data. You can find more details on the benchmark in our [blog post](https://blog.lancedb.com/benchmarking-lancedb-92b01032874a).
 
-![](assets/recall-vs-latency.webp)
+![](../assets/recall-vs-latency.webp)
 
 ### How do I connect to MinIO?
 

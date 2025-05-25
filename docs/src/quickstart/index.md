@@ -1,8 +1,8 @@
 # **Getting Started with LanceDB**
 
-![LanceDB Hero Image](../assets/overview/quickstart.png)
+![LanceDB Hero Image](../assets/quickstart/quickstart.png)
 
-This is a minimal tutorial for Python users. In [**Basic Usage**](../overview/basic-usage.md), we'll show you how to work with our Typescript and Rust SDKs. 
+This is a minimal tutorial for Python users. In [**Basic Usage**](../quickstart/basic-usage.md), we'll show you how to work with our Typescript and Rust SDKs. 
 
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/LanceDB_Cloud_quickstart.ipynb).
 
@@ -107,4 +107,4 @@ The results show the most similar vectors to your query, sorted by similarity sc
 
 ## **What's Next?**
 
-Check out some [**Basic Usage tips**](../overview/basic-usage.md). After that, we'll teach you how to build a small app.
+Check out some [**Basic Usage tips**](../quickstart/basic-usage.md). After that, we'll teach you how to build a small app.

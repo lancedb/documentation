@@ -39,7 +39,7 @@ theme:
 plugins:
   - redirects:
       redirect_maps:
-        'basic.md': 'overview/quickstart.md'
+        'basic.md': 'quickstart/index.md'
         'concepts/data_management.md': 'concepts/data.md'
         'concepts/vector_search.md': 'concepts/search.md'
         'concepts/index_ivfpq.md': 'concepts/indexing.md'
@@ -82,7 +82,7 @@ plugins:
         'core/index.md': 'guides/indexing/vector-index.md'
         'core/update.md': 'guides/tables/update.md'
         'core/ingestion.md': 'guides/tables/ingestion.md'
-        'changelog/changelog.md': 'changelog/index..md'
+        'changelog/changelog.md': 'changelog/index.md'
 
 
 
@@ -151,9 +151,9 @@ nav:
       - Getting Started:
           - Homepage: index.md
           - Quickstart:
-              - Quickstart: overview/quickstart.md
-              - Basic Usage: overview/basic-usage.md
-              - Working with Datasets: overview/datasets.md
+              - Quickstart: quickstart/index.md
+              - Basic Usage: quickstart/basic-usage.md
+              - Working with Datasets: quickstart/datasets.md
       - Products:
           - What is LanceDB OSS?: 
               - Overview: overview/index.md

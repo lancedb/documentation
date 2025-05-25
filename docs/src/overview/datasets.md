@@ -225,7 +225,7 @@ Let's see how it looks when we try to load a larger dataset.
     const sampleData = await loadDataset(datasetName, split, targetSize);
     console.log(`Loaded ${sampleData.length} examples from AG News dataset`);
     ```
-## 4. Ingest Data 
+## **4. Ingest Data**
 
 === "Python"
 
@@ -272,7 +272,7 @@ Let's see how it looks when we try to load a larger dataset.
     console.log('Successfully created table');
     ```
 
-## 5. Build an Index
+## **5. Build an Index**
 
 After creating a table with vector data, you'll want to create an index to enable fast similarity searches. The index creation process optimizes the data structure for efficient vector similarity lookups, significantly improving query performance for large datasets.
 
@@ -305,7 +305,7 @@ After creating a table with vector data, you'll want to create an index to enabl
     console.log(await table.indexStats(indexName));
     ```
 
-## 6. Vector Search
+## **6. Vector Search**
 
 Once you have created and indexed your table, you can perform vector similarity searches. LanceDB provides a flexible search API that allows you to find similar vectors, apply filters, and select specific columns to return. The examples below demonstrate basic vector searches as well as filtered searches that combine vector similarity with traditional SQL-style filtering.
 
@@ -348,7 +348,7 @@ Once you have created and indexed your table, you can perform vector similarity 
     console.log(results);
     ```
 
-## 7. Filtered Search
+## **7. Filtered Search**
 
 Add filter to your vector search query. Your can use SQL statements, like `where` for filtering.
 
@@ -379,7 +379,7 @@ Add filter to your vector search query. Your can use SQL statements, like `where
     console.log(filteredResultsesults);
     ```
 
-## What's Next?
+## **What's Next?**
 
 That's pretty much it for the **Getting Started** section.
 

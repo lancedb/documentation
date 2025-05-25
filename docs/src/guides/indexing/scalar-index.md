@@ -1,57 +1,64 @@
 ---
 title: Scalar Indexes in LanceDB | Optimized Metadata Filtering
-description: Learn how to use scalar indexes in LanceDB for efficient metadata filtering and query optimization. Includes index types, configuration options, and performance tuning guidelines.
+description: Learn how to use scalar indexes in LanceDB for efficient metadata filtering and query optimization.
 ---
 
-# Scalar Index in LanceDB
+# **Scalar Index in LanceDB**
 
-LanceDB Cloud and Enterprise support several types of scalar indices to accelerate search over scalar columns:
+Scalar indexes organize data by scalar attributes (e.g., numbers, categories) and enable fast filtering of vector data. They accelerate retrieval of scalar data associated with vectors, thus enhancing query performance.
 
-- **BTREE**: The most common type, inspired by the btree data structure. Performs well for columns with many unique values and few rows per value.
-- **BITMAP**: Stores a bitmap for each unique value. Ideal for columns with a finite number of unique values and many rows per value (e.g., categories, labels, tags).
-- **LABEL_LIST**: Special index for `List<T>` columns, supporting `array_contains_all` and `array_contains_any` queries using an underlying bitmap index.
+LanceDB supports three types of scalar indexes:
 
-You can create multiple scalar indexes within a table.
+- `BTREE`: Stores column data in sorted order for binary search. Best for columns with many unique values.
+- `BITMAP`: Uses bitmaps to track value presence. Ideal for columns with few unique values (e.g., categories, tags).
+- `LABEL_LIST`: Special index for `List<T>` columns supporting `array_contains_all` and `array_contains_any` queries.
 
-!!! note
+| Data Type                                                       | Filter                                    | Index Type   |
+| --------------------------------------------------------------- | ----------------------------------------- | ------------ |
+| Numeric, String, Temporal                                       | `<`, `=`, `>`, `in`, `between`, `is null` | `BTREE`      |
+| Boolean, numbers or strings with fewer than 1,000 unique values | `<`, `=`, `>`, `in`, `between`, `is null` | `BITMAP`     |
+| List of low cardinality of numbers or strings                   | `array_has_any`, `array_has_all`          | `LABEL_LIST` |
 
-    The `create_scalar_index` API returns immediately, but the building of the scalar index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter on `create_scalar_index()` or call `wait_for_index()` on the table.
+## **Build the Index**
+
+You can create multiple scalar indexes within a table. By default, the index will be `BTREE`, but you can always configure another type like `BITMAP`
 
 === "Python"
-    ```python
-    import lancedb
 
-    # Connect to LanceDB
-    db = lancedb.connect(
-      uri="db://your-project-slug",
-      api_key="your-api-key",
-      region="us-east-1"
-    )
+    === "Sync API"
 
-    table_name = "lancedb-cloud-quickstart"
-    table = db.open_table(table_name)
-    # Create BITMAP index (default is BTREE)
-    table.create_scalar_index("label", index_type="BITMAP")
-    ```
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb-btree-bitmap"
+        --8<-- "python/python/tests/docs/test_guide_index.py:basic_scalar_index"
+        ```
+    === "Async API"
 
-=== "TypeScript"
-    ```typescript
-    import * as lancedb from "@lancedb/lancedb"
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb-btree-bitmap"
+        --8<-- "python/python/tests/docs/test_guide_index.py:basic_scalar_index_async"
+        ```
 
-    const db = await lancedb.connect({
-      uri: "db://your-project-slug",
-      apiKey: "your-api-key",
-      region: "us-east-1"
-    });
+=== "Typescript"
 
-    const tableName = "lancedb-cloud-quickstart"
-    const table = await db.openTable(tableName);
-    await table.createIndex("label", {
-      config: lancedb.Index.bitmap()
-    });
-    ```
+    === "@lancedb/lancedb"
 
-Check scalar index status using the [methods above](#check-index-status).
+        ```js
+        const db = await lancedb.connect("data");
+        const tbl = await db.openTable("my_vectors");
+
+        await tbl.create_index("book_id");
+        await tlb.create_index("publisher", { config: lancedb.Index.bitmap() })
+        ```
+
+!!! note "LanceDB Cloud and Enterprise"
+
+    If you are using Cloud or Enterprise, the `create_scalar_index` API returns immediately, but the building of the scalar index is asynchronous. To wait until all data is fully indexed, you can specify the `wait_timeout` parameter on `create_scalar_index()` or call `wait_for_index()` on the table.
+
+## **Check Index Status**
+
+You can use the UI Dashboard in Cloud or just call the API:
 
 === "Python"
     ```python
@@ -65,10 +72,111 @@ Check scalar index status using the [methods above](#check-index-status).
     await table.waitForIndex([indexName], 60)
     ```
 
+## **Update the Index**
 
-### Build a Scalar Index on UUID Columns
+Updating the table data (adding, deleting, or modifying records) requires that you also update the scalar index. This can be done by calling `optimize`, which will trigger an update to the existing scalar index.
 
-LanceDB supports scalar indices on UUID columns (stored as `FixedSizeBinary(16)`), enabling efficient lookups and filtering on UUID-based primary keys.
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:update_scalar_index"
+        ```
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:update_scalar_index_async"
+        ```
+
+=== "TypeScript"
+
+    ```typescript
+    await tbl.add([{ vector: [7, 8], book_id: 4 }]);
+    await tbl.optimize();
+    ```
+
+=== "Rust"
+
+    ```rust
+    let more_data: Box<dyn RecordBatchReader + Send> = create_some_records()?;
+    tbl.add(more_data).execute().await?;
+    tbl.optimize(OptimizeAction::All).execute().await?;
+    ```
+
+!!! note "LanceDB Cloud"
+
+    New data added after creating the scalar index will still appear in search results if optimize is not used, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud automates the optimize process, minimizing the impact on search speed.
+
+
+## **Indexed Search**
+
+The following scan will be faster if the column `book_id` has a scalar index:
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:search_with_scalar_index"
+        ```
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:search_with_scalar_index_async"
+        ```
+
+=== "Typescript"
+
+    === "@lancedb/lancedb"
+
+        ```js
+        const db = await lancedb.connect("data");
+        const tbl = await db.openTable("books");
+
+        await tbl
+          .query()
+          .where("book_id = 2")
+          .limit(10)
+          .toArray();
+        ```
+
+Scalar indexes can also speed up scans containing a vector search or full text search, and a prefilter:
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:vector_search_with_scalar_index"
+        ```
+    === "Async API"
+
+        ```python
+        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
+        --8<-- "python/python/tests/docs/test_guide_index.py:vector_search_with_scalar_index_async"
+        ```
+
+=== "Typescript"
+
+    === "@lancedb/lancedb"
+
+        ```js
+        const db = await lancedb.connect("data/lance");
+        const tbl = await db.openTable("book_with_embeddings");
+
+        await tbl.search(Array(1536).fill(1.2))
+          .where("book_id != 3")  // prefilter is default behavior.
+          .limit(10)
+          .toArray();
+        ```
+
+## **Index UUID Columns**
+
+LanceDB supports scalar indexes on UUID columns (stored as `FixedSizeBinary(16)`), enabling efficient lookups and filtering on UUID-based primary keys.
 
 !!! note
 
@@ -76,7 +184,7 @@ LanceDB supports scalar indices on UUID columns (stored as `FixedSizeBinary(16)`
     - Python SDK version [0.22.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/python-v0.22.0-beta.4) or later
     - TypeScript SDK version [0.19.0-beta.4](https://github.com/lancedb/lancedb/releases/tag/v0.19.0-beta.4) or later
 
-=== "Python [expandable]"
+=== "Python"
     ```python
     import lancedb
     import uuid
@@ -145,7 +253,7 @@ LanceDB supports scalar indices on UUID columns (stored as `FixedSizeBinary(16)`
         .execute(new_users)
     ```
 
-=== "TypeScript [expandable]"
+=== "TypeScript"
     ```typescript
     import * as lancedb from "@lancedb/lancedb"
     import { v4 as uuidv4 } from "uuid"
@@ -220,178 +328,5 @@ LanceDB supports scalar indices on UUID columns (stored as `FixedSizeBinary(16)`
       .whenNotMatchedInsertAll()
       .execute(newUsers);
     ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-OSS______
-
-Scalar indices organize data by scalar attributes (e.g. numbers, categorical values), enabling fast filtering of vector data. In vector databases, scalar indices accelerate the retrieval of scalar data associated with vectors, thus enhancing the query performance when searching for vectors that meet certain scalar criteria. 
-
-Similar to many SQL databases, LanceDB supports several types of scalar indices to accelerate search
-over scalar columns.
-
-- `BTREE`: The most common type is BTREE. The index stores a copy of the
-  column in sorted order. This sorted copy allows a binary search to be used to
-  satisfy queries.
-- `BITMAP`: this index stores a bitmap for each unique value in the column. It 
-  uses a series of bits to indicate whether a value is present in a row of a table
-- `LABEL_LIST`: a special index that can be used on `List<T>` columns to
-  support queries with `array_contains_all` and `array_contains_any`
-  using an underlying bitmap index.
-  For example, a column that contains lists of tags (e.g. `["tag1", "tag2", "tag3"]`) can be indexed with a `LABEL_LIST` index.
-
-!!! tips "How to choose the right scalar index type"
-
-    `BTREE`: This index is good for scalar columns with mostly distinct values and does best when the query is highly selective.
-    
-    `BITMAP`: This index works best for low-cardinality numeric or string columns, where the number of unique values is small (i.e., less than a few thousands).
-    
-    `LABEL_LIST`: This index should be used for columns containing list-type data.
-
-| Data Type                                                       | Filter                                    | Index Type   |
-| --------------------------------------------------------------- | ----------------------------------------- | ------------ |
-| Numeric, String, Temporal                                       | `<`, `=`, `>`, `in`, `between`, `is null` | `BTREE`      |
-| Boolean, numbers or strings with fewer than 1,000 unique values | `<`, `=`, `>`, `in`, `between`, `is null` | `BITMAP`     |
-| List of low cardinality of numbers or strings                   | `array_has_any`, `array_has_all`          | `LABEL_LIST` |
-
-### Create a scalar index
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb-btree-bitmap"
-        --8<-- "python/python/tests/docs/test_guide_index.py:basic_scalar_index"
-        ```
-    === "Async API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb-btree-bitmap"
-        --8<-- "python/python/tests/docs/test_guide_index.py:basic_scalar_index_async"
-        ```
-
-=== "Typescript"
-
-    === "@lancedb/lancedb"
-
-        ```js
-        const db = await lancedb.connect("data");
-        const tbl = await db.openTable("my_vectors");
-
-        await tbl.create_index("book_id");
-        await tlb.create_index("publisher", { config: lancedb.Index.bitmap() })
-        ```
-
-The following scan will be faster if the column `book_id` has a scalar index:
-
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:search_with_scalar_index"
-        ```
-    === "Async API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:search_with_scalar_index_async"
-        ```
-
-=== "Typescript"
-
-    === "@lancedb/lancedb"
-
-        ```js
-        const db = await lancedb.connect("data");
-        const tbl = await db.openTable("books");
-
-        await tbl
-          .query()
-          .where("book_id = 2")
-          .limit(10)
-          .toArray();
-        ```
-
-Scalar indices can also speed up scans containing a vector search or full text search, and a prefilter:
-
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:vector_search_with_scalar_index"
-        ```
-    === "Async API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:import-lancedb"
-        --8<-- "python/python/tests/docs/test_guide_index.py:vector_search_with_scalar_index_async"
-        ```
-
-=== "Typescript"
-
-    === "@lancedb/lancedb"
-
-        ```js
-        const db = await lancedb.connect("data/lance");
-        const tbl = await db.openTable("book_with_embeddings");
-
-        await tbl.search(Array(1536).fill(1.2))
-          .where("book_id != 3")  // prefilter is default behavior.
-          .limit(10)
-          .toArray();
-        ```
-### Update a scalar index
-Updating the table data (adding, deleting, or modifying records) requires that you also update the scalar index. This can be done by calling `optimize`, which will trigger an update to the existing scalar index.
-=== "Python"
-
-    === "Sync API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:update_scalar_index"
-        ```
-    === "Async API"
-
-        ```python
-        --8<-- "python/python/tests/docs/test_guide_index.py:update_scalar_index_async"
-        ```
-
-=== "TypeScript"
-
-    ```typescript
-    await tbl.add([{ vector: [7, 8], book_id: 4 }]);
-    await tbl.optimize();
-    ```
-
-=== "Rust"
-
-    ```rust
-    let more_data: Box<dyn RecordBatchReader + Send> = create_some_records()?;
-    tbl.add(more_data).execute().await?;
-    tbl.optimize(OptimizeAction::All).execute().await?;
-    ```
-
-!!! note
-
-    New data added after creating the scalar index will still appear in search results if optimize is not used, but with increased latency due to a flat search on the unindexed portion. LanceDB Cloud automates the optimize process, minimizing the impact on search speed.
-
-
 
 

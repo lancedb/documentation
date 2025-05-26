@@ -5,6 +5,20 @@ description: Master LanceDB's vector indexing with our comprehensive guide. Lear
 
 # Vector Indexing in LanceDB
 
+LanceDB provides a comprehensive suite of indexing strategies to optimize query performance across diverse workloads:
+
+- **Vector Index**: Optimized for searching high-dimensional data (like images, audio, or text embeddings) by efficiently finding the most similar vectors
+- **Scalar Index**: Accelerates filtering and sorting of structured numeric or categorical data (e.g., timestamps, prices)
+- **Full-Text Search Index**: Enables fast keyword-based searches by indexing words and phrases
+
+!!! tip
+    Scalar indices serve as a foundational optimization layer, accelerating filtering across diverse search workloads. They can be combined with:
+
+    - Vector search (prefilter or post-filter results using metadata)
+    - Full-text search (combining keyword matching with structured filters) 
+    - SQL scans (optimizing WHERE clauses on scalar columns)
+    - Key-value lookups (enabling rapid primary key-based retrievals)
+
 ## Understanding IVF-PQ Index
 
 An ANN (Approximate Nearest Neighbors) index is a data structure that represents data in a way that makes it more efficient to search and retrieve. Using an ANN index is faster, but less accurate than kNN or brute force search because, in essence, the index is a lossy representation of the data.

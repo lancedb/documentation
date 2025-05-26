@@ -16,7 +16,15 @@
     color: var(--md-typeset-a-color);
 }
 
+/* Make navigation text bold */
+.md-nav__link {
+    font-weight: bold;
+}
 
+.md-nav__title {
+    font-weight: bold;
+    color: #000000 !important; /* Make section titles black */
+}
 
 /* Override button colors to orange */
 .md-button {

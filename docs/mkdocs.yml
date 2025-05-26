@@ -192,15 +192,15 @@ nav:
           - Structuring Queries:
               - Vector Search: guides/search/vector-search.md
               - Full-Text Search: guides/search/full-text-search.md
-              - Filtering: guides/search/filtering.md
+              - Hybrid Search: guides/search/hybrid-search.md
               - Multivector Search: guides/search/multivector-search.md
+              - Filtering: guides/search/filtering.md
               - SQL Queries: guides/search/sql-queries.md
               - Query Planning: guides/search/query-planning.md
           - Configuring Storage: guides/storage/storage.md
       - Advanced Usage:
           - Complex Queries:
               - Hybrid Search:
-                  - Overview: guides/search/hybrid-search.md
                   - Comparing Rerankers: reranking/eval.md
                   - Airbnb financial data example: notebooks/hybrid_search.ipynb
               - Multivector Search:

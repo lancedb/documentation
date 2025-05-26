@@ -272,7 +272,7 @@ With multiple vector queries, LanceDB calculates similarity using late interacti
 
 If you still need more guidance, you can try the complete [**Multivector Search Notebook**](https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/saas_examples/python_notebook/Multivector_on_LanceDB_Cloud.ipynb).
 
-For advanced users, we prepared a [**Tutorial on ColPali and LanceDB**](/notebooks/Multivector_on_LanceDB/).
+For advanced users, we prepared a [**Tutorial on ColPali and LanceDB**](/docs/notebooks/Multivector_on_LanceDB/).
 
 
 

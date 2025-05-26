@@ -193,19 +193,18 @@ nav:
               - Vector Search: guides/search/vector-search.md
               - Full-Text Search: guides/search/full-text-search.md
               - Filtering: guides/search/filtering.md
+              - Multivector Search: guides/search/multivector-search.md
               - SQL Queries: guides/search/sql-queries.md
               - Query Planning: guides/search/query-planning.md
-          - Configuring Storage: guides/storage.md
+          - Configuring Storage: guides/storage/storage.md
       - Advanced Usage:
           - Complex Queries:
-              - Optimizing Query Performance: guides/search/optimize-queries.md
               - Hybrid Search:
                   - Overview: guides/search/hybrid-search.md
                   - Comparing Rerankers: reranking/eval.md
                   - Airbnb financial data example: notebooks/hybrid_search.ipynb
               - Multivector Search:
-                  - Overview: guides/search/multivector-search.md
-                  - Example: notebooks/Multivector_on_LanceDB.ipynb
+                  - ColPali and LanceDB: notebooks/Multivector_on_LanceDB.ipynb
               - Reranking:
                   - Quickstart: reranking/index.md
                   - Cohere Reranker: reranking/cohere.md
@@ -219,6 +218,7 @@ nav:
                   - Voyage AI Rerankers: reranking/voyageai.md
                   - Building Custom Rerankers: reranking/custom_reranker.md
                   - Example: notebooks/lancedb_reranking.ipynb
+              - Optimizing Query Performance: guides/search/optimize-queries.md
           - Working with Embeddings:
               - What are Embeddings?: embeddings/understanding_embeddings.md
               - Getting Started: embeddings/index.md
@@ -351,6 +351,7 @@ nav:
       - Overview: changelog/index.md
   - Studies:
       - Overview: studies/overview.md
+      - Late Interaction & ColBERT: studies/late-interaction-colbert.md
       - ↗Improve retrievers with hybrid search and reranking: https://blog.lancedb.com/hybrid-search-and-reranking-report/
 
 extra_css:

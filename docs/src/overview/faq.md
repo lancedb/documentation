@@ -1,3 +1,4 @@
+# **Frequently Asked Questions**
 
 This section covers some common questions and issues that you may encounter when using LanceDB.
 

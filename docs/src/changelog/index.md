@@ -4,6 +4,7 @@ description: Track LanceDB's latest features, improvements, and bug fixes. Stay 
 hide:
   - navigation
 ---
+# **LanceDB Changelog**
 
 ## April 2025
 

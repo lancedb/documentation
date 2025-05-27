@@ -3,7 +3,7 @@ title: Migrating to LanceDB | Data Migration Guide
 description: Learn how to migrate your data to LanceDB from other vector databases and formats. Includes step-by-step guides, compatibility considerations, and best practices.
 ---
 
-# Rust-backed Client Migration Guide
+# **Rust-Backed Client Migration Guide**
 
 In an effort to ensure all clients have the same set of capabilities we have
 migrated the Python and Node clients onto a common Rust base library. In Python,

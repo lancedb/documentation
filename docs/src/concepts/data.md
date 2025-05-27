@@ -3,7 +3,7 @@ title: LanceDB Data Management Guide | Versioning, Schema Evolution & Organizati
 description: Master LanceDB's data management with our comprehensive guide. Learn about versioning, schema evolution, data organization, and best practices for efficient vector data storage and retrieval.
 ---
 
-# Data Management in LanceDB
+# **Data Management in LanceDB**
 
 This section covers essential concepts for managing your data effectively in LanceDB.
 

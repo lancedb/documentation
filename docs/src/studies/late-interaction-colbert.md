@@ -1,4 +1,4 @@
-# Late Interaction and the ColBERT Model
+# **Late Interaction and the ColBERT Model**
 
 ## What is Late Interaction?
 

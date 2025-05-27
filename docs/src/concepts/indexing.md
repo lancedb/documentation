@@ -3,7 +3,7 @@ title: Vector Indexing in LanceDB | IVF-PQ & HNSW Index Guide
 description: Master LanceDB's vector indexing with our comprehensive guide. Learn about IVF-PQ and HNSW indexes, product quantization, clustering, and performance optimization for large-scale vector search.
 ---
 
-# Vector Indexing in LanceDB
+# **Vector Indexing in LanceDB**
 
 LanceDB provides a comprehensive suite of indexing strategies to optimize query performance across diverse workloads:
 

@@ -3,7 +3,7 @@ title: Vector Search in LanceDB | Complete Guide to Similarity Search
 description: Master vector search in LanceDB with our comprehensive guide. Learn about embeddings, ANN search, brute force search, and how to perform efficient similarity searches at scale.
 ---
 
-# Vector Search in LanceDB
+# **Vector Search in LanceDB**
 
 ## Understanding Vector Search Fundamentals
 

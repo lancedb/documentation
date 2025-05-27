@@ -3,7 +3,7 @@ title: LanceDB Storage Guide | Complete Guide to Data Persistence
 description: Master LanceDB's storage architecture with our comprehensive guide. Learn about local storage, cloud storage options, and best practices for efficient vector data management and persistence.
 ---
 
-# Storage Architecture in LanceDB
+# **Storage Architecture in LanceDB**
 
 LanceDB is among the only vector databases built on top of multiple modular components designed from the ground-up to be efficient on disk. This gives it the unique benefit of being flexible enough to support multiple storage backends, including local NVMe, EBS, EFS and many other third-party APIs that connect to the cloud.
 

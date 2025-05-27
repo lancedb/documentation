@@ -3,7 +3,7 @@ title: LanceDB Cloud FAQ | Cloud Service Guide
 description: Find answers to common questions about LanceDB Cloud. Includes setup, usage, pricing, and best practices for cloud-based vector database deployment.
 ---
 
-# LanceDB Cloud FAQ
+# **LanceDB Cloud FAQ**
 
 This section provides answers to the most common questions asked about LanceDB Cloud. By following these guidelines, you can ensure a smooth, performant experience with LanceDB Cloud.
 

@@ -1,4 +1,4 @@
-# Enabling logging
+# **Logging in LanceDB Cloud**
 
 To provide more information, especially for LanceDB Cloud related issues, enable
 debug logging. You can set the `LANCEDB_LOG` environment variable:

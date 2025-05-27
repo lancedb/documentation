@@ -4,7 +4,7 @@ description: Comprehensive API reference for LanceDB. Includes Python, JavaScrip
 hide:
  - toc
 ---
-# LanceDB API Reference
+# **LanceDB API Reference**
 
 LanceDB provides multiple ways to interact with your vector database:
 

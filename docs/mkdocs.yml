@@ -150,6 +150,7 @@ nav:
   - Documentation:
       - Getting Started:
           - Homepage: index.md
+          - How to Use This Docsite: overview/instructions.md
           - Quickstart:
               - Quickstart: quickstart/index.md
               - Basic Usage: quickstart/basic-usage.md
@@ -191,7 +192,8 @@ nav:
               - GPU Indexing: guides/indexing/gpu-indexing.md
           - Structuring Queries:
               - Vector Search: guides/search/vector-search.md
-              - Full-Text Search: guides/search/full-text-search.md
+              - Full-Text Search (Native): guides/search/full-text-search.md
+              - Full-Text Search (Tantivy): guides/search/full-text-search-tantivy.md
               - Hybrid Search: guides/search/hybrid-search.md
               - Multivector Search: guides/search/multivector-search.md
               - Filtering: guides/search/filtering.md

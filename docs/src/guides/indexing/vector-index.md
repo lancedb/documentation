@@ -88,21 +88,17 @@ First, we connect to LanceDB and open the table we want to index.
     ```
 
 ### **2. Construct IVF Index**
-Next, we create an IVF index with cosine similarity, specifying the vector column and waiting for the index to be built.
+Next, create an `IVF_PQ` index with `cosine` similarity. You only need to specify the `vector_column_name` if using multiple vector columns or non-default names.
+
+Product Quantization is the default indexing option. If you want to use Scalar Quantization, switch to `index_type: IVF_SQ`
 
 === "Python"
     ```python
-    # Create index with cosine similarity
-    # Note: vector_column_name only needed for multiple vector columns or non-default names
-    # Supported index types: IVF_PQ (default) and IVF_HNSW_SQ
     table.create_index(metric="cosine", vector_column_name="keywords_embeddings", wait_timeout=timedelta(seconds=60))
     ```
 
 === "TypeScript"
     ```typescript
-    // Create index with cosine similarity
-    // Note: vector_column_name only needed for multiple vector columns or non-default names
-    // Supported index types: IVF_PQ (default) and IVF_HNSW_SQ
     await table.createIndex("keywords_embeddings", {
       config: lancedb.Index.ivfPq({
         distanceType: 'cosine'
@@ -111,8 +107,9 @@ Next, we create an IVF index with cosine similarity, specifying the vector colum
     ```
 ### **3. Query IVF Index**
 
+Search using a random 1536-dimensional embedding:
+
 ```python
-# Search using a random 1536-dimensional embedding
 tbl.search(np.random.random((1536))) \
     .limit(2) \
     .nprobes(20) \

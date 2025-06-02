@@ -29,35 +29,65 @@ LanceDB supports both managed and local deployments. The connection `uri` determ
 
 === "Cloud"
 
-    ```python
-    db = lancedb.connect(
-    uri="db://your-project-slug",
-    api_key="your-api-key",
-    region="us-east-1"
-    )
-    ```
+    === "Sync API"
+        ```python
+        db = lancedb.connect(
+            uri="db://your-project-slug",
+            api_key="your-api-key",
+            region="us-east-1"
+        )
+        ```
+
+    === "Async API"
+        ```python
+        db = await lancedb.connect_async(
+            uri="db://your-project-slug",
+            api_key="your-api-key",
+            region="us-east-1"
+        )
+        ```
 
 === "Enterprise"
 
     For LanceDB Enterprise, set the host override to your private cloud endpoint.
 
-    ```python
-    host_override = os.environ.get("LANCEDB_HOST_OVERRIDE")
+    === "Sync API"
+        ```python
+        host_override = os.environ.get("LANCEDB_HOST_OVERRIDE")
 
-    db = lancedb.connect(
-    uri=uri,
-    api_key=api_key,
-    region=region,
-    host_override=host_override
-    )
-    ```
+        db = lancedb.connect(
+            uri=uri,
+            api_key=api_key,
+            region=region,
+            host_override=host_override
+        )
+        ```
+
+    === "Async API"
+        ```python
+        host_override = os.environ.get("LANCEDB_HOST_OVERRIDE")
+
+        db = await lancedb.connect_async(
+            uri=uri,
+            api_key=api_key,
+            region=region,
+            host_override=host_override
+        )
+        ```
 
 === "Open Source"
 
-    ```python
-    uri = "data/sample-lancedb"
-    db = lancedb.connect(uri)
-    ```
+    === "Sync API"
+        ```python
+        uri = "data/sample-lancedb"
+        db = lancedb.connect(uri)
+        ```
+
+    === "Async API"
+        ```python
+        uri = "data/sample-lancedb"
+        db = await lancedb.connect_async(uri)
+        ```
 
 ## **4. Add Data**
 
@@ -77,9 +107,15 @@ data = pd.DataFrame([
 
 Create a table in the database. The table takes on the schema of your ingested data.
 
-```python
-table = db.create_table("adventurers", data)
-```
+=== "Sync API"
+    ```python
+    table = db.create_table("adventurers", data)
+    ```
+
+=== "Async API"
+    ```python
+    table = await db.create_table_async("adventurers", data)
+    ```
 
 ## **6. Vector Search**
 
@@ -87,11 +123,19 @@ Perform a vector similarity search. The query vector should have the same dimens
 
 Our query is **"warrior" - [0.8, 0.3, 0.8]**. Let's find the most similar adventurer:  
 
-```python
-query_vector = [0.8, 0.3, 0.8]  
-results = table.search(query_vector).limit(3).to_pandas()
-print(results)
-```
+=== "Sync API"
+    ```python
+    query_vector = [0.8, 0.3, 0.8]  
+    results = table.search(query_vector).limit(3).to_pandas()
+    print(results)
+    ```
+
+=== "Async API"
+    ```python
+    query_vector = [0.8, 0.3, 0.8]  
+    results = await table.search(query_vector).limit(3).to_pandas()
+    print(results)
+    ```
 
 ## **7. Results**
 

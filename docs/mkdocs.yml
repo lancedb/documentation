@@ -199,7 +199,7 @@ nav:
               - Filtering: guides/search/filtering.md
               - SQL Queries: guides/search/sql-queries.md
               - Query Planning: guides/search/query-planning.md
-          - Configuring Storage: guides/storage/storage.md
+          - Configuring Storage: guides/storage/integrations.md
       - Advanced Usage:
           - Complex Queries:
               - Hybrid Search:

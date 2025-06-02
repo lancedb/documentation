@@ -15,8 +15,9 @@ theme:
   palette:
     - scheme: default
       primary: black
-      accent: orange
+      accent: white
   features:
+    - announce.dismiss
     - content.code.copy
     - content.tabs.link
     - content.action.edit
@@ -350,7 +351,8 @@ nav:
               - Legacy SDK (vectordb): javascript/modules.md
           - Rust SDK: https://docs.rs/lancedb/latest/lancedb/
   - Changelog:
-      - Overview: changelog/index.md
+      - LanceDB Cloud & Enterprise: changelog/lancedb-changelog.md
+      - ↗LanceDB Open Source: https://github.com/lancedb/lancedb/releases
   - Studies:
       - Overview: studies/overview.md
       - Late Interaction & ColBERT: studies/late-interaction-colbert.md
@@ -360,7 +362,7 @@ extra_css:
   - styles/mkdocsoad.css
   - styles/links.css
 #  - styles/global.css
-#  - styles/extra.css
+  - styles/extra.css
 
 extra_javascript:
   # - "extra_js/init_ask_ai_widget.js"

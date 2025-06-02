@@ -1,10 +1,8 @@
 ---
-title: LanceDB Changelog | Release History & Updates
+title: LanceDB Cloud & Enterprise Changelog | Release History & Updates
 description: Track LanceDB's latest features, improvements, and bug fixes. Stay updated with our vector database's development progress and new capabilities.
-hide:
-  - navigation
 ---
-# **LanceDB Changelog**
+# **LanceDB Cloud & Enterprise Changelog**
 
 ## April 2025
 

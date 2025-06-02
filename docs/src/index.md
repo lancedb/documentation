@@ -21,9 +21,9 @@ LanceDB is ideal for **semantic search**, **recommendation systems**, and **Gene
 
 ## **Product Release: Announcing LanceDB Cloud!**
 
-1. [**LanceDB OSS:**](overview/index.md) If self-hosting, embed LanceDB directly into your backend, whether that's a Django, Flask, FastAPI, or Node.js service. Check out our available [**client libraries**](../api-index.md).
+1. [**LanceDB OSS:**](overview/index.md) If self-hosting, embed LanceDB directly into your backend, whether that's a Django, Flask, FastAPI, or Node.js service. Check out our available [**client libraries**](api/index.md).
 2. [**LanceDB Cloud:**](cloud/index.md) Create a LanceDB Cloud cluster that's completely serverless. Your application simply connects over HTTP/HTTPS, and LanceDB handles scaling, storage, and indexing for you. 
 3. [**LanceDB Enterprise - Private Cloud:**](enterprise/index.md) Deploy LanceDB in your own private cloud environment. Run LanceDB clusters in your existing cloud infrastructure for ultimate data sovereignty.
-4. [**LanceDB Enterprise - BYOC:**](enterprise/index.md) Bring Your Own Cloud gives you the best of both: use our Enterprise management features and support, while managing your clusters via our [**Dashboard UI**](https://accounts.lancedb.com/sign-up).
+4. [**LanceDB Enterprise - BYOC:**](enterprise/index.md) Bring Your Own Cloud gives you the best of both: use our Enterprise management features and support.
 </div>
 

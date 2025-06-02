@@ -1,8 +1,47 @@
 ---
-title: LanceDB Cloud & Enterprise Changelog | Release History & Updates
+title: LanceDB Changelog | Release History & Updates
 description: Track LanceDB's latest features, improvements, and bug fixes. Stay updated with our vector database's development progress and new capabilities.
+hide:
+  - navigation
 ---
-# **LanceDB Cloud & Enterprise Changelog**
+# **LanceDB Changelog**
+
+## May 2025
+
+Revamped LanceDB Cloud onboarding, added Umap visualization and improved performance for `upsert` 
+
+### Features
+* **Commit Conflict Free Upsert**: Upsert operations now support full concurrency without commit conflicts, enabling high-throughput parallel data ingestion/updates.
+    *  Added timeout parameter for `merge_insert` for better control over long-running upserts [\[lancedb#2378\]](https://github.com/lancedb/lancedb/pull/2378)
+* **Reduced IOPS to object store**:
+    * Optimized I/O Patterns for small tables: Significant improvements reduce total IOPS to the object store by up to 95%, especially benefiting small-table workloads. [\[lance#3764\]](https://github.com/lancedb/lance/pull/3764)
+    * Scan cache: Introduced a scan cache to further minimize object store IOPS and accelerate query performance. #enterprise 
+* **Faster & More Reliable Indexing**: 
+    * Indexing is now more robust and efficient, with dynamic job sizing based on table and row size, plus increased retry logic for reliability.
+    * IVF_PQ indexing performance: Eliminated unnecessary data copying during index creation, resulting in faster PQ training and reduced memory usage. [\[lance#3894\]](https://github.com/lancedb/lance/pull/3894)
+* **Configurable Scan Concurrency**: Query nodes now support configurable concurrency limits for scan requests to plan executors, allowing for better resource management in enterprise deployments. #enterprise
+    * New `grpc.concurrency_limit_per_connection` setting in the plan executor for fine-grained control.
+performance. #enterprise
+* **Improved Enterprise Deployment**:
+    * Automate deployment for AWS environments, making setup and scaling easier for enterprise users. 
+    * GCP deployments now support configuration of weak consistency and concurrency limits for greater flexibility and cost control.
+* **Filter on `large_binary` column**: Users can now filter on large binary columns in their queries. [\[lance#3797\]](https://github.com/lancedb/lance/pull/3797)
+* **LanceDB Cloud UI**:
+    * Revamped Cloud Onboarding: Streamlined LanceDB Cloud onboarding for a smoother user experience.
+    * Added UMAP visualization to help users visually explore embeddings in their tables.
+
+
+### Bug Fixes
+* **Upsert Page Size Calculation**: Page size for upsert operations now correctly considers pod memory instead of node memory, reducing the risk of out-of-memory errors in the plan executor. #enterprise
+* **Scalar Index**: 
+    * Fixed incremental indexing for `LABEL_LIST` columns, ensuring scalar indices are updated correctly on data changes.
+    * Addressed a bug in bitmap scalar index remapping, so partial remapping during compaction no longer drops rows unexpectedly.
+* **Partition Count for Small Tables**: Improved partitioning logic ensures the correct number of partitions for small tables, leading to more efficient queries.
+* **Accurate Error for Non-Existent Index**: Dropping a non-existent index now returns an IndexNotFound error (instead of a TableNotFound error). [\[lancedb#2380\]](https://github.com/lancedb/lancedb/pull/2380)
+* **Index Consistency After Horizontal `merge_insert`**:Any index fragments associated with modified data are now properly removed during a horizontal merge_insert, preventing index corruption and ensuring indices always reflect the current state of the data. [\[lancedb#3863\]](https://github.com/lancedb/lancedb/pull/3863)
+* **Fixed issues in create_index with empty tables**: 
+    * Resolved an error that could occur when performing operations such as deleting the last row or creating an index on an empty table. The function now safely handles empty tables, preventing division-by-zero errors during these events.
+    * Corrected a bug where events could be dropped if processed in the same batch as other events for empty tables. This was caused by Lance datasets evaluating to False when empty; the check now properly distinguishes between None and empty datasets, ensuring all events are processed as intended.
 
 ## April 2025
 

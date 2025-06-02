@@ -40,6 +40,7 @@ plugins:
   - redirects:
       redirect_maps:
         'basic.md': 'quickstart/index.md'
+        'guides/storage/index.md': 'guides/storage/integrations.md'
         'concepts/data_management.md': 'concepts/data.md'
         'concepts/vector_search.md': 'concepts/search.md'
         'concepts/index_ivfpq.md': 'concepts/indexing.md'

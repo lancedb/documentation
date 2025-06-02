@@ -818,7 +818,7 @@ These keys can be used as both environment variables or keys in the `storage_opt
 
 ### **Tigris Object Storage**
 
-Tigris Object Storage provides an S3-compatible API. To connect to Tigris Object Storage, you need to configure the endpoint and region:
+Tigris Object Storage provides an S3-compatible API for its global storage. To connect to Tigris Object Storage, you need to configure the endpoint and set the region to auto:
 
 === "Python"
 
@@ -829,7 +829,7 @@ Tigris Object Storage provides an S3-compatible API. To connect to Tigris Object
         db = lancedb.connect(
             "s3://your-bucket/path",
             storage_options={
-                "endpoint": "https://fly.storage.tigris.dev",
+                "endpoint": "https://t3.storage.dev",
                 "region": "auto"
             }
         )
@@ -841,7 +841,7 @@ Tigris Object Storage provides an S3-compatible API. To connect to Tigris Object
         async_db = await lancedb.connect_async(
             "s3://your-bucket/path",
             storage_options={
-                "endpoint": "https://fly.storage.tigris.dev",
+                "endpoint": "https://t3.storage.dev",
                 "region": "auto"
             }
         )
@@ -855,7 +855,7 @@ Tigris Object Storage provides an S3-compatible API. To connect to Tigris Object
         "s3://your-bucket/path",
         {
             storageOptions: {
-                endpoint: "https://fly.storage.tigris.dev",
+                endpoint: "https://t3.storage.dev",
                 region: "auto"
             }
         }
@@ -865,7 +865,7 @@ Tigris Object Storage provides an S3-compatible API. To connect to Tigris Object
 You can also set these values using environment variables:
 
 ```bash
-export AWS_ENDPOINT="https://fly.storage.tigris.dev"
+export AWS_ENDPOINT="https://t3.storage.dev"
 export AWS_DEFAULT_REGION="auto"
 ```
 

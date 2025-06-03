@@ -3,14 +3,14 @@ title: Storage in LanceDB | Data Persistence & Management
 description: Master LanceDB's storage capabilities for efficient data management. Covers local storage, cloud storage, data versioning, and best practices for large-scale vector data persistence.
 ---
 
-# Configuring Cloud Storage for LanceDB
+# **Configuring Cloud Storage for LanceDB**
 
 <!-- TODO: When we add documentation for how to configure other storage types
            we can change the name to a more general "Configuring storage" -->
 
 When using LanceDB OSS, you can choose where to store your data. The tradeoffs between different storage options are discussed in the [storage concepts guide](../concepts/storage.md). This guide shows how to configure LanceDB to use different storage options.
 
-## Object Stores
+## **Object Stores**
 
 LanceDB OSS supports object stores such as AWS S3 (and compatible stores), Azure Blob Store, and Google Cloud Storage. Which object store to use is determined by the URI scheme of the dataset path. `s3://` is used for AWS S3, `az://` is used for Azure Blob Storage, and `gs://` is used for Google Cloud Storage. These URIs are passed to the `connect` function:
 
@@ -224,7 +224,7 @@ Getting even more specific, you can set the `timeout` for only a particular tabl
 
     The storage option keys are case-insensitive. So `connect_timeout` and `CONNECT_TIMEOUT` are the same setting. Usually lowercase is used in the `storage_options` argument and uppercase is used for environment variables. In the `lancedb` Node package, the keys can also be provided in `camelCase` capitalization. For example, `connectTimeout` is equivalent to `connect_timeout`.
 
-### General configuration
+### **General configuration**
 
 There are several options that can be set for all object stores, mostly related to network client configuration.
 
@@ -241,7 +241,7 @@ There are several options that can be set for all object stores, mostly related 
 | `proxy_ca_certificate`     | PEM-formatted CA certificate for proxy connections.                                                |
 | `proxy_excludes`           | List of hosts that bypass the proxy. This is a comma-separated list of domains and IP masks. Any subdomain of the provided domain will be bypassed. For example, `example.com, 192.168.1.0/24` would bypass `https://api.example.com`, `https://www.example.com`, and any IP in the range `192.168.1.0/24`. |
 
-### AWS S3
+### **AWS S3**
 
 To configure credentials for AWS S3, you can use the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` keys. Region can also be set, but it is not mandatory when using AWS.
 These can be set as environment variables or passed in the `storage_options` parameter:
@@ -332,7 +332,7 @@ The following keys can be used as both environment variables or keys in the `sto
 
     **[Configuring a bucket lifecycle configuration to delete incomplete multipart uploads](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpu-abort-incomplete-mpu-lifecycle-config.html)**
 
-#### AWS IAM Permissions
+#### **AWS IAM Permissions**
 
 If a bucket is private, then an IAM policy must be specified to allow access to it. For many development scenarios, using broad permissions such as a PowerUser account is more than sufficient for working with LanceDB. However, in many production scenarios, you may wish to have as narrow as possible permissions.
 
@@ -652,7 +652,7 @@ To configure LanceDB to use an S3 Express endpoint, you must set the storage opt
         );
         ```
 
-### Google Cloud Storage
+### **Google Cloud Storage**
 
 GCS credentials are configured by setting the `GOOGLE_SERVICE_ACCOUNT` environment variable to the path of a JSON file containing the service account credentials. Alternatively, you can pass the path to the JSON file in the `storage_options`:
 
@@ -815,3 +815,60 @@ These keys can be used as both environment variables or keys in the `storage_opt
 | ``azure_disable_tagging``             | Disables tagging objects. This can be desirable if not supported by the backing store.           |
 
 <!-- TODO: demonstrate how to configure networked file systems for optimal performance -->
+
+### **Tigris Object Storage**
+
+Tigris Object Storage provides an S3-compatible API for its global storage. To connect to Tigris Object Storage, you need to configure the endpoint and set the region to auto:
+
+=== "Python"
+
+    === "Sync API"
+
+        ```python
+        import lancedb
+        db = lancedb.connect(
+            "s3://your-bucket/path",
+            storage_options={
+                "endpoint": "https://t3.storage.dev",
+                "region": "auto"
+            }
+        )
+        ```
+    === "Async API"
+
+        ```python
+        import lancedb
+        async_db = await lancedb.connect_async(
+            "s3://your-bucket/path",
+            storage_options={
+                "endpoint": "https://t3.storage.dev",
+                "region": "auto"
+            }
+        )
+        ```
+
+=== "TypeScript"
+
+    ```ts
+    import * as lancedb from "@lancedb/lancedb";
+    const db = await lancedb.connect(
+        "s3://your-bucket/path",
+        {
+            storageOptions: {
+                endpoint: "https://t3.storage.dev",
+                region: "auto"
+            }
+        }
+    );
+    ```
+
+You can also set these values using environment variables:
+
+```bash
+export AWS_ENDPOINT="https://t3.storage.dev"
+export AWS_DEFAULT_REGION="auto"
+```
+
+!!! note "Example Project"
+
+    [**Tigris has prepared a tutorial**](https://www.tigrisdata.com/docs/libraries/lancedb/) on how to build a RAG application with LanceDB, hosted on Tigris Object Storage.

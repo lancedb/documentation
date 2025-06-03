@@ -11,7 +11,7 @@ hide:
 Revamped LanceDB Cloud onboarding, added Umap visualization and improved performance for `upsert` 
 
 ### Features
-* **Commit Conflict Free Upsert**: Upsert operations now support full concurrency without commit conflicts, enabling high-throughput parallel data ingestion/updates.
+* **Reduced Commit Conflict Upsert**: Upsert operations to the same table are now designed to be conflict-free under typical concurrent workloads, enabling more reliable and higher-throughput parallel data ingestion and updates.
     *  Added timeout parameter for `merge_insert` for better control over long-running upserts [\[lancedb#2378\]](https://github.com/lancedb/lancedb/pull/2378)
 * **Reduced IOPS to object store**:
     * Optimized I/O Patterns for small tables: Significant improvements reduce total IOPS to the object store by up to 95%, especially benefiting small-table workloads. [\[lance#3764\]](https://github.com/lancedb/lance/pull/3764)

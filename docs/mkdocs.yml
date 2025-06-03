@@ -64,7 +64,7 @@ plugins:
         'guides/scalar_index.md': 'guides/indexing/scalar-index.md'
         'cloud/rest.md': 'api/cloud.md'
         'api_reference.md': 'api/index.md'
-        'migration.md': 'api/api-changes.md'
+        'migration.md': 'api/cloud.md'
         'faq.md': 'overview/faq.md'
         'cloud/cloud_faq.md': 'cloud/cloud-faq.md'
         'ann_indexes.md': 'guides/indexing/vector-index.md'
@@ -355,7 +355,6 @@ nav:
 
   - API & SDK Reference:
       - Overview: api/index.md
-      - API Changes: api/api-changes.md
       - LanceDB Cloud REST API: api/cloud.md
       - Client SDKs:
           - Python SDK: python/python.md

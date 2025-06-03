@@ -1,50 +1,366 @@
-:root {
-    --md-typeset-a-color: #e67e00; /* Darker orange */
+/* ==========================================================================
+   Theme Variables
+   ========================================================================== */
+
+/* Light mode (default) theme variables */
+[data-md-color-scheme="default"] {
+    /* Link colors */
+    --md-typeset-a-color: #000000;
+    --md-typeset-a-color--hover: #000000;
+    --md-primary-fg-color: #000000;
+    --md-accent-fg-color: #000000;
+    --md-accent-fg-color--transparent: rgba(0, 0, 0, 0.1);
+    --md-default-fg-color: #000000;
+
+    /* Header + Footer colors */
+    --md-footer-fg-color: #000000;
+    --md-footer-fg-color--light: #000000;
+    --md-footer-fg-color--lighter: #000000;
+     /* Announcement Strip colors */
+    --md-footer-bg-color: #ececec;
+     /* Footer colors */
+    --md-footer-bg-color--dark: #ffffff;
 }
 
-.md-typeset a {
-    color: var(--md-typeset-a-color);
+/* Dark mode (slate) theme variables */
+[data-md-color-scheme="slate"] {
+    /* Link colors */
+    --md-typeset-a-color: #ffffff;
+    --md-typeset-a-color--hover: #ffffff;
+    --md-primary-fg-color: #ffffff;
+    --md-accent-fg-color: #ffffff;
+    --md-accent-fg-color--transparent: rgba(255, 255, 255, 0.1);
+    --md-default-fg-color: #ffffff;  
+
+    /* Footer colors */
+    --md-footer-fg-color: #ffffff;
+    --md-footer-fg-color--light: #ffffff;
+    --md-footer-fg-color--lighter: #ffffff;
+    --md-footer-bg-color: #000000;
+    --md-footer-bg-color--dark: #000000;
+    
+    /* Background colors */
+    --md-primary-bg-color: #000000;
+    --md-primary-bg-color--light: #000000;
+    --md-default-bg-color: #000000;
+    --md-default-bg-color--light: #000000;
+    --md-default-bg-color--lighter: #000000;
+    --md-default-bg-color--lightest: #000000;
 }
 
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */
+
+/* Light mode header */
+[data-md-color-scheme="default"] .md-header {
+    background-color: #ffffff;
+}
+
+[data-md-color-scheme="default"] .md-header__button,
+[data-md-color-scheme="default"] .md-header__source,
+[data-md-color-scheme="default"] .md-tabs__link,
+[data-md-color-scheme="default"] .md-header__title,
+[data-md-color-scheme="default"] .md-header__source {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+[data-md-color-scheme="default"] .md-header__button:hover,
+[data-md-color-scheme="default"] .md-tabs__link:hover {
+    color: #000000 !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="default"] .md-tabs__link--active {
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+    background-color: #ffffff;
+}
+
+/* Dark mode header */
+[data-md-color-scheme="slate"] .md-header {
+    background-color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-header__button,
+[data-md-color-scheme="slate"] .md-header__source,
+[data-md-color-scheme="slate"] .md-tabs__link,
+[data-md-color-scheme="slate"] .md-header__title,
+[data-md-color-scheme="slate"] .md-header__source {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+[data-md-color-scheme="slate"] .md-header__button:hover,
+[data-md-color-scheme="slate"] .md-tabs__link:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .md-tabs__link--active {
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+[data-md-color-scheme="slate"] .md-tabs {
+    background-color: #000000;
+}
+
+/* ==========================================================================
+   Sidebar Styles
+   ========================================================================== */
+
+/* Light mode sidebar */
+[data-md-color-scheme="default"] .md-nav__item .md-nav__link {
+    color: #000000 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__item .md-nav__link:hover {
+    color: #000000 !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="default"] .md-nav__item .md-nav__link--active {
+    color: #000000 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link[for] {
+    color: #000000 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__link[for]:hover {
+    color: #000000 !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="default"] .md-nav__link[for].md-nav__link--active {
+    color: #000000 !important;
+}
+
+[data-md-color-scheme="default"] .md-nav__title {
+    color: #000000 !important;
+}
+
+/* Dark mode sidebar */
+[data-md-color-scheme="slate"] .md-nav__item .md-nav__link {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item .md-nav__link:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item .md-nav__link--active {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link[for] {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link[for]:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link[for].md-nav__link--active {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-nav__title {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Footer Styles
+   ========================================================================== */
+
+/* Light mode footer */
+[data-md-color-scheme="default"] .md-footer {
+    background-color: #000000;
+}
+
+[data-md-color-scheme="default"] .md-footer__link {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__link:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="default"] .md-footer__title {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="default"] .md-footer__copyright {
+    color: #ffffff !important;
+}
+
+/* Dark mode footer */
+[data-md-color-scheme="slate"] .md-footer {
+    background-color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-footer__link {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-footer__link:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .md-footer__title {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-footer__copyright {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   Content Styles
+   ========================================================================== */
+
+/* General link styles */
+.md-typeset a,
+.md-typeset a:focus,
 .md-typeset a:hover {
+    color: var(--md-typeset-a-color);
     text-decoration: underline;
 }
 
-/* Make bold text orange */
-.md-typeset b,
-.md-typeset strong {
-    color: var(--md-typeset-a-color);
+.md-typeset a:hover {
+    opacity: 0.8;
 }
 
-/* Make navigation text bold */
-.md-nav__link {
-    font-weight: bold;
+/* Heading styles */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3 {
+    color: var(--md-default-fg-color);
+    font-weight: bold !important;
 }
 
-.md-nav__title {
-    font-weight: bold;
-    color: #000000 !important; /* Make section titles black */
+.md-typeset h1 a,
+.md-typeset h2 a,
+.md-typeset h3 a {
+    font-weight: bold !important;
 }
 
-/* Override button colors to orange */
-.md-button {
+/* Code block styles */
+[data-md-color-scheme="slate"] .md-typeset code {
+    color: #ffffff;
+    background-color: #1a1a1a;
+}
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
+/* Light mode buttons */
+[data-md-color-scheme="default"] .md-button {
     color: #000000 !important;
+    background-color: #ffffff !important;
     border-color: #000000 !important;
 }
 
-.md-button:hover {
-    background-color: #000000 !important;
-    color: white !important;
+[data-md-color-scheme="default"] .md-button:hover {
+    color: #000000 !important;
+    background-color: #f0f0f0 !important;
+    border-color: #000000 !important;
+    opacity: 0.8;
 }
 
-/* Override primary button colors */
-.md-button--primary {
-    background-color: #000000 !important;
+[data-md-color-scheme="default"] .md-button--primary {
+    color: #000000 !important;
+    background-color: #ffffff !important;
     border-color: #000000 !important;
-    color: white !important;
 }
 
-.md-button--primary:hover {
-    background-color: #000000 !important; /* Even darker orange on hover */
+[data-md-color-scheme="default"] .md-button--primary:hover {
+    color: #000000 !important;
+    background-color: #f0f0f0 !important;
     border-color: #000000 !important;
+    opacity: 0.8;
 }
+
+/* Dark mode buttons */
+[data-md-color-scheme="slate"] .md-button {
+    color: #ffffff !important;
+    background-color: #1a1a1a !important;
+    border-color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-button:hover {
+    color: #ffffff !important;
+    background-color: #333333 !important;
+    border-color: #ffffff !important;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="slate"] .md-button--primary {
+    color: #ffffff !important;
+    background-color: #1a1a1a !important;
+    border-color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-button--primary:hover {
+    color: #ffffff !important;
+    background-color: #333333 !important;
+    border-color: #ffffff !important;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   Additional Dark Mode Overrides
+   ========================================================================== */
+
+[data-md-color-scheme="slate"] {
+    color-scheme: dark;
+}
+
+[data-md-color-scheme="slate"] .md-nav__source {
+    background-color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-search__input {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+    color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-search__input + .md-search__icon {
+    color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-search__scrollwrap {
+    background-color: #000000;
+}
+
+[data-md-color-scheme="slate"] .md-search__scrollwrap::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+}
+
+[data-md-color-scheme="slate"] .md-search__scrollwrap::-webkit-scrollbar-track {
+    background-color: #000000;
+}
+
+/* Content link overrides */
+[data-md-color-scheme="slate"] .md-content__inner a {
+    color: #ffffff !important;
+}
+
+[data-md-color-scheme="slate"] .md-content__inner a:hover {
+    color: #ffffff !important;
+    opacity: 0.8;
+} 

@@ -13,9 +13,21 @@ theme:
   logo: assets/logo.png
   favicon: assets/logo.png
   palette:
+    # Palette toggle for light mode
     - scheme: default
+      primary: white
+      accent: black
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
       primary: black
       accent: white
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
   features:
     - announce.dismiss
     - content.code.copy
@@ -359,10 +371,9 @@ nav:
       - ↗Improve retrievers with hybrid search and reranking: https://blog.lancedb.com/hybrid-search-and-reranking-report/
 
 extra_css:
-  - styles/mkdocsoad.css
+  # - styles/mkdocsoad.css
   - styles/links.css
-#  - styles/global.css
-  - styles/extra.css
+
 
 extra_javascript:
   # - "extra_js/init_ask_ai_widget.js"

@@ -371,7 +371,7 @@ nav:
       - ↗Improve retrievers with hybrid search and reranking: https://blog.lancedb.com/hybrid-search-and-reranking-report/
 
 extra_css:
-  # - styles/mkdocsoad.css
+  - styles/mkdocsoad.css
   - styles/links.css
 
 

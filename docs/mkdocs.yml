@@ -160,6 +160,8 @@ markdown_extensions:
       baselevel: 1
       permalink: ""
 
+use_directory_urls: false
+
 nav:
   - Documentation:
       - Getting Started:
@@ -379,6 +381,7 @@ extra_css:
 extra_javascript:
   # - "extra_js/init_ask_ai_widget.js"
   - "extra_js/reo.js"
+  - "extra_js/override.js"
 
 extra:
   analytics:

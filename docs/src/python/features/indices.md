@@ -1,4 +1,4 @@
-# Indices
+# Indexes
 
 Indices can be created on a table to speed up queries. This section lists the indices that LanceDb supports.
 

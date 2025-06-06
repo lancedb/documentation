@@ -1,8 +1,8 @@
 site_name: LanceDB Documentation
-site_url: https://lancedb.github.io/docs
-repo_url: https://github.com/lancedb/documentation
-edit_uri: https://github.com/lancedb/documentation
-repo_name: lancedb/documentation
+site_url: https://lancedb.com/documentation
+repo_url: https://github.com/lancedb/lancedb
+edit_uri: https://github.com/lancedb/lancedb
+repo_name: lancedb/lancedb
 docs_dir: src
 watch:
   - src
@@ -64,7 +64,7 @@ plugins:
         'guides/scalar_index.md': 'guides/indexing/scalar-index.md'
         'cloud/rest.md': 'api/cloud.md'
         'api_reference.md': 'api/index.md'
-        'migration.md': 'api/api-changes.md'
+        'migration.md': 'api/cloud.md'
         'faq.md': 'overview/faq.md'
         'cloud/cloud_faq.md': 'cloud/cloud-faq.md'
         'ann_indexes.md': 'guides/indexing/vector-index.md'
@@ -355,16 +355,30 @@ nav:
                   - HyDE: rag/advanced_techniques/hyde.md
                   - FLARE: rag/advanced_techniques/flare.md
 
-  - API & SDK Reference:
+  - API Reference:
       - Overview: api/index.md
-      - API Changes: api/api-changes.md
       - LanceDB Cloud REST API: api/cloud.md
-      - Client SDKs:
-          - Python SDK: python/python.md
-          - JavaScript SDK:
-              - Current SDK (@lancedb/lancedb): js/globals.md
-              - Legacy SDK (vectordb): javascript/modules.md
-          - Rust SDK: https://docs.rs/lancedb/latest/lancedb/
+      - Python SDK:
+              - Overview: python/index.md
+              - Connections:
+                  - Sync: python/sync/connections.md
+                  - Async: python/async/connections.md
+              - Tables & Data:
+                  - Sync: python/sync/tables.md
+                  - Async: python/async/tables.md
+                  - Pydantic Data Models: python/integrations/pydantic.md
+              - Search & Querying:
+                  - Sync: python/sync/querying.md
+                  - Async: python/async/querying.md
+                  - Indexes: python/features/indices.md
+              - AI & ML Features:
+                  - Embeddings: python/integrations/embeddings.md
+                  - Reranking: python/integrations/reranking.md
+                  - Context: python/features/context.md        
+              - LanceDBCloud: python/saas/index.md
+      - JavaScript SDK: 
+              - Overview: js/index.md
+      - Rust SDK: https://docs.rs/lancedb/latest/lancedb/
   - Changelog:
       - LanceDB Cloud & Enterprise: changelog/lancedb-changelog.md
       - ↗LanceDB Open Source: https://github.com/lancedb/lancedb/releases

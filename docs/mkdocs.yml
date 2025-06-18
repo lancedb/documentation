@@ -260,6 +260,8 @@ nav:
           - Getting Started:
               - Startup Guide: multimodal-lakehouse/startup.md
               - Deployment: multimodal-lakehouse/deploy.md
+              - Geneva Quickstart (Local): notebooks/geneva-quickstart-local.ipynb
+              - Geneva Quickstart (Materialized View): notebooks/geneva-quickstart-materialized-view.ipynb
           - Features:
               - Overview: multimodal-lakehouse/features.md
               - Materialized Views: multimodal-lakehouse/features/materialized_views.md

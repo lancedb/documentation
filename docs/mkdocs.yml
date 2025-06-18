@@ -1,8 +1,8 @@
 site_name: LanceDB Documentation
 site_url: https://lancedb.github.io/docs
-repo_url: https://github.com/lancedb/documentation
+repo_url: https://github.com/lancedb/lancedb
 edit_uri: https://github.com/lancedb/documentation
-repo_name: lancedb/documentation
+repo_name: lancedb/lancedb
 docs_dir: src
 watch:
   - src
@@ -223,6 +223,7 @@ nav:
               - What are Embeddings?: embeddings/understanding_embeddings.md
               - Getting Started: embeddings/index.md
               - Embedding Models: embeddings/embedding_functions.md
+              - Default Embedding Models: embeddings/default_embedding_functions.md
               - Text Embedding Models:
                   - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
                   - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
@@ -265,19 +266,18 @@ nav:
           - Features:
               - Overview: multimodal-lakehouse/features.md
               - Materialized Views: multimodal-lakehouse/features/materialized_views.md
-              - User-Defined Functions (UDFs): multimodal-lakehouse/features/UDFs.md
+              - PyTorch Integration: multimodal-lakehouse/torch.md
+              - SQL Queries: multimodal-lakehouse/sql.md
+          - User-Defined Functions:
+              - Overview: multimodal-lakehouse/features/UDFs.md
+              - Blobs: multimodal-lakehouse/udfs/blobs.md
               - Backfill: multimodal-lakehouse/features/backfill.md
           - API Reference:
               - Overview: multimodal-lakehouse/api.md
               - Connection: multimodal-lakehouse/api/connection.md
               - Table: multimodal-lakehouse/api/table.md
               - UDF: multimodal-lakehouse/api/udf.md
-          - UDFs:
-              - Blobs: multimodal-lakehouse/udfs/blobs.md
-          - Operations:
-              - SQL Queries: multimodal-lakehouse/sql.md
-              - PyTorch Integration: multimodal-lakehouse/torch.md
-              - Troubleshooting: multimodal-lakehouse/troubleshooting.md
+          - Troubleshooting: multimodal-lakehouse/troubleshooting.md
   - Tutorials & Integrations:
       - Integrations:
           - Overview: integrations/index.md

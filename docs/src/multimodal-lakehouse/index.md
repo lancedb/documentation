@@ -1,3 +1,7 @@
+---
+hide: toc
+---
+
 # Multimodal Lakehouse
 
 `Geneva` is an all-in-one data platform to manage petabytes of multimodal data.

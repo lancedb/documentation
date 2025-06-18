@@ -186,27 +186,30 @@ nav:
               - Benchmark: enterprise/benchmark.md
               - Security: enterprise/security.md
               - FAQ: enterprise/enterprise-faq.md
-      - Core Usage:
+      - Usage Guide:
           - Concepts:
               - Data: concepts/data.md
               - Vectors: concepts/vectors.md
               - Indexing: concepts/indexing.md
               - Search: concepts/search.md
               - Storage: concepts/storage.md
-          - Working with Tables: 
+          - Tables:
               - Getting Started: guides/tables/index.md
               - Table Operations: guides/tables/create.md
               - Data Operations: guides/tables/update.md
               - Managing Schema: guides/tables/schema.md
-              - Versioning Tables: guides/tables/versioning.md
-              - Ensuring Consistency: guides/tables/consistency.md
-          - Building an Index:
+              - Table Consistency: guides/tables/consistency.md
+              - Versioning Tables: 
+                  - Overview: guides/tables/versioning.md
+                  - Sync API: notebooks/reproducibility.ipynb
+                  - Async API: notebooks/reproducibility_async.ipynb
+          - Indexing:
               - Vector Index: guides/indexing/vector-index.md
               - Scalar Index: guides/indexing/scalar-index.md
               - Full Text Index: guides/indexing/fts-index.md
               - Reindexing: guides/indexing/reindexing.md
               - GPU Indexing: guides/indexing/gpu-indexing.md
-          - Structuring Queries:
+          - Search:
               - Vector Search: guides/search/vector-search.md
               - Full-Text Search (Native): guides/search/full-text-search.md
               - Full-Text Search (Tantivy): guides/search/full-text-search-tantivy.md
@@ -215,88 +218,30 @@ nav:
               - Filtering: guides/search/filtering.md
               - SQL Queries: guides/search/sql-queries.md
               - Query Planning: guides/search/query-planning.md
-          - Configuring Storage: guides/storage/integrations.md
-      - Advanced Usage:
-          - Complex Queries:
-              - Hybrid Search:
-                  - Comparing Rerankers: reranking/eval.md
-                  - Airbnb financial data example: notebooks/hybrid_search.ipynb
-              - Multivector Search:
-                  - ColPali and LanceDB: notebooks/Multivector_on_LanceDB.ipynb
-              - Reranking:
-                  - Quickstart: reranking/index.md
-                  - Cohere Reranker: reranking/cohere.md
-                  - Linear Combination Reranker: reranking/linear_combination.md
-                  - Reciprocal Rank Fusion Reranker: reranking/rrf.md
-                  - Cross Encoder Reranker: reranking/cross_encoder.md
-                  - ColBERT Reranker: reranking/colbert.md
-                  - Jina Reranker: reranking/jina.md
-                  - OpenAI Reranker: reranking/openai.md
-                  - AnswerDotAi Rerankers: reranking/answerdotai.md
-                  - Voyage AI Rerankers: reranking/voyageai.md
-                  - Building Custom Rerankers: reranking/custom_reranker.md
-                  - Example: notebooks/lancedb_reranking.ipynb
               - Optimizing Query Performance: guides/search/optimize-queries.md
-          - Working with Embeddings:
+          - Embeddings:
               - What are Embeddings?: embeddings/understanding_embeddings.md
               - Getting Started: embeddings/index.md
               - Embedding Models: embeddings/embedding_functions.md
-              - Available Models:
-                  - Overview: embeddings/default_embedding_functions.md
-                  - Text Embedding Models:
-                      - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
-                      - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
-                      - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
-                      - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
-                      - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
-                      - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
-                      - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
-                      - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
-                      - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
-                      - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
-                      - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
-                  - Multimodal Embedding Models:
-                      - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
-                      - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
-                      - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
+              - Text Embedding Models:
+                  - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
+                  - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
+                  - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
+                  - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
+                  - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
+                  - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
+                  - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
+                  - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
+                  - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
+                  - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
+                  - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
+              - Multimodal Embedding Models:
+                  - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
+                  - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
+                  - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
               - User-Defined Embedding Models: embeddings/custom_embedding_function.md
               - Variables and Secrets: embeddings/variables_and_secrets.md
-          - Versioning & Reproducibility:
-              - Versioning Guide: guides/versioning.md
-              - Sync API: notebooks/reproducibility.ipynb
-              - Async API: notebooks/reproducibility_async.ipynb
-    
-
-  - Tutorials & Integrations:
-      - Integrations:
-          - Overview: integrations/index.md
-          - Platforms:
-              - Pandas and PyArrow: python/pandas_and_pyarrow.md
-              - Polars: python/polars_arrow.md
-              - DuckDB: python/duckdb.md
-              - Voxel51: integrations/voxel51.md
-              - dlt: integrations/dlt.md
-              - phidata: integrations/phidata.md
-          - Embeddings:
-              - Available Models:
-                  - Overview: embeddings/default_embedding_functions.md
-                  - Text Embedding Models:
-                      - Sentence Transformers: embeddings/available_embedding_models/text_embedding_functions/sentence_transformers.md
-                      - Huggingface Embedding Models: embeddings/available_embedding_models/text_embedding_functions/huggingface_embedding.md
-                      - Ollama Embeddings: embeddings/available_embedding_models/text_embedding_functions/ollama_embedding.md
-                      - OpenAI Embeddings: embeddings/available_embedding_models/text_embedding_functions/openai_embedding.md
-                      - Instructor Embeddings: embeddings/available_embedding_models/text_embedding_functions/instructor_embedding.md
-                      - Gemini Embeddings: embeddings/available_embedding_models/text_embedding_functions/gemini_embedding.md
-                      - Cohere Embeddings: embeddings/available_embedding_models/text_embedding_functions/cohere_embedding.md
-                      - Jina Embeddings: embeddings/available_embedding_models/text_embedding_functions/jina_embedding.md
-                      - AWS Bedrock Text Embedding Functions: embeddings/available_embedding_models/text_embedding_functions/aws_bedrock_embedding.md
-                      - IBM watsonx.ai Embeddings: embeddings/available_embedding_models/text_embedding_functions/ibm_watsonx_ai_embedding.md
-                      - Voyage AI Embeddings: embeddings/available_embedding_models/text_embedding_functions/voyageai_embedding.md
-                  - Multimodal Embedding Models:
-                      - OpenClip embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/openclip_embedding.md
-                      - Imagebind embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/imagebind_embedding.md
-                      - Jina Embeddings: embeddings/available_embedding_models/multimodal_embedding_functions/jina_multimodal_embedding.md
-          - Rerankers:
+          - Reranking:
               - Quickstart: reranking/index.md
               - Cohere Reranker: reranking/cohere.md
               - Linear Combination Reranker: reranking/linear_combination.md
@@ -308,7 +253,39 @@ nav:
               - AnswerDotAi Rerankers: reranking/answerdotai.md
               - Voyage AI Rerankers: reranking/voyageai.md
               - Building Custom Rerankers: reranking/custom_reranker.md
-              - Example: notebooks/lancedb_reranking.ipynb
+              - Comparing Rerankers: reranking/eval.md
+          - Storage: guides/storage/integrations.md
+      - Multimodal Lakehouse:
+          - Overview: multimodal-lakehouse/index.md
+          - Getting Started:
+              - Startup Guide: multimodal-lakehouse/startup.md
+              - Deployment: multimodal-lakehouse/deploy.md
+          - Features:
+              - Overview: multimodal-lakehouse/features.md
+              - Materialized Views: multimodal-lakehouse/features/materialized_views.md
+              - User-Defined Functions (UDFs): multimodal-lakehouse/features/UDFs.md
+              - Backfill: multimodal-lakehouse/features/backfill.md
+          - API Reference:
+              - Overview: multimodal-lakehouse/api.md
+              - Connection: multimodal-lakehouse/api/connection.md
+              - Table: multimodal-lakehouse/api/table.md
+              - UDF: multimodal-lakehouse/api/udf.md
+          - UDFs:
+              - Blobs: multimodal-lakehouse/udfs/blobs.md
+          - Operations:
+              - SQL Queries: multimodal-lakehouse/sql.md
+              - PyTorch Integration: multimodal-lakehouse/torch.md
+              - Troubleshooting: multimodal-lakehouse/troubleshooting.md
+  - Tutorials & Integrations:
+      - Integrations:
+          - Overview: integrations/index.md
+          - Platforms:
+              - Pandas and PyArrow: python/pandas_and_pyarrow.md
+              - Polars: python/polars_arrow.md
+              - DuckDB: python/duckdb.md
+              - Voxel51: integrations/voxel51.md
+              - dlt: integrations/dlt.md
+              - phidata: integrations/phidata.md
           - Frameworks:
               - LangChain:
                   - LangChain 🔗: integrations/langchain.md
@@ -354,6 +331,11 @@ nav:
               - Advanced Techniques:
                   - HyDE: rag/advanced_techniques/hyde.md
                   - FLARE: rag/advanced_techniques/flare.md
+          - Examples:
+              - Hybrid Search: notebooks/hybrid_search.ipynb
+              - Multivector Search: notebooks/Multivector_on_LanceDB.ipynb
+              - Reranking: notebooks/lancedb_reranking.ipynb
+
 
   - API & SDK Reference:
       - Overview: api/index.md

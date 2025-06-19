@@ -496,7 +496,7 @@ Now we can perform both basic and fuzzy searches:
 
     # Basic match (exact search)
     basic_match_results = (
-        table.search(MatchQuery("crazily", "text"), query_type="fts")
+        table.search(MatchQuery("crazily", "text"))
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -521,7 +521,7 @@ Now we can perform both basic and fuzzy searches:
     ```python
     # Fuzzy match (allows typos)
     fuzzy_results = (
-        table.search(MatchQuery("crazi~1", "text", fuzziness=2), query_type="fts")
+        table.search(MatchQuery("crazi~1", "text", fuzziness=2))
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -565,7 +565,7 @@ Phrase matching is particularly useful for:
 
     print("\n1. Exact phrase match for 'puppy runs':")
     phrase_results = (
-        table.search(PhraseQuery("puppy runs", "text"), query_type="fts")
+        table.search(PhraseQuery("puppy runs", "text"))
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -597,7 +597,7 @@ For example, the phrase query "puppy merrily" would not return any results by de
 
     print("\n1. Flexible phrase match for 'puppy merrily' with slop=1:")
     phrase_results = (
-        table.search(PhraseQuery("puppy merrily", "text", slop=1), query_type="fts")
+        table.search(PhraseQuery("puppy merrily", "text", slop=1))
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -646,7 +646,6 @@ in your queries. This feature is particularly useful when you need to:
               MatchQuery("puppy", "text"),
               negative_boost=0.2,
           ),
-          query_type="fts",
       )
       .select(["id", "text"])
       .limit(100)
@@ -658,7 +657,7 @@ in your queries. This feature is particularly useful when you need to:
     # Search across both text and text2
     print("\n1. Searching 'crazily' in both text and text2:")
     multi_match_results = (
-        table.search(MultiMatchQuery("crazily", ["text", "text2"]), query_type="fts")
+        table.search(MultiMatchQuery("crazily", ["text", "text2"]))
         .select(["id", "text", "text2"])
         .limit(100)
         .to_pandas()
@@ -669,7 +668,6 @@ in your queries. This feature is particularly useful when you need to:
     multi_match_boosting_results = (
         table.search(
             MultiMatchQuery("crazily", ["text", "text2"], boosts=[1.0, 2.0]),
-            query_type="fts",
         )
         .select(["id", "text", "text2"])
         .limit(100)
@@ -730,7 +728,17 @@ LanceDB supports boolean logic in full-text search, allowing you to combine mult
 
 #### **Combining Two Match Queries**
 
-You can combine two MatchQuery objects using either the `and` function or the `&` operator (e.g., `MatchQuery("puppy", "text") and MatchQuery("merrily", "text")`); both methods are supported and yield the same result. Similarly, you can use either the `or` function or the `|` operator to perform an or query.
+In Python, you can combine two MatchQuery objects using either the `and` function or the `&` operator (e.g., `MatchQuery("puppy", "text") and MatchQuery("merrily", "text")`); both methods are supported and yield the same result. Similarly, you can use either the `or` function or the `|` operator to perform an or query. 
+
+In TypeScript, boolean queries are constructed using the `BooleanQuery` class with a list of [Occur, subquery] pairs. For example, to perform an AND query:(e.g. 
+    `new BooleanQuery([
+            [Occur.Must, new MatchQuery("puppy", "text")],
+            [Occur.Must, new MatchQuery("merrily", "text")],
+          ])`)
+This approach allows you to specify complex boolean logic by combining multiple subqueries with different Occur values (such as Must, Should, or MustNot).
+
+!!! note
+    A boolean query must include at least one `SHOULD` or `MUST` clause. Queries that contain only a `MUST_NOT` clause are not allowed.
 
 === "Python"
     ```python
@@ -739,7 +747,7 @@ You can combine two MatchQuery objects using either the `and` function or the `&
     # Example: Find documents containing both "puppy" and "merrily"
     and_query = MatchQuery("puppy", "text") & MatchQuery("merrily", "text")
     and_results = (
-        table.search(and_query, query_type="fts")
+        table.search(and_query)
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -750,7 +758,7 @@ You can combine two MatchQuery objects using either the `and` function or the `&
     # Example: Find documents containing either "puppy" or "merrily"
     or_query = MatchQuery("puppy", "text") | MatchQuery("merrily", "text")
     or_results = (
-        table.search(or_query, query_type="fts")
+        table.search(or_query)
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -795,10 +803,9 @@ You can combine two MatchQuery objects using either the `and` function or the `&
     ```
 
 !!! tip 
-    - Use `and`/`&` for intersection (documents must match all queries).
-    - Use `or`/`|` for union (documents must match at least one query).
+    - Use `and`/`&`(Python), `Occur.Must`(Typescript) for intersection (documents must match all queries).
+    - Use `or`/`|`(Python), `Occur.Should`(Typescript) for union (documents must match at least one query).
 
-Let me know if you want to add `NOT` queries or more advanced boolean logic!
 
 ## **Full-Text Search on Array Fields**
 
@@ -862,10 +869,18 @@ LanceDB supports full-text search on string array columns, enabling efficient ke
 
     # Search examples
     print("\nSearching for 'learning' in tags with a typo:")
-    result = table.search(MatchQuery("learnin", column="tags", fuzziness=1), query_type="fts").select(['id', 'tags', 'description']).to_arrow()
+    result = (
+        table.search(MatchQuery("learnin", column="tags", fuzziness=1))
+        .select(['id', 'tags', 'description'])
+        .to_arrow()
+    )
 
     print("\nSearching for 'machine learning' in tags:")
-    result = table.search(PhraseQuery("machine learning", column="tags"), query_type="fts").select(['id', 'tags', 'description']).to_arrow()
+    result = (
+        table.search(PhraseQuery("machine learning", column="tags"))
+        .select(['id', 'tags', 'description'])
+        .to_arrow()
+    )
     ```
 
 === "TypeScript"

@@ -300,7 +300,7 @@ For full-text search you can specify either a **phrase** query like `"the old ma
 or a **terms** search query like `old man sea`. For more details on the terms
 query syntax, see Tantivy's [query parser rules](https://docs.rs/tantivy/latest/tantivy/query/struct.QueryParser.html).
 
-To search for a phrase, the index must be created with `with_position=True`:
+To search for a phrase, the index must be created with `with_position=True` and `remove_stop_words=False`:
 === "Sync API"
 
     ```python
@@ -585,6 +585,39 @@ Phrase matching is particularly useful for:
       .toArray();
     ```
 
+#### **Flexible Phrase Match**
+To provide more flexible phrase matching, LanceDB supports the `slop` parameter. This allows you to match phrases where the terms appear close to each other, even if they are not directly adjacent or in the exact order, as long as they are within the specified `slop` value.
+
+For example, the phrase query "puppy merrily" would not return any results by default. However, if you set `slop=1`, it will match phrases like "puppy jumps merrily", "puppy runs merrily", and similar variations where one word appears between "puppy" and "merrily".
+
+=== "Python"
+    ```python
+    # Flexible phrase match with slop=1 for 'puppy merrily'
+    from lancedb.query import PhraseQuery
+
+    print("\n1. Flexible phrase match for 'puppy merrily' with slop=1:")
+    phrase_results = (
+        table.search(PhraseQuery("puppy merrily", "text", slop=1), query_type="fts")
+        .select(["id", "text"])
+        .limit(100)
+        .to_pandas()
+    )
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import { PhraseQuery } from "@lancedb/lancedb";
+
+    // Flexible phrase match with slop=1 for 'puppy runs'
+    console.log("\n1. Flexible phrase match for 'puppy runs' with slop=1:");
+    const phraseResults = await table.query()
+      .fullTextSearch(new PhraseQuery("puppy runs", "text", { slop: 1 }))
+      .select(["id", "text"])
+      .limit(100)
+      .toArray();
+    ```
+
+
 ### **Search with Boosting**
 
 Boosting allows you to control the relative importance of different search terms or fields 
@@ -691,6 +724,81 @@ in your queries. This feature is particularly useful when you need to:
     - For hybrid search combining text and vectors, see our [hybrid search guide](./hybrid-search.md)
     - For performance benchmarks, check our [benchmark results](../enterprise/benchmark.md)
     - For complex queries, use SQL to combine FTS with other filter conditions
+
+### **Boolean Queries**
+LanceDB supports boolean logic in full-text search, allowing you to combine multiple queries using `and` and `or` operators. This is useful when you want to match documents that satisfy multiple conditions (intersection) or at least one of several conditions (union).
+
+#### **Combining Two Match Queries**
+
+You can combine two MatchQuery objects using either the `and` function or the `&` operator (e.g., `MatchQuery("puppy", "text") and MatchQuery("merrily", "text")`); both methods are supported and yield the same result. Similarly, you can use either the `or` function or the `|` operator to perform an or query.
+
+=== "Python"
+    ```python
+    from lancedb.query import MatchQuery
+
+    # Example: Find documents containing both "puppy" and "merrily"
+    and_query = MatchQuery("puppy", "text") & MatchQuery("merrily", "text")
+    and_results = (
+        table.search(and_query, query_type="fts")
+        .select(["id", "text"])
+        .limit(100)
+        .to_pandas()
+    )
+    print("\nDocuments containing both 'puppy' and 'merrily':")
+    print(and_results)
+
+    # Example: Find documents containing either "puppy" or "merrily"
+    or_query = MatchQuery("puppy", "text") | MatchQuery("merrily", "text")
+    or_results = (
+        table.search(or_query, query_type="fts")
+        .select(["id", "text"])
+        .limit(100)
+        .to_pandas()
+    )
+    print("\nDocuments containing either 'puppy' OR 'merrily':")
+    print(or_results)
+    ```
+
+=== "TypeScript"
+    ```typescript
+    import { MatchQuery, BooleanQuery, Occur } from "@lancedb/lancedb";
+
+    // Flexible boolean queries with MatchQuery
+
+    // Find documents containing both "puppy" and "merrily"
+    const mustResults = await table
+        .search(
+          new BooleanQuery([
+            [Occur.Must, new MatchQuery("puppy", "text")],
+            [Occur.Must, new MatchQuery("merrily", "text")],
+          ]),
+        )
+        .select(["id", "text"])
+        .limit(100)
+        .toArray();
+    console.log("\nDocuments containing both 'puppy' and 'merrily':");
+    console.log(mustResults);
+
+    // Find documents containing either "puppy" or "merrily"
+    const shouldResults = await table
+        .search(
+          new BooleanQuery([
+            [Occur.Should, new MatchQuery("puppy", "text")],
+            [Occur.Should, new MatchQuery("merrily", "text")],
+          ]),
+        )
+        .select(["id", "text"])
+        .limit(100)
+        .toArray();
+    console.log("\nDocuments containing either 'puppy' or 'merrily':");
+    console.log(shouldResults);
+    ```
+
+!!! tip 
+    - Use `and`/`&` for intersection (documents must match all queries).
+    - Use `or`/`|` for union (documents must match at least one query).
+
+Let me know if you want to add `NOT` queries or more advanced boolean logic!
 
 ## **Full-Text Search on Array Fields**
 

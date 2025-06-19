@@ -64,15 +64,22 @@ LanceDB supports the following configurable parameters for full-text search:
 
 | Parameter         | Type | Default   | Description                                                                                                                                   |
 | ----------------- | ---- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| with_position     | bool | True      | Store token positions (required for phrase queries)                                                                                           |
+| with_position     | bool | False      | Store token positions (required for phrase queries)                                                                                           |
 | base_tokenizer    | str  | "simple"  | Text splitting method:  - "simple": Split by whitespace/punctuation  - "whitespace": Split by whitespace only  - "raw": Treat as single token |
 | language          | str  | "English" | Language for tokenization (stemming/stop words)                                                                                               |
 | max_token_length  | int  | 40        | Maximum token size in bytes; tokens exceeding this length are omitted from the index                                                          |
 | lower_case        | bool | True      | Convert tokens to lowercase                                                                                                                   |
-| stem              | bool | False     | Apply stemming (e.g., "running" → "run")                                                                                                      |
-| remove_stop_words | bool | False     | Remove common stop words                                                                                                                      |
-| ascii_folding     | bool | False     | Normalize accented characters                                                                                                                 |
+| stem              | bool | True     | Apply stemming (e.g., "running" → "run")                                                                                                      |
+| remove_stop_words | bool | True     | Remove common stop words                                                                                                                      |
+| ascii_folding     | bool | True     | Normalize accented characters                                                                                                                 |
 !!! note
     - The `max_token_length` parameter helps optimize indexing performance by filtering out non-linguistic content like base64 data and long URLs
     - When `with_position` is disabled, phrase queries will not work, but index size is reduced and indexing is faster
     - `ascii_folding` is useful for handling international text (e.g., "café" → "cafe")
+
+To enable phrase queries, you must modify these parameters from their default values:
+
+| Parameter         | Required Value | Purpose |
+|-------------------|----------------|---------|
+| with_position     | True           | Enables tracking of token positions for phrase matching |
+| remove_stop_words | False          | Preserves all words, including stop words, for exact phrase matching |

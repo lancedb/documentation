@@ -8,3 +8,4 @@ mkdocs-render-swagger-plugin
 pydantic
 neoteroi-mkdocs
 mkdocs-redirects
+geneva

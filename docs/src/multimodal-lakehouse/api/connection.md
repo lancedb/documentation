@@ -1,1 +1,3 @@
-# Connection
+::: geneva.db.Connection
+    members:
+      jobs

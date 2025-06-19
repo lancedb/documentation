@@ -1,1 +1,1 @@
-# Tables
+::: geneva.table.Table

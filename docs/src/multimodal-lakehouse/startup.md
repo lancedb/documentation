@@ -1,13 +1,13 @@
-# Job and Session Startup Optimizations
+# Job and Session startup optimizations
 
 During interactive sessions, there are two main actions where you would interact with Geneva.
 
-* Compute Cluster Creation
+* Compute cluster creation
 * Job execution
 
 Behind the scenes, Geneva packages your python environment and auto-provisions nodes to execute the jobs.  This can be time consuming, taking on the order of 5mins to complete before any work is done.   The following sections will describe what happens in these steps and how to diagnose and speed up these interactions.
 
-## Compute Cluster Creation
+## Compute cluster creation
 
 To execute a Geneva job, you'll need to initialize a compute environment.  Here's the basic steps Geneva takes to instantiate that cluster:
 
@@ -32,7 +32,7 @@ To speed this up, Geneva employs caching to help optimize the startup time.  The
 
 **Pre-provision nodes and pods.**  In your kubernetes configuration,  you can tag specific nodes with `geneva.lancedb.com/ray-head` k8s label.  These nodes should be configured to be on non-spot instances that are always up.  This makes initial kuberay cluster creation quick.
 
-## Job Execution
+## Job execution
 
 A backfill or materialized view jobs triggers the provisioning of worker nodes that will perform the computations and writes.   A cold start can be slow because several steps must take place before the UDFs can be applied.  However, once nodes and pods are warmed up, the time between submission and execution can be quick.
 

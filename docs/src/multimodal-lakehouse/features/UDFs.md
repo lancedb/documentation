@@ -1,11 +1,11 @@
-# Converting functions into UDFs
+## Converting functions into UDFs
 
 Converting your Python code to a Geneva UDF is simple.  There are three kinds of UDFs that you can provide — scalar UDFs, batched UDFs and stateful UDFs.
 
 In all cases, Geneva uses Python type hints from your functions to infer the input and output
 [arrow data types](https://arrow.apache.org/docs/python/api/datatypes.html) that LanceDB uses.
 
-## Scalar UDFs
+### Scalar UDFs
 
 The **simplest** form is a scalar UDF, which processes one row at a time:
 
@@ -27,7 +27,7 @@ def download_udf(filename:str) -> bytes:
 
 This UDF will take the value of x and value of y from each row and return the product.  The `@udf` wrapper is all that is needed.
 
-## Batched UDFs
+### Batched UDFs
 
 For **better performance**, you can also define batch UDFs that process multiple rows at once.
 
@@ -62,7 +62,7 @@ def recordbatch_filename_len(batch: pa.RecordBatch) -> pa.Array:
     which defines `pyarrow.DataType` of the returned `pyarrow.Array`.
 
 
-## Stateful UDFs
+### Stateful UDFs
 
 You can also define a **stateful** UDF that retains its state across calls.
 
@@ -189,6 +189,13 @@ class OpenAIEmbedding(Callable):
 tbl.add_columns({"embedding": OpenAIEmbedding()})
 ```
 
-## UDF API
+
+
+### UDF API
 All UDFs are decorated by ``@geneva.udf``.
+
+::: geneva.udf
+    options:
+      annotations_path: brief
+      show_source: false
 

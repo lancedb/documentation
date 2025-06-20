@@ -1,3 +1,4 @@
 # API Docs
 
+::: geneva.connect
 

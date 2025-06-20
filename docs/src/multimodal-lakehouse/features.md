@@ -9,7 +9,7 @@ Geneva uses Python User Defined Functions (**UDFs**) to define features as colum
 3. Register the UDF as a virtual column using `Table.add_columns()`.
 4. Trigger a backfill operation.
 
-## Prototyping Your Python Function
+## Prototyping your Python function
 
 Build your Python feature generator function in an IDE or notebook using your project's Python versions and dependencies.
 

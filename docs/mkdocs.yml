@@ -1,4 +1,4 @@
-site_name: LanceDB Documentation
+site_name: LanceDB
 site_url: https://lancedb.github.io/docs
 repo_url: https://github.com/lancedb/lancedb
 edit_uri: https://github.com/lancedb/documentation
@@ -13,13 +13,6 @@ theme:
   logo: assets/logo.png
   favicon: assets/logo.png
   palette:
-    # Palette toggle for light mode
-    - scheme: default
-      primary: white
-      accent: black
-      toggle:
-        icon: material/brightness-7 
-        name: Switch to dark mode
     # Palette toggle for dark mode
     - scheme: slate
       primary: black
@@ -27,6 +20,13 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    # Palette toggle for light mode
+    - scheme: default
+      primary: white
+      accent: black
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
 
   features:
     - announce.dismiss
@@ -378,3 +378,12 @@ extra:
       link: https://twitter.com/lancedb
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/company/lancedb
+  mainLanceDBURL: "http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com"
+  cloudLanceDBURL: "https://cloud.lancedb.com"
+  privacyPdfURL: "https://lancedb.com/docs/LanceDB%20Privacy%20Policy.pdf"
+  termsPdfUrl: "https://lancedb.com/docs/LanceDB%20Cloud%20Terms%20of%20service.pdf"
+  discordURL: "https://discord.com/invite/G5DcmnZWKB"
+  supportURL: "mailto:support@lancedb.com"
+  githubURL: "https://github.com/lancedb"
+  linkedInURL: "https://www.linkedin.com/company/lancedb/"
+  xURL: "https://x.com/lancedb"

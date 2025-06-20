@@ -1,0 +1,198 @@
+<style>
+  html { font-size: calc(0.625rem + 0.41666666666666663vw); }
+  @media screen and (max-width:1920px) { html { font-size: calc(0.625rem + 0.41666666666666674vw); } }
+  @media screen and (max-width:1440px) { html { font-size: calc(0.8126951092611863rem + 0.20811654526534862vw); } }
+  @media screen and (max-width:479px) { html { font-size: calc(0.8747384937238494rem + 0.41841004184100417vw); } }
+</style>
+<style>
+  
+/* Variables */
+:root {
+  --dark-800: #171513;
+  --font--title-family: "Aeonik Fono", Arial, sans-serif;
+  --body-medium--font-size: 0px;
+  --body-medium--line-height: 1em;
+  --body-medium--letter-spacing: 0em;
+  --font--heading-family: "Aeonik Fono", Arial, sans-serif;
+  --swatch--heading-main-color: var(--pure-black);
+  --heading-large--font-size: 0px;
+  --heading-large--line-height: 1em;
+  --heading-large--letter-spacing: 0em;
+  --heading-medium--font-size: 0px;
+  --heading-medium--line-height: 1em;
+  --heading-medium--letter-spacing: 0em;
+  --heading-small--font-size: 0px;
+  --heading-small--line-height: 1em;
+  --heading-small--letter-spacing: 0em;
+  --title-large--font-size: 0px;
+  --title-large--line-height: 1em;
+  --title-large--letter-spacing: 0em;
+  --title-medium--font-size: 0px;
+  --title-medium--line-height: 1em;
+  --title-medium--letter-spacing: 0em;
+  --title-small--font-size: 0px;
+  --title-small--line-height: 1em;
+  --title-small--letter-spacing: 0em;
+  --swatch--body-main-color: var(--pure-black);
+  --horizontal-padding--desktop: 2.5rem;
+  --horizontal-padding--landscape: 1.25rem;
+  --dark-700: #1e1b19;
+  --container-max-width--main: 81rem;
+  --space--80px: 5rem;
+  --space--48px: 3rem;
+  --space--8px: .5rem;
+  --swatch--title-main-color: var(--pure-black);
+  --font--body-family: "Aeonik Pro", Arial, sans-serif;
+  --body-large--font-size: 0px;
+  --body-large--line-height: 1em;
+  --body-large--letter-spacing: 0em;
+  --body-small--font-size: 0px;
+  --body-small--line-height: 1em;
+  --body-small--letter-spacing: 0em;
+  --font--caption-family: "Aeonik Fono", Arial, sans-serif;
+  --swatch--caption-main-color: var(--pure-black);
+  --caption--font-size: 0px;
+  --caption--line-height: 1em;
+  --caption--letter-spacing: 0em;
+  --offwhite: #f4ebe8;
+  --space--24px: 1.5rem;
+  --space--40px: 2.5rem;
+  --space--64px: 4rem;
+  --space--28px: 1.75rem;
+  --space--4px: .25rem;
+  --orange-400: #ff734a;
+  --orange-500: #f56136;
+  --dark-500: #4c443f;
+  --dark-600: #302a25;
+  --dark-400: #847770;
+  --space--32px: 2rem;
+  --pure-white: white;
+  --space--16px: 1rem;
+  --lavende-400: #e7d2f6;
+  --dark-300: #998a84;
+  --dark-200: #ad9e95;
+  --dark-100: #e5dad4;
+  --pure-black: black;
+  --swatch--light-stroke: #ffffff26;
+  --swatch--dark-stroke: #00000026;
+  --max-width--none: 0px;
+  --heading-large--font-family: var(--font--heading-family);
+  --heading-large--font-weight: var(--font-weight--500);
+  --heading-large--text-transform: var(--text-transform--inherit);
+  --heading-large--color: var(--swatch--heading-main-color);
+  --heading-medium--font-family: var(--font--heading-family);
+  --heading-medium--font-weight: var(--font-weight--500);
+  --heading-medium--text-transform: var(--text-transform--inherit);
+  --heading-medium--color: var(--swatch--heading-main-color);
+  --heading-small--font-family: var(--font--heading-family);
+  --heading-small--font-weight: var(--font-weight--500);
+  --heading-small--text-transform: var(--text-transform--inherit);
+  --heading-small--color: var(--swatch--heading-main-color);
+  --title-large--font-family: var(--font--title-family);
+  --title-large--font-weight: var(--font-weight--500);
+  --title-large--text-transform: var(--text-transform--inherit);
+  --title-large--color: var(--swatch--title-main-color);
+  --title-medium--font-family: var(--font--title-family);
+  --title-medium--font-weight: var(--font-weight--500);
+  --title-medium--text-transform: var(--text-transform--inherit);
+  --title-medium--color: var(--swatch--title-main-color);
+  --title-small--font-family: var(--font--title-family);
+  --title-small--font-weight: var(--font-weight--500);
+  --title-small--text-transform: var(--text-transform--inherit);
+  --title-small--color: var(--swatch--title-main-color);
+  --body-large--font-family: var(--font--body-family);
+  --body-large--font-weight: var(--font-weight--500);
+  --body-large--text-transform: var(--text-transform--inherit);
+  --body-large--color: var(--swatch--body-main-color);
+  --body-large-emphasis--font-weight: var(--font-weight--700);
+  --body-medium--font-family: var(--font--body-family);
+  --body-medium--font-weight: var(--font-weight--500);
+  --body-medium--text-transform: var(--text-transform--inherit);
+  --body-medium--color: var(--swatch--body-main-color);
+  --body-medium-emphasis--font-weight: var(--font-weight--700);
+  --body-small--font-family: var(--font--body-family);
+  --body-small--font-weight: var(--font-weight--500);
+  --body-small--text-transform: var(--text-transform--inherit);
+  --body-small--color: var(--swatch--body-main-color);
+  --body-small-emphasis--font-weight: var(--font-weight--700);
+  --caption--font-family: var(--font--caption-family);
+  --caption--font-weight: var(--font-weight--500);
+  --caption--text-transform: var(--text-transform--inherit);
+  --caption--color: var(--swatch--caption-main-color);
+  --font-weight--100: 0px;
+  --font-weight--200: 0px;
+  --font-weight--300: 0px;
+  --font-weight--400: 0px;
+  --font-weight--500: 0px;
+  --font-weight--600: 0px;
+  --font-weight--700: 0px;
+  --font-weight--800: 0px;
+  --font-weight--900: 0px;
+  --font-weight--inherit: 0px;
+  --space--2px: .125rem;
+  --space--6px: .375rem;
+  --space--10px: .625rem;
+  --space--12px: .75rem;
+  --space--14px: .875rem;
+  --space--18px: 1.125rem;
+  --space--20px: 1.25rem;
+  --space--36px: 2.25rem;
+  --space--56px: 3.5rem;
+  --space--72px: 4.5rem;
+  --space--88px: 5.5rem;
+  --space--96px: 6rem;
+  --space--104px: 6.5rem;
+  --space--112px: 7rem;
+  --space--120px: 7.5rem;
+  --space--128px: 8rem;
+  --space--140px: 8.75rem;
+  --space--180px: 11.25rem;
+  --space--160px: 10rem;
+  --space--200px: 12.5rem;
+  --space--220px: 13.75rem;
+  --space--240px: 15rem;
+}
+
+.topbar_wrapper {
+  z-index: 15;
+  color: var(--dark-800);
+  background-image: linear-gradient(90deg, #e7d2f6, #ff734a);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: .875rem;
+  line-height: 1.71429;
+  display: flex;
+  position: relative;
+  inset: 0% 0% auto;
+  overflow: hidden;
+}
+
+.topbar_link-wrapper {
+  grid-column-gap: .75rem;
+  grid-row-gap: .75rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5rem 2rem;
+  display: flex;
+}
+  
+
+.topbar_wrapper a {
+  color: var(--dark-800);
+}
+
+.topbar_wrapper a:hover {
+  color: var(--dark-800);
+	text-decoration:underline;
+}
+</style>
+
+<div class="topbar_wrapper">
+  <div class="topbar_link-wrapper">
+    <span>June 1st, 2025: LanceDB Cloud is now in public beta!&nbsp;</span>
+    <a href="https://cloud.lancedb.com">Try it now →</a>
+  </div>
+</div>

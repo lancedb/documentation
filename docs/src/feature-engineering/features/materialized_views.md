@@ -1,4 +1,4 @@
-# Materialized Views With UDFs
+# Materialized views with UDFs
 
 Geneva provides a materialized view feature that can be used to declaratively manage “batch” updates of expensive operations such as populating udf columns.   These updates are triggered via `refresh` operation.  This can be used to optimize data layouts for training and to simplify some operations that traditionally may require external procedural orchestration (airflow, prefect, dagster). 
 
@@ -14,7 +14,7 @@ The process is straightforward.
 
 Just like with backfills, this operation is **incremental**, checkpointed, and run in a distributed manner.  
 
-## Example: 
+# An Example: 
 
 Let's walk thorugh an example using a raw video table as a base.  We want to create a materialized view off the table that adds transcirption columns to a subset of the values.
 
@@ -65,6 +65,7 @@ view_table = db.create_materialized_view("table_view", q)
 
 To populate the values, we call `refresh`.
 
+
 ```python
 
 # explicitly copy values from the source table, applying UDF on cols.
@@ -84,6 +85,10 @@ Materialized views are just tables so you can query them as well as modify them 
 
 ## API
 
+::: geneva.db.Connection.create_materialized_view
+    options:
+      annotations_path: brief
+      show_source: false
 
 
 ## FAQ

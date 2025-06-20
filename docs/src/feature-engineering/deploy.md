@@ -4,7 +4,7 @@ Geneva is a client-side library that simplifies feature engineering at scale.  T
 
 This page will help cloud admins understand and setup Geneva's requirements.
 
-## Geneva on Kubernetes deployments
+# Geneva on Kubernetes deployments
 
 Prerequisites
 
@@ -37,7 +37,7 @@ CPU Worker nodes are where distributed processing that does not require GPU shou
 
 GPU Worker node are where distributed processing tha trequire GPU should be scheduled.  Geneval looks for nodes with the `geneva.lancedb.com/ray-worker-gpu` k8s label when these nodes are requested.
 
-### GKE + k8s Permissions
+### GKE + k8s  Permissions
 
 Geneva needs the ability to deploy a kuberay cluster and submit jobs to Ray. The workers in the Ray cluster need the ability to read and write to the Google Cloud Storage (GCS) buckets.  This requires setting up the proper k8s permissions and GCP IAM grants.  There are three main areas to setup and verify:
 

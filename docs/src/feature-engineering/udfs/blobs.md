@@ -1,4 +1,4 @@
-# Blob Types
+# Blob types
 
 Gevena supports UDFs that take [Lance Blobs](https://lancedb.github.io/lance/blob.html) (large binary objects) as input and has the ability to write out columns with binaries encoded as Lance Blobs.  Lance blobs are an optimization intended for large objects (1's MBs -> 100MB's) and provide a file-like object that lazily reads large binary objects.
 
@@ -7,6 +7,7 @@ Gevena supports UDFs that take [Lance Blobs](https://lancedb.github.io/lance/blo
 Defining functions that read blob columns is straight forward.  
 
 For scalar UDFs, blob columns are expected to be of type `BlobFile`
+
 
 ```python
 from lance.blob import BlobFile
@@ -27,6 +28,7 @@ TODO: For batched  `pa.Array` UDFs and for `RecordBatch` UDFs, blob columns are 
 ```
 
 ## Writing Blobs
+
 
 Defining UDFs that write out `Blob`s to a new column is straightforward.   Here we add the standard metadata annotation to the UDF so that Geneva knows to write out Blobs.
 

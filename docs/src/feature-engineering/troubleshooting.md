@@ -9,7 +9,7 @@ Here are some areas to verify to identify the source of problems with your Genev
 3. Sufficient permissions to access data.
 4. Worker code only returns serializable values (no open files, no GPU resident buffers).
 
-## Confirming dependency versions (Ray, Python, Lance, etc)
+# Confirming dependency versions (Ray, Python, Lance, etc)
 
 Geneva uses Ray for distributed execution.  Ray requires the version deployed cluster services and clients to be exactly the same.   Minor versions of Python must match both on client and cluster services (e.g. 3.10.3 and 3.10.5 are ok, but 3.10.3 and 3.12.1 are not.)
 
@@ -22,7 +22,7 @@ You can run this code in your notebook to verify your environment matches your e
 !echo $VIRTUAL_ENV'
 ```
 
-## Confirming remote Ray execution
+# Confirming remote Ray execution
 
 Geneva allows you to specify the resources of your worker nodes.  You can verify that your cluster has the resources (e.g. GPUs) available for your jobs and that remote execution is working properly.
 
@@ -68,7 +68,7 @@ def check_cuda():
 print(ray.get(check_cuda.remote()))
 ```
 
-## Confirming sufficient permissions
+# Confirming sufficient permissions
 
 While your notebook or working environment may have credentials to read and write to particular buckets, your jobs need sufficient rights to read and write to them as well.    Adding a `import geneva` to any remote function can help verify that your workers have sufficient grants.
 
@@ -121,7 +121,7 @@ raycluster = ray_cluster(
 
 ```
 
-## Serialization Errors
+# Serialization errors
 
 Serialization is a critical subsystem of Geneva.  In order to store UDFs and perform distributed execution, both code and data must be serializable.  Errors in this area can be subtle and difficult to find.
 
@@ -133,7 +133,7 @@ There are a few basic rules:
 
 Below is a list error categories and examples and how to fix them.
 
-## Serialization Library Mismatches
+## Serialization library mismatches
 
 Any python code and objects must be able to be serialized by the client and deserialized on the server side, and vice versa.  This includes objects that are generated on the fly such as those using the `attrs` library.
 
@@ -154,7 +154,7 @@ TypeError: Enum.__new__() missing 1 required positional argument: 'value'
 
 This was solved by updating the `attrs` module on the client side to use the same version found on the serverside.
 
-## Object With Unserializable Elements
+## Object with unserializable elements
 
 Python objects may have internal references to un`pickle`able objects such as open file handles or open network clients with machine specific state.  There are two strategies here:
 
@@ -201,7 +201,8 @@ def udf_function(...)
   ...
 ```
 
-## Disconnect or Serialization Errors With GPU Dependent UDFs
+
+## Disconnect or serialization errors with GPU dependent UDFs
 
 When using GPU code, the typical process loads some values and tensors from CPU memory to GPU memory.  Even after moving data (`data.cpu().tolist()`), there may be references to GPU memory.  While this is not a problem with local execution, when doing a distributed job it may cause problems because the GPU references are not serializable and not needed.  You must take steps to eliminate references to structures in GPU memory since they can not be serialized
 and sent between workers.  This can be achieved by explicitly disconnecting references to the GPU memory (`data.cpu().detach().tolist()`) to get only-CPU resident fully serializable objects.

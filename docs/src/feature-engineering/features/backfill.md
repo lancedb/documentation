@@ -1,6 +1,6 @@
 
 
-## Triggering Backfill
+## Triggering backfill
 
 Triggering backfill creates a distributed job to run the UDF and populate the column values in your LanceDB table. The Geneva framework simplifies several aspects of distributed execution.
 
@@ -105,6 +105,8 @@ We currently support one processing backend: [Ray](https://www.anyscale.com/prod
     ```python
     tbl.add_column({"filename_len": filename_len}, ["prompt"], backfill=True)
     ```
+
+
 
 ## Filtered Backfills
 

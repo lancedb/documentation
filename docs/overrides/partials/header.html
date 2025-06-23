@@ -205,6 +205,52 @@
 .is-text-dark-100 {
   color: var(--dark-100);
 }
+
+.primary-button.is-secondary.is-navbar {
+    grid-column-gap: .5rem;
+    grid-row-gap: .5rem;
+    margin-left: 1.25rem;
+    padding: .75rem 1.25rem;
+    font-size: .9375rem;
+    line-height: 1.4;
+}
+.primary-button.is-secondary {
+    border: 1px solid var(--dark-500);
+    background-color: var(--dark-600);
+    color: var(--offwhite);
+}
+.primary-button {
+    grid-column-gap: .625rem;
+    grid-row-gap: .625rem;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: var(--orange-400);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-right-color: var(--orange-400);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--orange-400);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: var(--orange-400);
+    background-color: var(--orange-400);
+    font-family: var(--font--heading-family);
+    color: var(--dark-800);
+    letter-spacing: 0;
+    border-radius: .25rem;
+    justify-content: center;
+    align-items: center;
+    padding: .875rem 2rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-decoration: none;
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: ease;
+    display: flex;
+}
 </style>
 
 <div class="navbar_container w-container">
@@ -219,7 +265,7 @@
     </a>
     <nav role="navigation" class="navbar_menu w-nav-menu">
         <div class="navbar_menu-content"><div class="navbar_menu-middle">
-            <a href="{{ config.extra.mainLanceDBURL }}/pricing" class="navbar_navlink w-nav-link">Pricing</a>
+            <a href="{{ config.extra.mainLanceDBURL }}/pricing.html" class="navbar_navlink w-nav-link">Pricing</a>
             <a href="{{ config.extra.mainLanceDBURL }}/documentation" class="navbar_navlink w-nav-link w--current">Docs</a>
             <a href="{{ config.extra.mainLanceDBURL }}/blog" aria-current="page" class="navbar_navlink w-nav-link">Blog</a>
         </div>
@@ -234,7 +280,7 @@
                     {% include "partials/github.html" %}
                 </div>
             </a>
-            <a href="https://cloud.lancedb.com/sign-in" class="primary-button is-secondary is-navbar w-inline-block">Get started</a>
+            <a target="_blank" href="https://accounts.lancedb.com/sign-up" class="primary-button is-secondary is-navbar w-inline-block">Sign up</a>
         </div>
     </nav>
 </div>

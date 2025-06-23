@@ -256,7 +256,7 @@ nav:
               - Building Custom Rerankers: reranking/custom_reranker.md
               - Comparing Rerankers: reranking/eval.md
           - Storage: guides/storage/integrations.md
-      - Multimodal Lakehouse:
+      - Feature Engineering:
           - Overview: multimodal-lakehouse/index.md
           - Getting Started:
               - Startup Guide: multimodal-lakehouse/startup.md

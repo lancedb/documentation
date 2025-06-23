@@ -27,6 +27,7 @@ jobs:
       - name: Build node
         working-directory: node
         run: |
+          npm install
           npm ci
           npm run build
           npm run tsc

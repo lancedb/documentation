@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: Copyright The LanceDB Authors
+
 import datasets
 from pathlib import Path
 from google.cloud.storage import Client, transfer_manager

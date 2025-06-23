@@ -194,8 +194,3 @@ tbl.add_columns({"embedding": OpenAIEmbedding()})
 ### UDF API
 All UDFs are decorated by ``@geneva.udf``.
 
-::: geneva.udf
-    options:
-      annotations_path: brief
-      show_source: false
-

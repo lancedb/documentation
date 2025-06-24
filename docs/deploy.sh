@@ -19,7 +19,7 @@ if [ "$ENV" == "staging" ]; then
   aws s3 ls $BUCKET_NAME
 
   echo "📦 Building for staging..."
-  # npm run build
+  mkdocs build -f mkdocs.yml
 
   echo "☁️ Uploading to S3: $BUCKET_NAME"
   aws s3 sync ./site s3://$BUCKET_NAME/documentation
@@ -36,7 +36,9 @@ elif [ "$ENV" == "prod" ]; then
   aws s3 ls $BUCKET_NAME
 
   echo "📦 Building for production..."
-  # npm run build
+  sed -i.bak 's|http://lancedb-website-staging.s3-website-us-east-1.amazonaws.com|https://lancedb.com|' mkdocs.yml
+  mkdocs build -f mkdocs.yml
+  mv mkdocs.yml.bak mkdocs.yml
 
   echo "☁️ Uploading to S3: $BUCKET_NAME"
   aws s3 sync ./site s3://$BUCKET_NAME/documentation

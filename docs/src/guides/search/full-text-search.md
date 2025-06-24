@@ -8,7 +8,7 @@ description: "Learn how to implement full-text search in LanceDB. Includes text 
 LanceDB provides support for full-text search via Lance, allowing you to incorporate keyword-based search (based on BM25) in your retrieval solutions.
 
 !!! note
-    The Python SDK uses tantivy-based FTS by default, you need to pass `use_tantivy=False` to use native FTS.
+    The Python SDK uses our native FTS implementation by default, you need to pass `use_tantivy=True` to use tantivy-based FTS.
 
 ## **Basic Usage**
 
@@ -486,7 +486,7 @@ Then, create an index on the second text column:
 
 ### **4. Basic and Fuzzy Search**
 
-Now we can perform both basic and fuzzy searches:
+Now we can perform basic, fuzzy, and prefix match searches:
 
 #### **Basic Exact Search**
 
@@ -521,7 +521,7 @@ Now we can perform both basic and fuzzy searches:
     ```python
     # Fuzzy match (allows typos)
     fuzzy_results = (
-        table.search(MatchQuery("crazi~1", "text", fuzziness=2))
+        table.search(MatchQuery("craziou", "text", fuzziness=2))
         .select(["id", "text"])
         .limit(100)
         .to_pandas()
@@ -532,8 +532,35 @@ Now we can perform both basic and fuzzy searches:
     ```typescript
     // Fuzzy match (allows typos)
     const fuzzyResults = await table.query()
-        .fullTextSearch(new MatchQuery("crazi~1", "text", {
+        .fullTextSearch(new MatchQuery("craziou", "text", {
             fuzziness: 2,
+        }))
+        .select(["id", "text"])
+        .limit(100)
+        .toArray();
+    ```
+
+#### **Prefix based Match**
+
+Prefix-based match allows you to search for documents containing words that start with a specific prefix. 
+
+=== "Python"
+    ```python
+    # Fuzzy match (allows typos)
+    fuzzy_results = (
+        table.search(MatchQuery("cra", "text", prefix_length=3))
+        .select(["id", "text"])
+        .limit(100)
+        .to_pandas()
+    )
+    ```
+
+=== "TypeScript"
+    ```typescript
+    // Fuzzy match (allows typos)
+    const fuzzyResults = await table.query()
+        .fullTextSearch(new MatchQuery("cra", "text", {
+            prefixLength: 3,
         }))
         .select(["id", "text"])
         .limit(100)

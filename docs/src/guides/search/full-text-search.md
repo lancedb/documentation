@@ -567,12 +567,6 @@ Prefix-based match allows you to search for documents containing words that star
         .toArray();
     ```
 
-!!! note "Results"
-  The fuzzy search example demonstrates:
-  1. Creating a table with sample text data
-  2. Setting up FTS indices on multiple text columns
-  3. Performing both exact and fuzzy searches with typo tolerance
-
 ### **Phrase Match**
 
 Phrase matching enables you to search for exact sequences of words. Unlike regular text search 

@@ -37,7 +37,9 @@
     align-items: center;
     width: auto;
     max-width: none;
-    margin: 1.5rem;
+    margin-top: 1.5rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
     padding: .75rem 1.5rem;
     display: flex;
 }
@@ -56,6 +58,17 @@
     color: var(--orange-400);
 }
 
+.w-nav-link {
+    vertical-align: top;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
 .navbar_navlink {
     font-family: var(--font--body-family);
     color: var(--offwhite);
@@ -66,17 +79,6 @@
 
 .navbar_navlink:hover {
     color: var(--dark-400);
-}
-
-.w-nav-link {
-    vertical-align: top;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    text-decoration: none;
-    display: inline-block;
-    position: relative;
 }
 
 .navbar_menu {
@@ -280,7 +282,7 @@
                     {% include "partials/github.html" %}
                 </div>
             </a>
-            <a target="_blank" href="https://accounts.lancedb.com/sign-up" class="primary-button is-secondary is-navbar w-inline-block">Sign up</a>
+            <a target="_blank" href="https://cloud.lancedb.com/sign-up" class="primary-button is-secondary is-navbar w-inline-block">Sign up <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2 11L10 3" stroke="CurrentColor" stroke-width="1.5" stroke-miterlimit="10"></path><path d="M2.88889 3H10V10.1111" stroke="CurrentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="square"></path></svg></a>
         </div>
     </nav>
 </div>

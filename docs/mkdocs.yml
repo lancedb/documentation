@@ -1,4 +1,4 @@
-site_name: LanceDB
+site_name: LanceDB Documentation
 site_url: https://lancedb.github.io/docs
 repo_url: https://github.com/lancedb/lancedb
 edit_uri: https://github.com/lancedb/documentation
@@ -338,7 +338,7 @@ nav:
 
 extra_css:
   - styles/mkdocsoad.css
-  # - styles/links.css
+  - styles/links.css
 
 
 extra_javascript:

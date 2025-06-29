@@ -160,7 +160,7 @@ markdown_extensions:
       baselevel: 1
       permalink: ""
 
-use_directory_urls: false
+use_directory_urls: true
 
 nav:
   - Documentation:
@@ -338,7 +338,7 @@ nav:
 
 extra_css:
   - styles/mkdocsoad.css
-  - styles/links.css
+  # - styles/links.css
 
 
 extra_javascript:

@@ -438,3 +438,53 @@ body {
 [data-md-color-scheme="slate"] .md-nav {
     background-color: var(--md-primary-bg-color);
 }
+
+/* ==========================================================================
+   Custom Styles for LanceDB Documentation
+   ========================================================================== */
+
+/* Ensure proper spacing for announcement bar */
+.md-banner {
+  margin-bottom: 0;
+}
+
+/* Custom link colors for dark mode */
+[data-md-color-scheme="slate"] {
+  --md-typeset-a-color: #60a5fa;
+  --md-typeset-a-color--hover: #93c5fd;
+}
+
+/* Custom link colors for light mode */
+[data-md-color-scheme="default"] {
+  --md-typeset-a-color: #2563eb;
+  --md-typeset-a-color--hover: #1d4ed8;
+}
+
+/* Ensure proper font sizing */
+.md-typeset {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Custom button styling */
+.md-button {
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+/* Ensure proper spacing in navigation */
+.md-nav__item {
+  margin-bottom: 0.25rem;
+}
+
+/* Custom code block styling */
+.md-typeset code {
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+}
+
+/* Ensure proper table styling */
+.md-typeset table {
+  border-radius: 0.25rem;
+  overflow: hidden;
+}

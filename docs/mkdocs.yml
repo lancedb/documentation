@@ -1,4 +1,4 @@
-site_name: LanceDB
+site_name: LanceDB Documentation
 site_url: https://lancedb.github.io/docs
 repo_url: https://github.com/lancedb/lancedb
 edit_uri: https://github.com/lancedb/documentation
@@ -160,7 +160,7 @@ markdown_extensions:
       baselevel: 1
       permalink: ""
 
-use_directory_urls: false
+use_directory_urls: true
 
 nav:
   - Documentation:

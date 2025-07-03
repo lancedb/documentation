@@ -140,7 +140,7 @@ There are three key parameters to set when constructing an HNSW index:
 ### **1. Construct HNSW Index**
 
 ```python
-tbl.create_index(index_type=IVF_HNSW_SQ)
+tbl.create_index(index_type="IVF_HNSW_SQ")
 ```
 
 ### **2. Query HNSW Index**

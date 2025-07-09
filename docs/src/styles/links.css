@@ -20,6 +20,104 @@
 
 body {
     font-family: 'Aeonik', Arial, sans-serif;
+    font-size: 18px; /* Increased from default */
+    line-height: 1.6; /* Improved line height for better readability */
+}
+
+/* Increase font sizes for better readability */
+.md-typeset {
+    font-size: 18px;
+}
+
+.md-typeset h1 {
+    font-size: 2.5rem; /* Increased from default */
+}
+
+.md-typeset h2 {
+    font-size: 2rem; /* Increased from default */
+}
+
+.md-typeset h3 {
+    font-size: 1.5rem; /* Increased from default */
+}
+
+.md-typeset h4 {
+    font-size: 1.25rem; /* Increased from default */
+}
+
+.md-typeset h5 {
+    font-size: 1.1rem; /* Increased from default */
+}
+
+.md-typeset h6 {
+    font-size: 1rem; /* Increased from default */
+}
+
+/* Increase navigation font sizes */
+.md-nav__link {
+    font-size: 16px; /* Increased from default */
+}
+
+.md-nav__title {
+    font-size: 18px; /* Increased from default */
+}
+
+/* Increase sidebar font sizes */
+.md-nav__item .md-nav__link {
+    font-size: 16px; /* Increased from default */
+}
+
+/* Increase header font sizes */
+.md-header__title {
+    font-size: 1.2rem; /* Increased from default */
+}
+
+.md-tabs__link {
+    font-size: 16px; /* Increased from default */
+}
+
+/* Increase code font sizes */
+.md-typeset code {
+    font-size: 16px; /* Increased from default */
+}
+
+.md-typeset pre {
+    font-size: 16px; /* Increased from default */
+}
+
+/* Increase table font sizes */
+.md-typeset table {
+    font-size: 16px; /* Increased from default */
+}
+
+/* Increase list font sizes */
+.md-typeset ul,
+.md-typeset ol {
+    font-size: 18px; /* Increased from default */
+}
+
+/* Increase blockquote font sizes */
+.md-typeset blockquote {
+    font-size: 18px; /* Increased from default */
+}
+
+/* Increase admonition font sizes */
+.md-typeset .admonition {
+    font-size: 18px; /* Increased from default */
+}
+
+/* Increase search font sizes */
+.md-search__input {
+    font-size: 16px; /* Increased from default */
+}
+
+/* Increase footer font sizes */
+.md-footer__title {
+    font-size: 16px; /* Increased from default */
+}
+
+.md-footer__copyright {
+    font-size: 16px; /* Increased from default */
 }
 
 /* ==========================================================================

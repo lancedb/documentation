@@ -46,8 +46,10 @@
     }
 }
 
+/* Increase font sizes for API documentation */
 .api-tag {
     font-weight: bold;
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 span[class^="http-"] {
@@ -56,6 +58,7 @@ span[class^="http-"] {
     padding: 4px 1rem;
     border-radius: 2px;
     margin-right: .5rem;
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 .http-get {
@@ -128,7 +131,7 @@ span[class^="http-"] {
 }
 
 .api-version {
-    font-size: 1.2rem;
+    font-size: 1.4rem; /* Already using rem */
 }
 
 .operation-separator {
@@ -137,8 +140,10 @@ span[class^="http-"] {
     padding-top: .5rem;
 }
 
+/* Increase font sizes for API documentation content */
 .operation-separator+h3 {
     margin-top: 1rem;
+    font-size: 1.5rem; /* Already using rem */
 }
 
 .string-type {
@@ -169,29 +174,34 @@ a.ref-link {
 .request-block+div {
     padding-left: 1rem;
     border-left: 2px dashed var(--oad-block-border-color);
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 .small-note {
-    font-size: 14px;
+    font-size: 0.9rem; /* Use rem instead of px */
     color: var(--oad-small-note-color);
 }
 
-.request-body-title {
+/* Increase font sizes for request/response sections */
+.request-body-title,
+.response-title {
+    font-size: 1rem; /* Use rem instead of px */
     margin-bottom: 4px;
 }
 
-.request-body-title+.tabbed-set,
-.response-title+.tabbed-set,
-.message-separator+.tabbed-set,
-.common-response,
-.response-section {
-    margin-top: 2px;
-    padding-left: 1rem;
-    border-left: 2px dotted var(--oad-indent-border-color);
+/* Increase font sizes for tabbed content */
+.tabbed-set {
+    font-size: 1rem; /* Use rem instead of px */
+}
+
+/* Increase font sizes for code blocks in API docs */
+.operation-separator+h3 code,
+.request-block+div code {
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 .info-data {
-    font-size: .6rem;
+    font-size: 0.8rem; /* Already using rem */
 }
 
 .message-separator {
@@ -200,5 +210,5 @@ a.ref-link {
 
 .sub-section-title {
     font-style: italic;
-    font-size: 14px;
+    font-size: 0.9rem; /* Use rem instead of px */
 }

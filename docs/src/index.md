@@ -1,3 +1,7 @@
+---
+hide: toc
+---
+
 # LanceDB Documentation
 
 [**LanceDB is an open-source multimodal database**](overview/index.md) designed for efficient storage, retrieval, and management of vectors and multimodal data. Use our documentation to build a production-grade service with a simple API for inserting, querying, and filtering vectors. 

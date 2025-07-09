@@ -18,106 +18,111 @@
     font-display: swap;
 }
 
+/* Set base font size on html element for consistent rem units */
+html {
+    font-size: 18px; /* Base font size for rem calculations */
+}
+
 body {
     font-family: 'Aeonik', Arial, sans-serif;
-    font-size: 18px; /* Increased from default */
+    font-size: 1rem; /* Use rem instead of px */
     line-height: 1.6; /* Improved line height for better readability */
 }
 
 /* Increase font sizes for better readability */
 .md-typeset {
-    font-size: 18px;
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 .md-typeset h1 {
-    font-size: 2.5rem; /* Increased from default */
+    font-size: 2.5rem; /* Consistent with rem base */
 }
 
 .md-typeset h2 {
-    font-size: 2rem; /* Increased from default */
+    font-size: 2rem; /* Consistent with rem base */
 }
 
 .md-typeset h3 {
-    font-size: 1.5rem; /* Increased from default */
+    font-size: 1.5rem; /* Consistent with rem base */
 }
 
 .md-typeset h4 {
-    font-size: 1.25rem; /* Increased from default */
+    font-size: 1.25rem; /* Consistent with rem base */
 }
 
 .md-typeset h5 {
-    font-size: 1.1rem; /* Increased from default */
+    font-size: 1.1rem; /* Consistent with rem base */
 }
 
 .md-typeset h6 {
-    font-size: 1rem; /* Increased from default */
+    font-size: 1rem; /* Consistent with rem base */
 }
 
 /* Increase navigation font sizes */
 .md-nav__link {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 .md-nav__title {
-    font-size: 18px; /* Increased from default */
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 /* Increase sidebar font sizes */
 .md-nav__item .md-nav__link {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* Increase header font sizes */
 .md-header__title {
-    font-size: 1.2rem; /* Increased from default */
+    font-size: 1.2rem; /* Already using rem */
 }
 
 .md-tabs__link {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* Increase code font sizes */
 .md-typeset code {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 .md-typeset pre {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* Increase table font sizes */
 .md-typeset table {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* Increase list font sizes */
 .md-typeset ul,
 .md-typeset ol {
-    font-size: 18px; /* Increased from default */
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 /* Increase blockquote font sizes */
 .md-typeset blockquote {
-    font-size: 18px; /* Increased from default */
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 /* Increase admonition font sizes */
 .md-typeset .admonition {
-    font-size: 18px; /* Increased from default */
+    font-size: 1rem; /* Use rem instead of px */
 }
 
 /* Increase search font sizes */
 .md-search__input {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* Increase footer font sizes */
 .md-footer__title {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 .md-footer__copyright {
-    font-size: 16px; /* Increased from default */
+    font-size: 0.9rem; /* Use rem instead of px */
 }
 
 /* ==========================================================================

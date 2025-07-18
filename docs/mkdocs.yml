@@ -256,7 +256,24 @@ nav:
               - Building Custom Rerankers: reranking/custom_reranker.md
               - Comparing Rerankers: reranking/eval.md
           - Storage: guides/storage/integrations.md
-      - Feature Engineering: https://lancedb.github.io/geneva/
+          - Feature Engineering:
+              - Overview: geneva/index.md
+              - Geneva: geneva/docs/features.md
+              - UDFs:
+                  - Overview: geneva/docs/features/UDFs.md
+                  - Blob: geneva/docs/udfs/blobs.md
+              - Jobs:
+                  - Contexts: geneva/docs/features/contexts.md
+                  - Backfilling: geneva/docs/features/backfill.md
+                  - Materialized Views: geneva/docs/features/materialized_views.md
+                  - Startup: geneva/docs/startup.md
+                  - Performance: geneva/docs/performance.md
+              - Deployment:
+                  - KubeRay : geneva/docs/deploy.md
+                  - Troubleshooting : geneva/docs/troubleshooting.md
+              - Examples:
+                  - Ingest & Embed Wikipedia: notebooks/wiki-10m-geneva/ingest.ipynb
+
   - Tutorials & Integrations:
       - Integrations:
           - Overview: integrations/index.md

@@ -17,7 +17,7 @@ The REST API allows you to interact with LanceDB Cloud instances using standard 
 
 | LanceDB Cloud | Documentation Link |
 |--------------|-------------------|
-| REST API | [REST API Documentation](api/cloud.md) |
+| REST API | [REST API Documentation](../api/cloud.html) |
 
 ## Client SDKs
 
@@ -27,9 +27,9 @@ For tighter integration with your application code, LanceDB provides native SDK 
 
 | LanceDB SDKs | Documentation Link | Description |
 |--------------|-------------------|-------------|
-| Python | [Python SDK Documentation](python/python.md) | Full-featured Python client with pandas & numpy integration |
-| JavaScript (@lancedb/lancedb package) | [Current JS Documentation](js/globals.md) | Modern JavaScript/TypeScript SDK for Node.js and browsers |
-| JavaScript (legacy vectordb package) | [Legacy JS Documentation](javascript/modules.md) | Legacy JavaScript package (deprecated) |
+| Python | [Python SDK Documentation](../python/python.html) | Full-featured Python client with pandas & numpy integration |
+| JavaScript (@lancedb/lancedb package) | [Current JS Documentation](../js/globals.html) | Modern JavaScript/TypeScript SDK for Node.js and browsers |
+| JavaScript (legacy vectordb package) | [Legacy JS Documentation](../javascript/modules.html) | Legacy JavaScript package (deprecated) |
 | Rust | [Rust Documentation](https://docs.rs/lancedb/latest/lancedb/index.html) | Native Rust implementation for high performance |
 
 

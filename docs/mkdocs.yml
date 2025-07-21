@@ -271,6 +271,10 @@ nav:
               - Deployment:
                   - KubeRay : geneva/docs/deploy.md
                   - Troubleshooting : geneva/docs/troubleshooting.md
+              - API:
+                  - UDF: geneva/docs/api/udf.md
+                  - Connection: geneva/docs/api/connection.md
+                  - Table: geneva/docs/api/table.md
               - Examples:
                   - Ingest & Embed Wikipedia: notebooks/wiki-10m-geneva/ingest.ipynb
 

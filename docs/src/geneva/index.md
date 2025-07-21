@@ -6,13 +6,15 @@ Feature engineering is the process of cleaning up your data and creating new sig
 
 It can take some work to get from raw data to useful features. Let’s look at a simple example to see why this matters and how it’s done.
 
-## The Manual Workflow: A E-commerce Recommendation System 🛍️
+## The Challenge: Manual Feature Engineering
 
-Imagine we are building a product recommendation system for a large e-commerce platform. The goal is to find items that are genuinely "similar" to a product a user is currently viewing. This notion of "similarity" must be sophisticated, going far beyond a simple text match on the product description. It needs to incorporate nuanced business concepts like popularity, value, brand equity, and key product attributes.
+Imagine we are building a product recommendation system for a large e-commerce platform. The goal is to find items that are genuinely "similar" to a product a user is currently viewing.
+
+This notion of "similarity" must be sophisticated. It goes far beyond a simple text match on the product description. It needs to incorporate nuanced business concepts like popularity, value, brand equity, and key product attributes.
 
 ### Step 1: The Raw Data Table
 
-We start with a raw data table in our data lakehouse, which we'll call `products_raw`. This table contains the basic, unprocessed information scraped from our product catalog. An embedding model could be applied directly to the `description` column for semantic search, but that would only capture a fraction of the story.
+We start with a raw data table in our data lakehouse. We'll call it `products_raw`. This table contains the basic, unprocessed information scraped from our product catalog. An embedding model could be applied directly to the `description` column for semantic search. However, that would only capture a fraction of the story.
 
 **Table: `products_raw`**
 
@@ -24,18 +26,18 @@ We start with a raw data table in our data lakehouse, which we'll call `products
 
 ### Step 2: The Problem with Raw Data
 
-Using this raw data to generate embeddings for a recommendation model is destined for failure. Critical business signals that define true product similarity are either misleading, hidden, or entirely absent:
+Using this raw data to generate embeddings for a recommendation model is destined for failure. Critical business signals that define true product similarity are either misleading, hidden, or entirely absent.
 
-* **Misleading Popularity:** The "New Tee" boasts a perfect 5.0 rating, but with only a single review. Is it truly more "popular" or "better" than the "V-Neck Tee" with 1200 reviews and a 4.8 rating? A naive model would think so, leading to poor recommendations.
-* **Missing Price Context:** The model sees a price of $90.00 for the "Designer Tee," but it has no intrinsic understanding that this represents a steep 40% discount, a powerful purchasing signal. It also doesn't know how this price compares to the average price of other T-shirts.
-* **Hidden Attributes:** Key attributes like "organic" or "limited edition" are buried within the free-text `description`. They are invisible to any model that doesn't perform sophisticated text analysis, yet they are crucial for matching user preferences.
+* **Misleading Popularity:** The "New Tee" boasts a perfect 5.0 rating, but with only a single review. Is it truly more "popular" or "better" than the "V-Neck Tee" with 1200 reviews and a 4.8 rating? A naive model would think so. This leads to poor recommendations.
+* **Missing Price Context:** The model sees a price of $90.00 for the "Designer Tee." It has no intrinsic understanding that this represents a steep 40% discount. This is a powerful purchasing signal. The model also doesn't know how this price compares to the average price of other T-shirts.
+* **Hidden Attributes:** Key attributes like "organic" or "limited edition" are buried within the free-text `description`. They are invisible to any model that doesn't perform sophisticated text analysis. Yet, they are crucial for matching user preferences.
 
-### Step 3: Manual Feature engineering
+### Step 3: Manual Feature Engineering
 
-To address these challenges, a data scientist or ML engineer typically embarks on a manual, code-intensive journey to extract hidden signals and craft new, meaningful features. This process often takes place in a Jupyter notebook and involves several intricate steps:
+To address these challenges, a data scientist or ML engineer typically embarks on a manual, code-intensive journey. The goal is to extract hidden signals and craft new, meaningful features. This process often takes place in a Jupyter notebook. It involves several intricate steps.
 
 1. **Engineer `popularity_score`:**  
-   To create a more accurate measure of popularity, combine the average rating with the volume of reviews. A common approach is to use logarithmic scaling, which prevents products with massive review counts from overwhelming the score.
+   To create a more accurate measure of popularity, combine the average rating with the volume of reviews. A common approach is to use logarithmic scaling. This prevents products with massive review counts from overwhelming the score.
    - **Logic:**  
      ```python
      popularity_score = log(review_count + 1) * avg_rating
@@ -44,7 +46,7 @@ To address these challenges, a data scientist or ML engineer typically embarks o
 2. **Engineer `price_tier`:**  
    To help the model understand value, bucket raw prices into clear tiers such as 'budget', 'mid-range', or 'premium'.
    - **Logic:**  
-     Use conditional logic (e.g., `CASE WHEN` in SQL or `np.select` in Python) to assign a tier based on price thresholds.
+     Use conditional logic (for example, `CASE WHEN` in SQL or `np.select` in Python) to assign a tier based on price thresholds.
 
 3. **Engineer `discount_pct`:**  
    To explicitly signal a "deal" to the model, calculate the discount percentage by combining the original and current prices.
@@ -54,7 +56,7 @@ To address these challenges, a data scientist or ML engineer typically embarks o
      ```
 
 4. **Engineer `price_vs_cat_avg`:**  
-   To contextualize a product's price, compare it to the average price within its category. This requires an aggregation step to compute the average price per category before calculating the feature for each product.
+   To contextualize a product's price, compare it to the average price within its category. This requires an aggregation step to compute the average price per category. Then, calculate the feature for each product.
    - **Logic:**  
      For each product:
      ```python
@@ -66,11 +68,11 @@ To address these challenges, a data scientist or ML engineer typically embarks o
    - **Logic:**  
      Use a regular expression or string search for the keyword "organic" to create a boolean (`true`/`false`) flag.
 
-Each of these steps requires careful data manipulation, domain knowledge, and iterative experimentation to ensure the resulting features are both accurate and useful for downstream models.
+Each of these steps requires careful data manipulation and domain knowledge. Iterative experimentation is also needed to ensure the resulting features are both accurate and useful for downstream models.
 
 ### Step 4: The Enriched Table
 
-After executing this complex chain of logic, we produce a new, enriched table. The features in this table are more potent and ready to be fed into an embedding model to produce high-quality vectors for our recommendation system.
+After executing this complex chain of logic, we produce a new, enriched table. The features in this table are more potent and ready to be fed into an embedding model. This produces high-quality vectors for our recommendation system.
 
 **Table: `products_engineered`**
 
@@ -80,12 +82,12 @@ After executing this complex chain of logic, we produce a new, enriched table. T
 | 102 |... | 15.9 | 'premium' | 0.4 | 1.95 | true |
 | 103 |... | 3.5 | 'budget' | 0.0 | 0.47 | false |
 
-## The Real Challenge: Scaling Feature Engineering
+## The Solution: LanceDB Scales Feature Engineering
 
-While manual feature engineering works for small datasets, **things change dramatically at scale**. In real-world production systems, you often need to process tens or hundreds of millions of records, sometimes in real time. The logic that was simple in a notebook—like aggregations, conditional logic, or text processing—becomes much harder to manage and execute efficiently.
+Manual feature engineering works for small datasets. However, things change dramatically at scale. In real-world production systems, you often need to process tens or hundreds of millions of records. Sometimes this must happen in real time. The logic that was simple in a notebook, such as aggregations, conditional logic, or text processing, becomes much harder to manage and execute efficiently.
 
-**As data grows, so does complexity**. You might need to generate features from new sources, such as user behavior logs, images, or videos. This can involve running large-scale machine learning models for tasks like image captioning or text embedding, which require significant compute resources and robust infrastructure.
+As data grows, so does complexity. You might need to generate features from new sources. These could include user behavior logs, images, or videos. This can involve running large-scale machine learning models for tasks like image captioning or text embedding. These tasks require significant compute resources and robust infrastructure.
 
-Managing this at scale means dealing with distributed systems, scheduling, monitoring, and ensuring that feature pipelines are reliable and reproducible. Experimenting with new features or updating existing ones can require major engineering work, slowing down iteration and innovation. Infrastructure challenges—like orchestrating batch and streaming jobs, handling dependencies, and scaling inference—often become the main bottleneck.
+Managing this at scale means dealing with distributed systems, scheduling, and monitoring. You must ensure that feature pipelines are reliable and reproducible. Experimenting with new features or updating existing ones can require major engineering work. This slows down iteration and innovation. Infrastructure challenges, such as orchestrating batch and streaming jobs, handling dependencies, and scaling inference, often become the main bottleneck.
 
-In short, the biggest challenge in modern feature engineering is not just coming up with good features, but building infrastructure that can handle complex, multi-modal operations and deliver fresh, high-quality features quickly and reliably at massive scale. This is what Geneva solves. Learn more in the next section.
+In short, the biggest challenge in modern feature engineering is not just coming up with good features. It is also about building infrastructure that can handle complex, multi-modal operations. The goal is to deliver fresh, high-quality features quickly and reliably at massive scale. 

@@ -41,7 +41,7 @@ Sometimes you need to configure the index beyond default parameters:
 - Index Types:
     - `IVF_PQ`: Default index type, optimized for high-dimensional vectors
     - `IVF_HNSW_SQ`: Combines IVF clustering with HNSW graph for improved search quality
-- `metrix`: default is `l2`, other available are `cosine` or `dot`
+- `metric`: default is `l2`, other available are `cosine` or `dot`
     - When using `cosine` similarity, distances range from 0 (identical vectors) to 2 (maximally dissimilar)
 - `num_partitions`: The number of partitions in the IVF portion of the index. This number is usually chosen to target a particular number of vectors per partition.
 - `num_sub_vectors`: The number of sub-vectors that will be created during Product Quantization (PQ). This number is typically chosen based on the desired recall and the dimensionality of the vector. 

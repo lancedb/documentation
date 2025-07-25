@@ -6,6 +6,57 @@ hide:
 ---
 # **LanceDB Changelog**
 
+## June 2025
+
+More advanced features added to Full-text Search and optimized BYOC deployment.
+
+### Features
+
+* **Full-Text Search (FTS) Enhancements:**  
+  Expanded FTS capabilities with:
+    * [Boolean logic for FTS](../guides/search/full-text-search.html#boolean-queries): Combine filters using `SHOULD`, `MUST`, and `MUST_NOT` for expressive, intuitive search. (Python users can also use `AND`/`OR` or `&`/`|`.)
+    * [Flexible phrase matching](../guides/search/full-text-search.html#flexible-phrase-match): Phrase queries now support the `slop` parameter, allowing matches where terms are close together but not necessarily adjacent or in exact order, enabling typo-tolerant and flexible phrase search.
+    * [Autocomplete-ready prefix search](../guides/search/full-text-search.html#prefix-based-match): Search for documents containing words that start with a specific prefix, enabling partial word and autocomplete-style queries (e.g., searching for "mach" matches "machine", "machinery", etc.).
+    * Faster, smarter full-text indexing: Compression and optimized algorithms speed up index builds and boost search performance at scale.
+
+* **Native Helm Chart Support:**  
+  Added native Helm chart deployment for Kubernetes, streamlining BYOC (Bring Your Own Cloud) deployments and improving infrastructure management. #enterprise
+
+* **KNN Scan Pushdown Optimization:**  
+  Improved vector search performance and reduced memory usage by supporting KNN scan pushdown. #enterprise
+
+* **Query Resource Limits:**  
+  Introduced concurrent request limits and scan row constraints to prevent resource exhaustion and maintain system stability under high load. #enterprise
+
+* **Improved Vector Search with Selective Filters:**  
+  Split `nprobes` into `minimum_nprobes` and `maximum_nprobes` for more efficient vector search. The system starts with `minimum_nprobes` and increases up to `maximum_nprobes` if not enough results are found. [lancedb#2430](https://github.com/lancedb/lancedb/pull/2430)
+
+* **Cloud Guardrails:**  
+  Enforced API payload limits (100MB) to prevent heavy workloads from degrading cloud service quality, with extra checks on `merge_insert` to avoid introducing large workloads.
+
+---
+
+### Bug Fixes
+
+* **Embedding Function Error with Existing Vector Column:**  
+  Fixed a TypeScript SDK error when adding data that already includes the vector column and a registered embedding function is present. [lancedb#2433](https://github.com/lancedb/lancedb/pull/2433)
+
+* **`create_table` Errors with Existing Tables:**  
+  Fixed errors when using `create_table` with `mode=overwrite` or `exists_ok=true` on an existing table.
+
+* **Indexing Skipped with Certain Compaction Configurations:**  
+  Fixed an issue where indexing criteria were not included in `lance_agent`, causing the index to not be created as expected under certain compaction settings.
+
+* **Failed Login After Changing Account:**  
+  Fixed a login failure that occurred when a user signed up for LanceDB Cloud, dropped out, and then rejoined an organization with the same email via an invite.
+
+* **Column Disordering in KNN Scanning:**  
+  Fixed an error in plans that union indexed and unindexed data, where the KNNScan node returned data in a different order than its output schema. #enterprise
+
+* **Divide-by-Zero on Empty Table:**  
+  Fixed an issue where creating an index failed on an empty table, either after deleting the last row or when creating an index on an already empty table.
+
+
 ## May 2025
 
 Revamped LanceDB Cloud onboarding, added Umap visualization and improved performance for `upsert` 
